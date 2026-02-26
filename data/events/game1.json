@@ -1,0 +1,30 @@
+{
+  "match_id": "2026-02-25_game01",
+  "hero": "Zenyatta",
+  "map": "optional",
+  "events": [
+    {
+      "t": 192.4,
+      "type": "death",
+      "victim": "you",
+      "killer": "Genji",
+      "killer_team": "enemy",
+      "ult_pct": 87,
+      "hp_pct": 0,
+      "notes": "optional"
+    },
+    {
+      "t": 210.1,
+      "type": "fight_boundary",
+      "fight_id": 3,
+      "state": "start"
+    },
+    {
+      "t": 255.6,
+      "type": "fight_boundary",
+      "fight_id": 3,
+      "state": "end",
+      "outcome": "lost"
+    }
+  ]
+}

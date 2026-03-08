@@ -20,5 +20,8 @@ Learnings
    2. It also makes CV ingestion cleaner later - e.g., at frame 3, Zen had 44% ult; at frame 10, Zen was on high-ground; on frame 12, Zen killed Anran. 
    3. Those are not deaths. They are observations of state. If an attribute is intrinsic to that event (i.e., 'ult % at death'), then we use it as an inline. If the attribute is observable state that can exist outside the event (e.g., high-ground), make it it's own event.
 2. Only mark IMPORTANT events in our system. Otherwise, you're just tracking move up, down, pitch aim left, right. What defines an important event? If it has a direct impat on the game's outcome. 
+3. Manual annotation is untenable. For 9 minutes of gameplay, even trying to capture the key events took roughly 3.5 hours. This was even after converting annotations to a more human-friendly workbook in Excel. 
+   1. Important: almost all other ML projects start with human annotation as the ground truth; it's not the tediousness which makes this redundant in our case but the fact that the killfeed and hero UI gives us almost everything we need; a machine would be better suited and tracking those diffs than a human, that is why we pivoted.
+   2. XX
 
 

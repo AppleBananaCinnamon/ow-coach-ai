@@ -28,7 +28,7 @@ class Config:
     sample_fps: float = 4.0
     monitor_idx: int = 1
     # x1, y1, x2, y2 normalized to selected monitor
-    killfeed_roi: tuple[float, float, float, float] = (0.68, 0.02, 0.99, 0.22)
+    killfeed_roi: tuple[float, float, float, float] = (0.8, 0.15, 0.985, 0.185)
     diff_threshold: float = 14.0
     min_gap_sec: float = 0.6
     resize_width: int = 700

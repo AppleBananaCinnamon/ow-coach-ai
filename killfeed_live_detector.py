@@ -28,7 +28,7 @@ class Config:
     sample_fps: float = 4.0
     monitor_idx: int = 1
     # x1, y1, x2, y2 normalized to selected monitor
-    killfeed_roi: tuple[float, float, float, float] = (0.68, 0.02, 0.99, 0.22)
+    killfeed_roi: tuple[float, float, float, float] = (0.75, 0.15, 0.985, 0.185)
     diff_threshold: float = 14.0
     min_gap_sec: float = 0.6
     resize_width: int = 700
@@ -97,6 +97,13 @@ def list_monitors() -> None:
             else:
                 print(f"  {idx}: {mon['width']}x{mon['height']} at ({mon['left']}, {mon['top']})")
 
+def save_crop_image(path: Path, crop: np.ndarray, save_format: str) -> None:
+    if save_format == "jpg":
+        cv2.imwrite(str(path), crop, [cv2.IMWRITE_JPEG_QUALITY, 90])
+    elif save_format == "png":
+        cv2.imwrite(str(path), crop)
+    else:
+        raise ValueError(f"Unsupported save_format={save_format}")
 
 def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
     out_dir = Path(cfg.output_dir)
@@ -111,6 +118,8 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
     prev_proc: Optional[np.ndarray] = None
     last_hit_ts = -999.0
     frame_idx = 0
+    burst_remaining = 0
+    burst_event_idx = 0
 
     with mss.mss() as sct:
         if cfg.monitor_idx < 1 or cfg.monitor_idx >= len(sct.monitors):
@@ -137,7 +146,6 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                 break
 
             raw = np.array(sct.grab(mon))
-            # mss returns BGRA
             frame_bgr = cv2.cvtColor(raw, cv2.COLOR_BGRA2BGR)
 
             crop = frame_bgr[y1_rel:y2_rel, x1_rel:x2_rel]
@@ -145,10 +153,24 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
             score = diff_score(proc, prev_proc)
 
             should_emit = score >= cfg.diff_threshold and (ts_sec - last_hit_ts) >= cfg.min_gap_sec
+
             if should_emit:
-                crop_name = f"killfeed_{frame_idx:07d}_{ts_sec:08.2f}.jpg"
+                burst_remaining = max(cfg.burst_count, 1)
+                burst_event_idx += 1
+                last_hit_ts = ts_sec
+
+            if burst_remaining > 0:
+                burst_seq = cfg.burst_count - burst_remaining
+                ext = cfg.save_format
+                crop_name = (
+                    f"killfeed_evt{burst_event_idx:05d}_"
+                    f"b{burst_seq}_"
+                    f"f{frame_idx:07d}_"
+                    f"t{ts_sec:08.2f}."
+                    f"{ext}"
+                )
                 crop_path = crops_dir / crop_name
-                cv2.imwrite(str(crop_path), crop)
+                save_crop_image(crop_path, crop, cfg.save_format)
 
                 bbox_abs = (
                     mon_left + x1_rel,
@@ -167,8 +189,16 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         monitor_idx=cfg.monitor_idx,
                     )
                 )
-                last_hit_ts = ts_sec
-                print(f"[hit] t={ts_sec:7.2f}s score={score:6.2f} saved={crop_path.name}")
+
+                tag = "[hit]" if burst_seq == 0 else "[burst]"
+                h, w = crop.shape[:2]
+                print(
+                    f"{tag} evt={burst_event_idx:05d} "
+                    f"b={burst_seq} t={ts_sec:7.2f}s score={score:6.2f} "
+                    f"size={w}x{h} saved={crop_path.name}"
+                )
+
+                burst_remaining -= 1
 
             if cfg.debug or cfg.show_preview:
                 frame_dbg = frame_bgr.copy()
@@ -193,7 +223,13 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                     max_preview_width = 1600
                     if preview.shape[1] > max_preview_width:
                         scale = max_preview_width / preview.shape[1]
-                        preview = cv2.resize(preview, None, fx=scale, fy=scale, interpolation=cv2.INTER_AREA)
+                        preview = cv2.resize(
+                            preview,
+                            None,
+                            fx=scale,
+                            fy=scale,
+                            interpolation=cv2.INTER_AREA,
+                        )
                     cv2.imshow("OW Killfeed Detector", preview)
                     key = cv2.waitKey(1) & 0xFF
                     if key == ord("q"):

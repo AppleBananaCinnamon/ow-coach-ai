@@ -22,6 +22,7 @@ Learnings
 2. Only mark IMPORTANT events in our system. Otherwise, you're just tracking move up, down, pitch aim left, right. What defines an important event? If it has a direct impat on the game's outcome. 
 3. Manual annotation is untenable. For 9 minutes of gameplay, even trying to capture the key events took roughly 3.5 hours. This was even after converting annotations to a more human-friendly workbook in Excel. 
    1. Important: almost all other ML projects start with human annotation as the ground truth; it's not the tediousness which makes this redundant in our case but the fact that the killfeed and hero UI gives us almost everything we need; a machine would be better suited and tracking those diffs than a human, that is why we pivoted.
-   2. XX
+4. Machine vision (CV) isn't without it's own set of problems. Tuning the right killfeed box, trying to avoid the color flair from someone popping off and going on fire, trying not to make the box too wide or too tall to ingest unncessary images (the background will always change as the character is moving).
+5. XX
 
 

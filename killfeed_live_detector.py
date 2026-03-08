@@ -28,7 +28,7 @@ class Config:
     sample_fps: float = 4.0
     monitor_idx: int = 1
     # x1, y1, x2, y2 normalized to selected monitor
-    killfeed_roi: tuple[float, float, float, float] = (0.8, 0.15, 0.985, 0.185)
+    killfeed_roi: tuple[float, float, float, float] = (0.68, 0.02, 0.99, 0.22)
     diff_threshold: float = 14.0
     min_gap_sec: float = 0.6
     resize_width: int = 700
@@ -36,6 +36,8 @@ class Config:
     debug: bool = False
     duration_sec: Optional[float] = None
     show_preview: bool = False
+    burst_count: int = 3
+    save_format: str = "jpg"   # "jpg" or "png"
 
 
 def parse_args() -> argparse.Namespace:
@@ -48,6 +50,8 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--duration-sec", type=float, default=None, help="Optional max run time")
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--show-preview", action="store_true", help="Show live preview window; press q to quit")
+    parser.add_argument("--burst-count", type=int, default=3, help="Save N crops per detected hit")
+    parser.add_argument("--save-format", type=str, default="jpg", choices=["jpg", "png"])
     return parser.parse_args()
 
 
@@ -142,7 +146,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
 
             should_emit = score >= cfg.diff_threshold and (ts_sec - last_hit_ts) >= cfg.min_gap_sec
             if should_emit:
-                crop_name = f"killfeed_{frame_idx:07d}_{ts_sec:08.2f}.png"
+                crop_name = f"killfeed_{frame_idx:07d}_{ts_sec:08.2f}.jpg"
                 crop_path = crops_dir / crop_name
                 cv2.imwrite(str(crop_path), crop)
 
@@ -221,6 +225,8 @@ def main() -> None:
         duration_sec=args.duration_sec,
         debug=args.debug,
         show_preview=args.show_preview,
+        burst_count=args.burst_count,
+        save_format=args.save_format,
     )
 
     list_monitors()

@@ -1,0 +1,100 @@
+{
+  "schema_version": "0.1.0",
+  "match": {
+    "match_id": "M001",
+    "map": "SHAMBALI MONASTERY",
+    "mode": "PAYLOAD",
+    "player": "JEFFBEZOS7",
+    "hero": "ZENYATTA",
+    "rank": "SILVER 3",
+    "video": { "source": "Twitch", "vod_id": "NRJZ0B", "start_offset_sec": 45 }
+  },
+  "players": [
+    { "player_id": "P1", "team": "ENEMY", "role": "DPS", "hero": "SYMMETRA", "handle": "enemy_dps1" },
+    { "player_id": "P2", "team": "ENEMY", "role": "DPS", "hero": "GENJI", "handle": "enemy_dps2" },
+    { "player_id": "P3", "team": "ENEMY", "role": "SUPPORT", "hero": "MERCY", "handle": "enemy_sup1" },
+    { "player_id": "P4", "team": "ENEMY", "role": "TANK", "hero": "ORISA", "handle": "enemy_tank" },
+    { "player_id": "P5", "team": "ENEMY", "role": "SUPPORT", "hero": "MOIRA", "handle": "enemy_sup2" },
+
+    { "player_id": "P6", "team": "ALLY", "role": "DPS", "hero": "VENTURE", "handle": "ally_dps1" },
+    { "player_id": "P7", "team": "ALLY", "role": "SUPPORT", "hero": "ZENYATTA", "handle": "focus" },
+    { "player_id": "P8", "team": "ALLY", "role": "DPS", "hero": "ANRAN", "handle": "ally_dps2" },
+    { "player_id": "P9", "team": "ALLY", "role": "SUPPORT", "hero": "MIZUKI", "handle": "ally_sup2" },
+    { "player_id": "P10", "team": "ALLY", "role": "TANK", "hero": "ORISA", "handle": "ally_tank" }
+  ],
+  "fights": [
+    { "fight_id": "F01", "start_ts": 120.0, "end_ts": 148.0, "note": "clustered killfeed deaths" }
+  ],
+  "events": [
+    {
+      "event_id": "E001",
+      "ts": 121.5,
+      "type": "FIGHT_STATE",
+      "actors": { "team": "ALLY" },
+      "payload": { "fight_id": "F01", "state": "ENGAGE" },
+      "tags": ["fight:F01"],
+      "sources": [{ "kind": "manual", "confidence": 0.9 }]
+    },
+
+    {
+      "event_id": "E002",
+      "ts": 123.0,
+      "type": "ULT_PCT",
+      "actors": { "subject_player_id": "P1" },
+      "payload": { "fight_id": "F01", "pct": 42 },
+      "tags": ["fight:F01", "zen"],
+      "sources": [{ "kind": "manual", "confidence": 0.95, "note": "POV ult meter" }]
+    },
+
+    {
+      "event_id": "E003",
+      "ts": 128.2,
+      "type": "DEATH",
+      "actors": { "subject_player_id": "P3", "by_player_id": "P8" },
+      "payload": { "fight_id": "F01" },
+      "tags": ["fight:F01"],
+      "sources": [{ "kind": "manual", "confidence": 0.9, "note": "killfeed" }]
+    },
+
+    {
+      "event_id": "E004",
+      "ts": 132.0,
+      "type": "ULT_PCT",
+      "actors": { "subject_player_id": "P1" },
+      "payload": { "fight_id": "F01", "pct": 71 },
+      "tags": ["fight:F01", "zen"],
+      "sources": [{ "kind": "manual", "confidence": 0.95 }]
+    },
+
+    {
+      "event_id": "E005",
+      "ts": 135.4,
+      "type": "POSITION_TAG",
+      "actors": { "subject_player_id": "P1" },
+      "payload": { "fight_id": "F01", "tag": "FRONTLINE" },
+      "tags": ["fight:F01", "zen"],
+      "sources": [{ "kind": "manual", "confidence": 0.8 }]
+    },
+
+    {
+      "event_id": "E006",
+      "ts": 136.1,
+      "type": "DEATH",
+      "actors": { "subject_player_id": "P1", "by_player_id": "P7" },
+      "payload": { "fight_id": "F01", "ult_pct_at_death": 74, "is_stagger": false },
+      "tags": ["fight:F01", "zen"],
+      "sources": [{ "kind": "manual", "confidence": 1.0 }]
+    },
+
+    {
+      "event_id": "E007",
+      "ts": 147.5,
+      "type": "FIGHT_STATE",
+      "actors": { "team": "ALLY" },
+      "payload": { "fight_id": "F01", "state": "REGROUP" },
+      "tags": ["fight:F01"],
+      "sources": [{ "kind": "manual", "confidence": 0.85 }]
+    }
+  ],
+  "observations": []
+}

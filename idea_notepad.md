@@ -14,6 +14,11 @@
    4. Takes perks ascendence and focused destruction
    5. Ult charge gained per fight 
 
-
+Learnings
+1. We broke out ULT and POSITION because these are state identifiers -- while it's useful to know what the outcome is (e.g., death), knowing how the player got there is also important. 
+   1. This is similar to user funnel journey metrics -- purchase and attrition are not the only things that matter; decomposing how they got there usually matter more.
+   2. It also makes CV ingestion cleaner later - e.g., at frame 3, Zen had 44% ult; at frame 10, Zen was on high-ground; on frame 12, Zen killed Anran. 
+   3. Those are not deaths. They are observations of state. If an attribute is intrinsic to that event (i.e., 'ult % at death'), then we use it as an inline. If the attribute is observable state that can exist outside the event (e.g., high-ground), make it it's own event.
+2. Only mark IMPORTANT events in our system. Otherwise, you're just tracking move up, down, pitch aim left, right. What defines an important event? If it has a direct impat on the game's outcome. 
 
 

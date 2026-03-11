@@ -1,0 +1,23 @@
+{
+  "output_dir": "artifacts/killfeed_live",
+  "sample_fps": 8.0,
+  "monitor_idx": 1,
+  "killfeed_roi": [
+    0.75,
+    0.15,
+    0.985,
+    0.185
+  ],
+  "diff_threshold": 0.03,
+  "min_gap_sec": 0.6,
+  "resize_width": 700,
+  "blur_kernel": 3,
+  "debug": false,
+  "duration_sec": null,
+  "show_preview": true,
+  "burst_count": 3,
+  "save_format": "jpg",
+  "sat_threshold": 0.05,
+  "color_signal_threshold": 0.08,
+  "event_cooldown_sec": 0.6
+}

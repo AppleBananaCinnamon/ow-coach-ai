@@ -1,0 +1,257 @@
+[
+  {
+    "frame_idx": 30,
+    "ts_sec": 3.758,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00001_best_f0000030_t00003.76.jpg",
+    "motion_score": 0.371,
+    "signal": 0.583,
+    "red_ratio": 0.025,
+    "cyan_ratio": 0.558,
+    "white_ratio": 0.0,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 33,
+    "ts_sec": 4.134,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00002_best_f0000033_t00004.13.jpg",
+    "motion_score": 0.182,
+    "signal": 0.225,
+    "red_ratio": 0.003,
+    "cyan_ratio": 0.223,
+    "white_ratio": 0.0,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 38,
+    "ts_sec": 4.761,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00003_best_f0000038_t00004.76.jpg",
+    "motion_score": 0.336,
+    "signal": 0.315,
+    "red_ratio": 0.001,
+    "cyan_ratio": 0.315,
+    "white_ratio": 0.0,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 43,
+    "ts_sec": 5.387,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00004_best_f0000043_t00005.39.jpg",
+    "motion_score": 0.626,
+    "signal": 0.56,
+    "red_ratio": 0.26,
+    "cyan_ratio": 0.227,
+    "white_ratio": 0.072,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 49,
+    "ts_sec": 6.139,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00005_best_f0000049_t00006.14.jpg",
+    "motion_score": 0.088,
+    "signal": 0.796,
+    "red_ratio": 0.371,
+    "cyan_ratio": 0.305,
+    "white_ratio": 0.12,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 54,
+    "ts_sec": 6.766,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00006_best_f0000054_t00006.77.jpg",
+    "motion_score": 0.056,
+    "signal": 0.788,
+    "red_ratio": 0.344,
+    "cyan_ratio": 0.324,
+    "white_ratio": 0.12,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 60,
+    "ts_sec": 7.518,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00007_best_f0000060_t00007.52.jpg",
+    "motion_score": 0.254,
+    "signal": 0.661,
+    "red_ratio": 0.341,
+    "cyan_ratio": 0.275,
+    "white_ratio": 0.045,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 66,
+    "ts_sec": 8.27,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00008_best_f0000066_t00008.27.jpg",
+    "motion_score": 0.434,
+    "signal": 0.795,
+    "red_ratio": 0.338,
+    "cyan_ratio": 0.302,
+    "white_ratio": 0.156,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 71,
+    "ts_sec": 8.896,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00009_best_f0000071_t00008.90.jpg",
+    "motion_score": 0.153,
+    "signal": 0.73,
+    "red_ratio": 0.35,
+    "cyan_ratio": 0.063,
+    "white_ratio": 0.317,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 74,
+    "ts_sec": 9.272,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00010_best_f0000074_t00009.27.jpg",
+    "motion_score": 0.324,
+    "signal": 0.583,
+    "red_ratio": 0.198,
+    "cyan_ratio": 0.016,
+    "white_ratio": 0.37,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 81,
+    "ts_sec": 10.149,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00011_best_f0000081_t00010.15.jpg",
+    "motion_score": 0.106,
+    "signal": 0.653,
+    "red_ratio": 0.269,
+    "cyan_ratio": 0.036,
+    "white_ratio": 0.347,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 84,
+    "ts_sec": 10.524,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00012_best_f0000084_t00010.52.jpg",
+    "motion_score": 0.217,
+    "signal": 0.908,
+    "red_ratio": 0.448,
+    "cyan_ratio": 0.308,
+    "white_ratio": 0.152,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 91,
+    "ts_sec": 11.401,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00013_best_f0000091_t00011.40.jpg",
+    "motion_score": 0.103,
+    "signal": 0.853,
+    "red_ratio": 0.427,
+    "cyan_ratio": 0.268,
+    "white_ratio": 0.158,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 94,
+    "ts_sec": 11.777,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00014_best_f0000094_t00011.78.jpg",
+    "motion_score": 0.441,
+    "signal": 0.769,
+    "red_ratio": 0.409,
+    "cyan_ratio": 0.011,
+    "white_ratio": 0.349,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  },
+  {
+    "frame_idx": 99,
+    "ts_sec": 12.404,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00015_best_f0000099_t00012.40.jpg",
+    "motion_score": 0.063,
+    "signal": 0.705,
+    "red_ratio": 0.344,
+    "cyan_ratio": 0.013,
+    "white_ratio": 0.348,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "monitor_idx": 1
+  }
+]

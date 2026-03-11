@@ -18,8 +18,24 @@ class FeedDetection:
     ts_sec: float
     crop_path: str
     motion_score: float
+    signal: float
+    red_ratio: float
+    cyan_ratio: float
+    white_ratio: float
     bbox_xyxy: tuple[int, int, int, int]
     monitor_idx: int
+
+
+@dataclass
+class BurstCandidate:
+    frame_idx: int
+    ts_sec: float
+    crop: np.ndarray
+    motion_score: float
+    signal: float
+    red_ratio: float
+    cyan_ratio: float
+    white_ratio: float
 
 
 @dataclass
@@ -29,7 +45,7 @@ class Config:
     monitor_idx: int = 1
     # x1, y1, x2, y2 normalized to selected monitor
     killfeed_roi: tuple[float, float, float, float] = (0.75, 0.15, 0.985, 0.185)
-    diff_threshold: float = 14.0
+    diff_threshold: float = 0.03
     min_gap_sec: float = 0.6
     resize_width: int = 700
     blur_kernel: int = 3
@@ -38,6 +54,9 @@ class Config:
     show_preview: bool = False
     burst_count: int = 3
     save_format: str = "jpg"   # "jpg" or "png"
+    sat_threshold: float = 0.05   # fraction of saturated pixels required
+    color_signal_threshold: float = 0.08
+    event_cooldown_sec: float = 0.6
 
 
 def parse_args() -> argparse.Namespace:
@@ -45,8 +64,9 @@ def parse_args() -> argparse.Namespace:
     parser.add_argument("--output-dir", type=str, default="artifacts/killfeed_live")
     parser.add_argument("--sample-fps", type=float, default=4.0)
     parser.add_argument("--monitor-idx", type=int, default=1, help="mss monitor index; usually 1 is primary")
-    parser.add_argument("--diff-threshold", type=float, default=14.0)
+    parser.add_argument("--diff-threshold", type=float, default=0.03)
     parser.add_argument("--min-gap-sec", type=float, default=0.6)
+    parser.add_argument("--event-cooldown-sec", type=float, default=0.6)
     parser.add_argument("--duration-sec", type=float, default=None, help="Optional max run time")
     parser.add_argument("--debug", action="store_true")
     parser.add_argument("--show-preview", action="store_true", help="Show live preview window; press q to quit")
@@ -88,6 +108,80 @@ def diff_score(curr: np.ndarray, prev: Optional[np.ndarray]) -> float:
     return float(np.mean(diff))
 
 
+def saturation_ratio(crop_bgr: np.ndarray) -> float:
+    hsv = cv2.cvtColor(crop_bgr, cv2.COLOR_BGR2HSV)
+    saturation = hsv[:, :, 1]
+
+    # count pixels with meaningful saturation
+    sat_pixels = np.sum(saturation > 60)
+
+    return sat_pixels / saturation.size
+
+
+def killfeed_color_signal(crop_bgr: np.ndarray) -> tuple[float, float, float, float]:
+    hsv = cv2.cvtColor(crop_bgr, cv2.COLOR_BGR2HSV)
+
+    h = hsv[:, :, 0]
+    s = hsv[:, :, 1]
+    v = hsv[:, :, 2]
+
+    # OpenCV hue ranges 0-179
+    # Red wraps around 0, so use two ranges
+    red_mask = (
+        (((h <= 10) | (h >= 170)) & (s >= 90) & (v >= 80))
+    )
+
+    # Cyan / blue team color
+    cyan_mask = (
+        ((h >= 80) & (h <= 110) & (s >= 70) & (v >= 80))
+    )
+
+    # Bright white text / chevron
+    white_mask = (
+        (s <= 45) & (v >= 180)
+    )
+
+    red_ratio = float(np.mean(red_mask))
+    cyan_ratio = float(np.mean(cyan_mask))
+    white_ratio = float(np.mean(white_mask))
+    signal = red_ratio + cyan_ratio + white_ratio
+
+    return signal, red_ratio, cyan_ratio, white_ratio
+
+
+def killfeed_ui_mask(crop_bgr: np.ndarray) -> np.ndarray:
+    hsv = cv2.cvtColor(crop_bgr, cv2.COLOR_BGR2HSV)
+
+    h = hsv[:, :, 0]
+    s = hsv[:, :, 1]
+    v = hsv[:, :, 2]
+
+    red_mask = (((h <= 10) | (h >= 170)) & (s >= 90) & (v >= 80))
+    cyan_mask = ((h >= 80) & (h <= 110) & (s >= 70) & (v >= 80))
+    white_mask = ((s <= 45) & (v >= 180))
+
+    mask = (red_mask | cyan_mask | white_mask).astype(np.uint8) * 255
+
+    # denoise / connect nearby UI bits
+    kernel = np.ones((3, 3), np.uint8)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_OPEN, kernel)
+    mask = cv2.morphologyEx(mask, cv2.MORPH_CLOSE, kernel)
+
+    return mask
+
+
+def diff_score_binary(curr: np.ndarray, prev: Optional[np.ndarray]) -> float:
+    if prev is None:
+        return 0.0
+    diff = cv2.absdiff(curr, prev)
+    return float(np.mean(diff)) / 255.0
+
+
+def has_horizontal_bar_structure(mask: np.ndarray, min_row_fill: float = 0.18, min_rows: int = 6) -> bool:
+    row_fill = np.mean(mask > 0, axis=1)  # fraction of "on" pixels in each row
+    return int(np.sum(row_fill >= min_row_fill)) >= min_rows
+
+
 def list_monitors() -> None:
     with mss.mss() as sct:
         print("Available monitors:")
@@ -116,10 +210,11 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
 
     detections: List[FeedDetection] = []
     prev_proc: Optional[np.ndarray] = None
-    last_hit_ts = -999.0
     frame_idx = 0
     burst_remaining = 0
     burst_event_idx = 0
+    last_event_ts = -999.0
+    burst_candidates: List[BurstCandidate] = []
 
     with mss.mss() as sct:
         if cfg.monitor_idx < 1 or cfg.monitor_idx >= len(sct.monitors):
@@ -141,6 +236,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
         while True:
             loop_start = time.perf_counter()
             ts_sec = loop_start - start_time
+            can_start_new_event = (ts_sec - last_event_ts) >= cfg.event_cooldown_sec
 
             if cfg.duration_sec is not None and ts_sec >= cfg.duration_sec:
                 break
@@ -149,56 +245,96 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
             frame_bgr = cv2.cvtColor(raw, cv2.COLOR_BGRA2BGR)
 
             crop = frame_bgr[y1_rel:y2_rel, x1_rel:x2_rel]
-            proc = preprocess_crop(crop, cfg.resize_width, cfg.blur_kernel)
-            score = diff_score(proc, prev_proc)
 
-            should_emit = score >= cfg.diff_threshold and (ts_sec - last_hit_ts) >= cfg.min_gap_sec
+            mask = killfeed_ui_mask(crop)
+            score = diff_score_binary(mask, prev_proc)
+            has_bar = has_horizontal_bar_structure(mask)
 
+            signal, red_ratio, cyan_ratio, white_ratio = killfeed_color_signal(crop)
+
+            should_emit = (
+                score >= cfg.diff_threshold
+                and has_bar
+                and can_start_new_event
+            )
+            
             if should_emit:
                 burst_remaining = max(cfg.burst_count, 1)
                 burst_event_idx += 1
-                last_hit_ts = ts_sec
+                last_event_ts = ts_sec
+                burst_candidates = []
 
             if burst_remaining > 0:
                 burst_seq = cfg.burst_count - burst_remaining
-                ext = cfg.save_format
-                crop_name = (
-                    f"killfeed_evt{burst_event_idx:05d}_"
-                    f"b{burst_seq}_"
-                    f"f{frame_idx:07d}_"
-                    f"t{ts_sec:08.2f}."
-                    f"{ext}"
-                )
-                crop_path = crops_dir / crop_name
-                save_crop_image(crop_path, crop, cfg.save_format)
 
-                bbox_abs = (
-                    mon_left + x1_rel,
-                    mon_top + y1_rel,
-                    mon_left + x2_rel,
-                    mon_top + y2_rel,
+                should_keep_burst_candidate = (
+                    burst_seq == 0
+                    or (has_bar and signal >= 0.45)
                 )
 
-                detections.append(
-                    FeedDetection(
-                        frame_idx=frame_idx,
-                        ts_sec=round(ts_sec, 3),
-                        crop_path=str(crop_path),
-                        motion_score=round(score, 3),
-                        bbox_xyxy=bbox_abs,
-                        monitor_idx=cfg.monitor_idx,
+                if should_keep_burst_candidate:
+                    burst_candidates.append(
+                        BurstCandidate(
+                            frame_idx=frame_idx,
+                            ts_sec=round(ts_sec, 3),
+                            crop=crop.copy(),
+                            motion_score=round(score, 3),
+                            signal=round(signal, 3),
+                            red_ratio=round(red_ratio, 3),
+                            cyan_ratio=round(cyan_ratio, 3),
+                            white_ratio=round(white_ratio, 3),
+                        )
                     )
-                )
-
-                tag = "[hit]" if burst_seq == 0 else "[burst]"
-                h, w = crop.shape[:2]
-                print(
-                    f"{tag} evt={burst_event_idx:05d} "
-                    f"b={burst_seq} t={ts_sec:7.2f}s score={score:6.2f} "
-                    f"size={w}x{h} saved={crop_path.name}"
-                )
 
                 burst_remaining -= 1
+
+                if burst_remaining == 0 and burst_candidates:
+                    best_candidate = max(
+                        burst_candidates,
+                        key=lambda candidate: candidate.motion_score * candidate.signal,
+                    )
+
+                    ext = cfg.save_format
+                    crop_name = (
+                        f"killfeed_evt{burst_event_idx:05d}_"
+                        f"best_"
+                        f"f{best_candidate.frame_idx:07d}_"
+                        f"t{best_candidate.ts_sec:08.2f}."
+                        f"{ext}"
+                    )
+                    crop_path = crops_dir / crop_name
+                    save_crop_image(crop_path, best_candidate.crop, cfg.save_format)
+
+                    bbox_abs = (
+                        mon_left + x1_rel,
+                        mon_top + y1_rel,
+                        mon_left + x2_rel,
+                        mon_top + y2_rel,
+                    )
+
+                    detections.append(
+                        FeedDetection(
+                            frame_idx=best_candidate.frame_idx,
+                            ts_sec=best_candidate.ts_sec,
+                            crop_path=str(crop_path),
+                            motion_score=best_candidate.motion_score,
+                            signal=best_candidate.signal,
+                            red_ratio=best_candidate.red_ratio,
+                            cyan_ratio=best_candidate.cyan_ratio,
+                            white_ratio=best_candidate.white_ratio,
+                            bbox_xyxy=bbox_abs,
+                            monitor_idx=cfg.monitor_idx,
+                        )
+                    )
+
+                    h, w = best_candidate.crop.shape[:2]
+                    print(
+                        f"[save] evt={burst_event_idx:05d} "
+                        f"t={best_candidate.ts_sec:7.2f}s "
+                        f"score={best_candidate.motion_score:6.2f} "
+                        f"sig={best_candidate.signal:0.3f} "
+                        f"size={w}x{h} saved={crop_path.name}"
+                    )
 
             if cfg.debug or cfg.show_preview:
                 frame_dbg = frame_bgr.copy()
@@ -235,7 +371,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                     if key == ord("q"):
                         break
 
-            prev_proc = proc
+            prev_proc = mask
             frame_idx += 1
 
             elapsed = time.perf_counter() - loop_start
@@ -247,6 +383,36 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
         cv2.destroyAllWindows()
 
     return detections
+
+
+def cluster_detections(detections: List[FeedDetection], gap_sec: float = 0.6) -> List[FeedDetection]:
+    if not detections:
+        return []
+
+    detections = sorted(detections, key=lambda d: d.ts_sec)
+
+    clusters = []
+    current_cluster = [detections[0]]
+
+    for d in detections[1:]:
+        if d.ts_sec - current_cluster[-1].ts_sec <= gap_sec:
+            current_cluster.append(d)
+        else:
+            clusters.append(current_cluster)
+            current_cluster = [d]
+
+    clusters.append(current_cluster)
+
+    representatives = []
+
+    for cluster in clusters:
+        def cluster_rank(detection: FeedDetection) -> float:
+            return detection.motion_score * detection.signal
+
+        best = max(cluster, key=cluster_rank)
+        representatives.append(best)
+
+    return representatives
 
 
 def main() -> None:
@@ -263,6 +429,7 @@ def main() -> None:
         show_preview=args.show_preview,
         burst_count=args.burst_count,
         save_format=args.save_format,
+        event_cooldown_sec=args.event_cooldown_sec,
     )
 
     list_monitors()
@@ -271,10 +438,14 @@ def main() -> None:
     print("If using --show-preview, press q to stop.\n")
 
     detections = detect_feed_changes_live(cfg)
+    events = cluster_detections(detections, gap_sec=0.6)
     out_dir = Path(cfg.output_dir)
-    save_json(out_dir / "detections.json", [asdict(d) for d in detections])
+    save_json(out_dir / "detections_raw.json", [asdict(d) for d in detections])
+    save_json(out_dir / "detections_clustered.json", [asdict(d) for d in events])
     save_json(out_dir / "config.json", asdict(cfg))
     print(f"\nSaved {len(detections)} candidate killfeed crops to {out_dir}")
+    print(f"Raw detections: {len(detections)}")
+    print(f"Clustered events: {len(events)}")
 
 
 if __name__ == "__main__":

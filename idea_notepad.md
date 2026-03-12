@@ -32,6 +32,8 @@ Learnings
         AND the crop contains enough saturated pixels
         ```
 6. We are picking up too much noise from the burst approach, and the generic color palette change isn't helping much. We implemented a structural detection module; that means it's looking for a specific color change within a defined geometric space to avoid picking up just whenever the background changed. 
-7. On 3.11, switched to Codex for making in-line changes. Will need to find a way to review changes before implementing them so I can ensure I'm still learning along the way, that was the early advantage of the 'manual patch' approach. 
+7. On 3.11, switched to Codex for making in-line changes. Will need to find a way to review changes before implementing them so I can ensure I'm still learning along the way, that was the early advantage of the 'manual patch' approach.
+   1. Codex is very helpful! Removes the problem with stitching in code piecemeal, and now I can abstract the actual tuning changes unless they are one-line tweaks to parameters.
+8. Main challenge is getting true events from the killfeed that aren't overrepresented. The pixel change is just enough that it's throwing off me detecting events; still, making progress from actually picking up the kill. Now I just need to isolate out the noise. 
 
 

@@ -51,23 +51,6 @@
     "monitor_idx": 1
   },
   {
-    "frame_idx": 36,
-    "ts_sec": 4.51,
-    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00004_best_f0000036_t00004.51.jpg",
-    "motion_score": 0.169,
-    "signal": 0.73,
-    "red_ratio": 0.32,
-    "cyan_ratio": 0.267,
-    "white_ratio": 0.143,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "monitor_idx": 1
-  },
-  {
     "frame_idx": 49,
     "ts_sec": 6.139,
     "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00005_best_f0000049_t00006.14.jpg",
@@ -75,23 +58,6 @@
     "signal": 0.679,
     "red_ratio": 0.267,
     "cyan_ratio": 0.268,
-    "white_ratio": 0.143,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 55,
-    "ts_sec": 6.891,
-    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00006_best_f0000055_t00006.89.jpg",
-    "motion_score": 0.223,
-    "signal": 0.888,
-    "red_ratio": 0.273,
-    "cyan_ratio": 0.472,
     "white_ratio": 0.143,
     "bbox_xyxy": [
       1920,
@@ -153,57 +119,6 @@
     "monitor_idx": 1
   },
   {
-    "frame_idx": 73,
-    "ts_sec": 9.147,
-    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00010_best_f0000073_t00009.15.jpg",
-    "motion_score": 0.082,
-    "signal": 0.745,
-    "red_ratio": 0.352,
-    "cyan_ratio": 0.271,
-    "white_ratio": 0.122,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 78,
-    "ts_sec": 9.773,
-    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00011_best_f0000078_t00009.77.jpg",
-    "motion_score": 0.058,
-    "signal": 0.683,
-    "red_ratio": 0.318,
-    "cyan_ratio": 0.173,
-    "white_ratio": 0.192,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 85,
-    "ts_sec": 10.65,
-    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00012_best_f0000085_t00010.65.jpg",
-    "motion_score": 0.068,
-    "signal": 0.709,
-    "red_ratio": 0.287,
-    "cyan_ratio": 0.242,
-    "white_ratio": 0.18,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "monitor_idx": 1
-  },
-  {
     "frame_idx": 89,
     "ts_sec": 11.151,
     "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00013_best_f0000089_t00011.15.jpg",
@@ -212,23 +127,6 @@
     "red_ratio": 0.302,
     "cyan_ratio": 0.255,
     "white_ratio": 0.177,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 95,
-    "ts_sec": 11.903,
-    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00014_best_f0000095_t00011.90.jpg",
-    "motion_score": 0.256,
-    "signal": 0.773,
-    "red_ratio": 0.276,
-    "cyan_ratio": 0.186,
-    "white_ratio": 0.31,
     "bbox_xyxy": [
       1920,
       216,
@@ -280,23 +178,6 @@
     "red_ratio": 0.219,
     "cyan_ratio": 0.43,
     "white_ratio": 0.184,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 115,
-    "ts_sec": 14.41,
-    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00018_best_f0000115_t00014.41.jpg",
-    "motion_score": 0.036,
-    "signal": 0.814,
-    "red_ratio": 0.226,
-    "cyan_ratio": 0.374,
-    "white_ratio": 0.213,
     "bbox_xyxy": [
       1920,
       216,

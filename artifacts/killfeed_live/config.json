@@ -9,7 +9,7 @@
     0.185
   ],
   "diff_threshold": 0.03,
-  "min_gap_sec": 0.6,
+  "min_gap_sec": 0.45,
   "resize_width": 700,
   "blur_kernel": 3,
   "debug": false,

@@ -222,8 +222,58 @@ def save_crop_image(path: Path, crop: np.ndarray, save_format: str) -> None:
         raise ValueError(f"Unsupported save_format={save_format}")
 
 
-def candidate_rank(signal: float, motion_score: float) -> float:
-    return signal - 0.5 * motion_score
+def detection_rank(detection: FeedDetection) -> float:
+    return detection.motion_score * detection.signal
+
+
+def crop_similarity(
+    crop_path_a: str, crop_path_b: str, blur_kernel: int = 3
+) -> float:
+    img_a = cv2.imread(crop_path_a, cv2.IMREAD_GRAYSCALE)
+    img_b = cv2.imread(crop_path_b, cv2.IMREAD_GRAYSCALE)
+
+    if img_a is None or img_b is None:
+        return 0.0
+
+    if img_a.shape != img_b.shape:
+        img_b = cv2.resize(
+            img_b,
+            (img_a.shape[1], img_a.shape[0]),
+            interpolation=cv2.INTER_LINEAR,
+        )
+
+    img_a = cv2.normalize(img_a, None, 0, 255, cv2.NORM_MINMAX)
+    img_b = cv2.normalize(img_b, None, 0, 255, cv2.NORM_MINMAX)
+
+    if blur_kernel > 1:
+        img_a = cv2.GaussianBlur(img_a, (blur_kernel, blur_kernel), 0)
+        img_b = cv2.GaussianBlur(img_b, (blur_kernel, blur_kernel), 0)
+
+    diff = cv2.absdiff(img_a, img_b)
+    return 1.0 - (float(np.mean(diff)) / 255.0)
+
+
+def dedupe_detections_visual(
+    detections: List[FeedDetection],
+    max_gap_sec: float = 1.0,
+    similarity_threshold: float = 0.70,
+) -> List[FeedDetection]:
+    if not detections:
+        return []
+
+    deduped = [detections[0]]
+
+    for detection in detections[1:]:
+        prev = deduped[-1]
+        is_nearby = (detection.ts_sec - prev.ts_sec) <= max_gap_sec
+        similarity = crop_similarity(prev.crop_path, detection.crop_path)
+
+        if is_nearby and similarity >= similarity_threshold:
+            deduped[-1] = max(prev, detection, key=detection_rank)
+        else:
+            deduped.append(detection)
+
+    return deduped
 
 
 def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
@@ -328,9 +378,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                 if burst_remaining == 0 and burst_candidates:
                     best_candidate = max(
                         burst_candidates,
-                        key=lambda candidate: candidate_rank(
-                            candidate.signal, candidate.motion_score
-                        ),
+                        key=lambda candidate: candidate.motion_score * candidate.signal,
                     )
 
                     ext = cfg.save_format
@@ -450,7 +498,7 @@ def cluster_detections(
 
     for cluster in clusters:
         def cluster_rank(detection: FeedDetection) -> float:
-            return candidate_rank(detection.signal, detection.motion_score)
+            return detection_rank(detection)
 
         best = max(cluster, key=cluster_rank)
         representatives.append(best)
@@ -484,14 +532,17 @@ def main() -> None:
     print("If using --show-preview, press q to stop.\n")
 
     detections = detect_feed_changes_live(cfg)
-    events = cluster_detections(detections, gap_sec=cfg.event_cooldown_sec)
+    events = cluster_detections(detections, gap_sec=cfg.min_gap_sec)
+    deduped_events = dedupe_detections_visual(events)
     out_dir = Path(cfg.output_dir)
     save_json(out_dir / "detections_raw.json", [asdict(d) for d in detections])
     save_json(out_dir / "detections_clustered.json", [asdict(d) for d in events])
+    save_json(out_dir / "detections_deduped.json", [asdict(d) for d in deduped_events])
     save_json(out_dir / "config.json", asdict(cfg))
     print(f"\nSaved {len(detections)} candidate killfeed crops to {out_dir}")
     print(f"Raw detections: {len(detections)}")
     print(f"Clustered events: {len(events)}")
+    print(f"Deduped events: {len(deduped_events)}")
 
 
 if __name__ == "__main__":

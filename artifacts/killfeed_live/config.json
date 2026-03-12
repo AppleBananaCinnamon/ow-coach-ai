@@ -13,11 +13,12 @@
   "resize_width": 700,
   "blur_kernel": 3,
   "debug": false,
-  "duration_sec": null,
+  "duration_sec": 15.0,
   "show_preview": true,
   "burst_count": 3,
   "save_format": "jpg",
   "sat_threshold": 0.05,
   "color_signal_threshold": 0.08,
-  "event_cooldown_sec": 0.6
+  "event_cooldown_sec": 0.6,
+  "save_burst_debug_candidates": true
 }

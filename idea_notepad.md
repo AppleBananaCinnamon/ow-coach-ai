@@ -31,7 +31,7 @@ Learnings
             diff_score is high
         AND the crop contains enough saturated pixels
         ```
-6. XX
-7. 
+6. We are picking up too much noise from the burst approach, and the generic color palette change isn't helping much. We implemented a structural detection module; that means it's looking for a specific color change within a defined geometric space to avoid picking up just whenever the background changed. 
+7. On 3.11, switched to Codex for making in-line changes. Will need to find a way to review changes before implementing them so I can ensure I'm still learning along the way, that was the early advantage of the 'manual patch' approach. 
 
 

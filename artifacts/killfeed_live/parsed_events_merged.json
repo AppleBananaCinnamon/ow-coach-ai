@@ -1,0 +1,30 @@
+[
+  {
+    "ts_sec": 3.26,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00002_best_f0000028_t00003.51.jpg",
+    "killer_hero": null,
+    "victim_hero": null,
+    "confidence": 0.0
+  },
+  {
+    "ts_sec": 7.14,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00008_best_f0000059_t00007.39.jpg",
+    "killer_hero": null,
+    "victim_hero": null,
+    "confidence": 0.0
+  },
+  {
+    "ts_sec": 8.4,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00010_best_f0000069_t00008.65.jpg",
+    "killer_hero": null,
+    "victim_hero": null,
+    "confidence": 0.0
+  },
+  {
+    "ts_sec": 9.65,
+    "crop_path": "artifacts\\killfeed_live\\crops\\killfeed_evt00012_best_f0000079_t00009.90.jpg",
+    "killer_hero": null,
+    "victim_hero": null,
+    "confidence": 0.0
+  }
+]

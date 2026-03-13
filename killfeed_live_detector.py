@@ -23,6 +23,7 @@ class FeedDetection:
     cyan_ratio: float
     white_ratio: float
     bbox_xyxy: tuple[int, int, int, int]
+    row_idx: int
     monitor_idx: int
 
 
@@ -56,7 +57,7 @@ class Config:
     save_format: str = "jpg"  # "jpg" or "png"
     sat_threshold: float = 0.05  # fraction of saturated pixels required
     color_signal_threshold: float = 0.08
-    event_cooldown_sec: float = 0.6
+    event_cooldown_sec: float = 0.9
     save_burst_debug_candidates: bool = False
 
 
@@ -226,54 +227,103 @@ def detection_rank(detection: FeedDetection) -> float:
     return detection.motion_score * detection.signal
 
 
-def crop_similarity(
-    crop_path_a: str, crop_path_b: str, blur_kernel: int = 3
-) -> float:
-    img_a = cv2.imread(crop_path_a, cv2.IMREAD_GRAYSCALE)
-    img_b = cv2.imread(crop_path_b, cv2.IMREAD_GRAYSCALE)
+def extract_killfeed_regions(crop_bgr: np.ndarray) -> dict[str, np.ndarray]:
+    width = crop_bgr.shape[1]
+    left_end = int(width * 0.42)
+    center_end = int(width * 0.58)
 
-    if img_a is None or img_b is None:
-        return 0.0
+    return {
+        "left": crop_bgr[:, :left_end],
+        "center": crop_bgr[:, left_end:center_end],
+        "right": crop_bgr[:, center_end:],
+    }
 
-    if img_a.shape != img_b.shape:
-        img_b = cv2.resize(
-            img_b,
-            (img_a.shape[1], img_a.shape[0]),
-            interpolation=cv2.INTER_LINEAR,
-        )
 
-    img_a = cv2.normalize(img_a, None, 0, 255, cv2.NORM_MINMAX)
-    img_b = cv2.normalize(img_b, None, 0, 255, cv2.NORM_MINMAX)
+def region_fingerprint(region_bgr: np.ndarray) -> np.ndarray:
+    mask = killfeed_ui_mask(region_bgr)
+    return cv2.resize(mask, (32, 12), interpolation=cv2.INTER_AREA)
 
-    if blur_kernel > 1:
-        img_a = cv2.GaussianBlur(img_a, (blur_kernel, blur_kernel), 0)
-        img_b = cv2.GaussianBlur(img_b, (blur_kernel, blur_kernel), 0)
 
-    diff = cv2.absdiff(img_a, img_b)
-    return 1.0 - (float(np.mean(diff)) / 255.0)
+def compute_row_signature(crop_path: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
+    crop = cv2.imread(crop_path, cv2.IMREAD_COLOR)
+    if crop is None or crop.size == 0:
+        empty = np.zeros((12, 32), dtype=np.uint8)
+        return empty, empty, empty
+
+    regions = extract_killfeed_regions(crop)
+    return (
+        region_fingerprint(regions["left"]),
+        region_fingerprint(regions["center"]),
+        region_fingerprint(regions["right"]),
+    )
+
+
+def crop_similarity(crop_path_a: str, crop_path_b: str) -> float:
+    sig_a = compute_row_signature(crop_path_a)
+    sig_b = compute_row_signature(crop_path_b)
+
+    region_scores = []
+    for region_a, region_b in zip(sig_a, sig_b):
+        diff = cv2.absdiff(region_a, region_b)
+        region_scores.append(1.0 - (float(np.mean(diff)) / 255.0))
+
+    return float(np.mean(region_scores))
 
 
 def dedupe_detections_visual(
     detections: List[FeedDetection],
-    max_gap_sec: float = 1.0,
-    similarity_threshold: float = 0.70,
+    max_gap_sec: float = 4.0,
+    similarity_threshold: float = 0.65,
 ) -> List[FeedDetection]:
     if not detections:
         return []
 
-    deduped = [detections[0]]
+    deduped: List[FeedDetection] = []
+    last_by_row: dict[int, FeedDetection] = {}
+    last_idx_by_row: dict[int, int] = {}
 
-    for detection in detections[1:]:
-        prev = deduped[-1]
-        is_nearby = (detection.ts_sec - prev.ts_sec) <= max_gap_sec
-        similarity = crop_similarity(prev.crop_path, detection.crop_path)
+    for detection in detections:
+        row_idx = detection.row_idx
+        prev = last_by_row.get(row_idx)
+        prev_idx = last_idx_by_row.get(row_idx)
 
-        if is_nearby and similarity >= similarity_threshold:
-            deduped[-1] = max(prev, detection, key=detection_rank)
+        if prev is not None and (detection.ts_sec - prev.ts_sec) <= max_gap_sec:
+            similarity = crop_similarity(prev.crop_path, detection.crop_path)
+        else:
+            similarity = 0.0
+
+        if prev is not None and prev_idx is not None and similarity >= similarity_threshold:
+            best = max(prev, detection, key=detection_rank)
+            last_by_row[row_idx] = best
+            deduped[prev_idx] = best
         else:
             deduped.append(detection)
+            last_by_row[row_idx] = detection
+            last_idx_by_row[row_idx] = len(deduped) - 1
 
     return deduped
+
+
+def estimate_row_idx_from_crop(
+    crop_path: str, top_y: int = 0, row_height: int = 24
+) -> int:
+    crop = cv2.imread(crop_path, cv2.IMREAD_GRAYSCALE)
+    if crop is None or crop.size == 0:
+        return 0
+
+    norm = cv2.normalize(crop, None, 0, 255, cv2.NORM_MINMAX)
+    blur = cv2.GaussianBlur(norm, (3, 3), 0)
+
+    # Use the brightest horizontal band as a simple proxy for the active killfeed row.
+    row_signal = np.mean(blur, axis=1)
+    peak_y = int(np.argmax(row_signal))
+
+    if row_height <= 0:
+        return 0
+    
+    row_idx = int((peak_y - top_y) / row_height)
+
+    return max(0, min(row_idx, 2))
 
 
 def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
@@ -410,6 +460,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                             cyan_ratio=best_candidate.cyan_ratio,
                             white_ratio=best_candidate.white_ratio,
                             bbox_xyxy=bbox_abs,
+                            row_idx=estimate_row_idx_from_crop(str(crop_path)),
                             monitor_idx=cfg.monitor_idx,
                         )
                     )

@@ -6,10 +6,14 @@ import time
 from dataclasses import dataclass, asdict
 from pathlib import Path
 from typing import List, Optional
+from urllib.parse import unquote, urlparse
 
 import cv2
 import mss
 import numpy as np
+
+from arrow_detector import ArrowDetector, compute_arrow_search_band
+from killfeed_parser import run_parser
 
 
 @dataclass
@@ -37,6 +41,7 @@ class BurstCandidate:
     red_ratio: float
     cyan_ratio: float
     white_ratio: float
+    arrow_center: Optional[tuple[int, int]]
 
 
 @dataclass
@@ -59,6 +64,7 @@ class Config:
     color_signal_threshold: float = 0.08
     event_cooldown_sec: float = 0.9
     save_burst_debug_candidates: bool = False
+    startup_warmup_sec: float = 0.75
 
 
 def parse_args() -> argparse.Namespace:
@@ -92,6 +98,7 @@ def parse_args() -> argparse.Namespace:
         "--save-format", type=str, default="jpg", choices=["jpg", "png"]
     )
     parser.add_argument("--save-burst-debug-candidates", action="store_true")
+    parser.add_argument("--startup-warmup-sec", type=float, default=0.75)
     return parser.parse_args()
 
 
@@ -102,6 +109,27 @@ def ensure_dir(path: Path) -> None:
 def save_json(path: Path, data: object) -> None:
     with path.open("w", encoding="utf-8") as f:
         json.dump(data, f, indent=2)
+
+
+def append_jsonl(path: Path, data: object) -> None:
+    with path.open("a", encoding="utf-8") as f:
+        f.write(json.dumps(data))
+        f.write("\n")
+
+
+def path_to_uri(path: Path) -> str:
+    return path.resolve().as_uri()
+
+
+def uri_to_local_path(path_or_uri: str) -> Path:
+    parsed = urlparse(path_or_uri)
+    if parsed.scheme != "file":
+        return Path(path_or_uri)
+
+    local_path = unquote(parsed.path)
+    if local_path.startswith("/") and len(local_path) >= 3 and local_path[2] == ":":
+        local_path = local_path[1:]
+    return Path(local_path)
 
 
 def roi_to_pixels(
@@ -227,6 +255,26 @@ def detection_rank(detection: FeedDetection) -> float:
     return detection.motion_score * detection.signal
 
 
+def draw_arrow_overlay(
+    image: np.ndarray,
+    arrow_center: Optional[tuple[int, int]],
+    origin_x: int = 0,
+    origin_y: int = 0,
+) -> np.ndarray:
+    debug_img = image.copy()
+    if arrow_center is None:
+        return debug_img
+
+    cx = arrow_center[0] - origin_x
+    cy = arrow_center[1] - origin_y
+    height, width = debug_img.shape[:2]
+
+    if 0 <= cx < width and 0 <= cy < height:
+        cv2.circle(debug_img, (cx, cy), 8, (0, 255, 0), 2)
+
+    return debug_img
+
+
 def extract_killfeed_regions(crop_bgr: np.ndarray) -> dict[str, np.ndarray]:
     width = crop_bgr.shape[1]
     left_end = int(width * 0.42)
@@ -245,7 +293,7 @@ def region_fingerprint(region_bgr: np.ndarray) -> np.ndarray:
 
 
 def compute_row_signature(crop_path: str) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    crop = cv2.imread(crop_path, cv2.IMREAD_COLOR)
+    crop = cv2.imread(str(uri_to_local_path(crop_path)), cv2.IMREAD_COLOR)
     if crop is None or crop.size == 0:
         empty = np.zeros((12, 32), dtype=np.uint8)
         return empty, empty, empty
@@ -305,9 +353,9 @@ def dedupe_detections_visual(
 
 
 def estimate_row_idx_from_crop(
-    crop_path: str, top_y: int = 0, row_height: int = 24
+    crop_path: str, top_y: int = 0, row_height: int = 24, arrow_y: Optional[int] = None
 ) -> int:
-    crop = cv2.imread(crop_path, cv2.IMREAD_GRAYSCALE)
+    crop = cv2.imread(str(uri_to_local_path(crop_path)), cv2.IMREAD_GRAYSCALE)
     if crop is None or crop.size == 0:
         return 0
 
@@ -316,12 +364,16 @@ def estimate_row_idx_from_crop(
 
     # Use the brightest horizontal band as a simple proxy for the active killfeed row.
     row_signal = np.mean(blur, axis=1)
-    peak_y = int(np.argmax(row_signal))
 
     if row_height <= 0:
         return 0
-    
-    row_idx = int((peak_y - top_y) / row_height)
+
+    fallback_row_idx = int(np.argmax(row_signal) / row_height)
+
+    if arrow_y is not None:
+        row_idx = int(round((arrow_y - top_y) / row_height))
+    else:
+        row_idx = fallback_row_idx
 
     return max(0, min(row_idx, 2))
 
@@ -330,6 +382,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
     out_dir = Path(cfg.output_dir)
     crops_dir = out_dir / "crops"
     debug_dir = out_dir / "debug_frames"
+    arrow_debug_path = out_dir / "arrow_debug.jsonl"
     ensure_dir(out_dir)
     ensure_dir(crops_dir)
     if cfg.debug:
@@ -342,6 +395,9 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
     burst_event_idx = 0
     last_event_ts = -999.0
     burst_candidates: List[BurstCandidate] = []
+    arrow_detector = ArrowDetector()
+    candidates_skipped_no_arrow = 0
+    candidates_skipped_warmup = 0
 
     with mss.mss() as sct:
         if cfg.monitor_idx < 1 or cfg.monitor_idx >= len(sct.monitors):
@@ -366,14 +422,15 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
             loop_start = time.perf_counter()
             ts_sec = loop_start - start_time
             can_start_new_event = (ts_sec - last_event_ts) >= cfg.event_cooldown_sec
+            in_startup_warmup = ts_sec < cfg.startup_warmup_sec
 
             if cfg.duration_sec is not None and ts_sec >= cfg.duration_sec:
                 break
 
             raw = np.array(sct.grab(mon))
             frame_bgr = cv2.cvtColor(raw, cv2.COLOR_BGRA2BGR)
-
             crop = frame_bgr[y1_rel:y2_rel, x1_rel:x2_rel]
+            row_height = max(1, int(round(crop.shape[0] / 3)))
 
             mask = killfeed_ui_mask(crop)
             score = diff_score_binary(mask, prev_proc)
@@ -381,15 +438,42 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
 
             signal, red_ratio, cyan_ratio, white_ratio = killfeed_color_signal(crop)
 
-            should_emit = (
+            should_emit_base = (
                 score >= cfg.diff_threshold and has_bar and can_start_new_event
             )
+            if in_startup_warmup and should_emit_base:
+                candidates_skipped_warmup += 1
+
+            should_emit = should_emit_base and not in_startup_warmup
 
             if should_emit:
                 burst_remaining = max(cfg.burst_count, 1)
                 burst_event_idx += 1
                 last_event_ts = ts_sec
                 burst_candidates = []
+
+            crop_arrow_center = None
+            arrow_center = None
+            if should_emit or burst_remaining > 0:
+                arrow_search_band = compute_arrow_search_band(
+                    crop.shape[1], crop.shape[0]
+                )
+                crop_arrow_center = arrow_detector.find_arrow(crop, arrow_search_band)
+                if crop_arrow_center is not None:
+                    arrow_center = (
+                        crop_arrow_center[0] + x1_rel,
+                        crop_arrow_center[1] + y1_rel,
+                    )
+
+            append_jsonl(
+                arrow_debug_path,
+                {
+                    "frame_idx": frame_idx,
+                    "ts_sec": ts_sec,
+                    "arrow_center": arrow_center,
+                    "arrow_detected": arrow_center is not None,
+                },
+            )
 
             if burst_remaining > 0:
                 burst_seq = cfg.burst_count - burst_remaining
@@ -399,6 +483,9 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                 )
 
                 if should_keep_burst_candidate:
+                    if crop_arrow_center is None:
+                        candidates_skipped_no_arrow += 1
+
                     candidate = BurstCandidate(
                         frame_idx=frame_idx,
                         ts_sec=round(ts_sec, 3),
@@ -408,6 +495,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         red_ratio=round(red_ratio, 3),
                         cyan_ratio=round(cyan_ratio, 3),
                         white_ratio=round(white_ratio, 3),
+                        arrow_center=arrow_center,
                     )
                     burst_candidates.append(candidate)
 
@@ -421,7 +509,17 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                             f"{ext}"
                         )
                         debug_candidate_path = crops_dir / debug_candidate_name
-                        save_crop_image(debug_candidate_path, candidate.crop, cfg.save_format)
+                        debug_candidate_img = draw_arrow_overlay(
+                            candidate.crop,
+                            candidate.arrow_center,
+                            origin_x=x1_rel,
+                            origin_y=y1_rel,
+                        )
+                        save_crop_image(
+                            debug_candidate_path,
+                            debug_candidate_img,
+                            cfg.save_format,
+                        )
 
                 burst_remaining -= 1
 
@@ -440,7 +538,13 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         f"{ext}"
                     )
                     crop_path = crops_dir / crop_name
-                    save_crop_image(crop_path, best_candidate.crop, cfg.save_format)
+                    best_candidate_img = draw_arrow_overlay(
+                        best_candidate.crop,
+                        best_candidate.arrow_center,
+                        origin_x=x1_rel,
+                        origin_y=y1_rel,
+                    )
+                    save_crop_image(crop_path, best_candidate_img, cfg.save_format)
 
                     bbox_abs = (
                         mon_left + x1_rel,
@@ -453,14 +557,23 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         FeedDetection(
                             frame_idx=best_candidate.frame_idx,
                             ts_sec=best_candidate.ts_sec,
-                            crop_path=str(crop_path),
+                            crop_path=path_to_uri(crop_path),
                             motion_score=best_candidate.motion_score,
                             signal=best_candidate.signal,
                             red_ratio=best_candidate.red_ratio,
                             cyan_ratio=best_candidate.cyan_ratio,
                             white_ratio=best_candidate.white_ratio,
                             bbox_xyxy=bbox_abs,
-                            row_idx=estimate_row_idx_from_crop(str(crop_path)),
+                            row_idx=estimate_row_idx_from_crop(
+                                path_to_uri(crop_path),
+                                top_y=y1_rel,
+                                row_height=row_height,
+                                arrow_y=(
+                                    best_candidate.arrow_center[1]
+                                    if best_candidate.arrow_center is not None
+                                    else None
+                                ),
+                            ),
                             monitor_idx=cfg.monitor_idx,
                         )
                     )
@@ -476,6 +589,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
 
             if cfg.debug or cfg.show_preview:
                 frame_dbg = frame_bgr.copy()
+                frame_dbg = draw_arrow_overlay(frame_dbg, arrow_center)
                 cv2.rectangle(
                     frame_dbg, (x1_rel, y1_rel), (x2_rel, y2_rel), (0, 255, 0), 2
                 )
@@ -522,6 +636,8 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
     if cfg.show_preview:
         cv2.destroyAllWindows()
 
+    setattr(cfg, "_candidates_skipped_no_arrow", candidates_skipped_no_arrow)
+    setattr(cfg, "_candidates_skipped_warmup", candidates_skipped_warmup)
     return detections
 
 
@@ -573,6 +689,7 @@ def main() -> None:
         save_format=args.save_format,
         event_cooldown_sec=args.event_cooldown_sec,
         save_burst_debug_candidates=args.save_burst_debug_candidates,
+        startup_warmup_sec=args.startup_warmup_sec,
     )
 
     list_monitors()
@@ -590,10 +707,15 @@ def main() -> None:
     save_json(out_dir / "detections_clustered.json", [asdict(d) for d in events])
     save_json(out_dir / "detections_deduped.json", [asdict(d) for d in deduped_events])
     save_json(out_dir / "config.json", asdict(cfg))
+    run_parser(input_dir=out_dir, templates_dir=None)
     print(f"\nSaved {len(detections)} candidate killfeed crops to {out_dir}")
     print(f"Raw detections: {len(detections)}")
     print(f"Clustered events: {len(events)}")
     print(f"Deduped events: {len(deduped_events)}")
+    print(
+        f"candidates_skipped_no_arrow: {getattr(cfg, '_candidates_skipped_no_arrow', 0)} "
+        f"candidates_skipped_warmup: {getattr(cfg, '_candidates_skipped_warmup', 0)}"
+    )
 
 
 if __name__ == "__main__":

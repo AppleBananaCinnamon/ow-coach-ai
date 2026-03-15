@@ -20,5 +20,6 @@
   "sat_threshold": 0.05,
   "color_signal_threshold": 0.08,
   "event_cooldown_sec": 0.6,
-  "save_burst_debug_candidates": true
+  "save_burst_debug_candidates": true,
+  "startup_warmup_sec": 0.75
 }

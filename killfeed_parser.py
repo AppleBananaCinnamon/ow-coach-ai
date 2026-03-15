@@ -5,9 +5,21 @@ import json
 import re
 from dataclasses import asdict, dataclass
 from pathlib import Path
+from urllib.parse import unquote, urlparse
 
 import cv2
 import numpy as np
+
+from arrow_detector import ArrowDetector, compute_arrow_search_band
+
+
+ARROW_ANCHORED_SUBREGIONS = {
+    "left_name": (-180, 5, 91, 32),
+    "left_icon": (-78, 0, 62, 43),
+    "arrow": (0, 0, 30, 43),
+    "right_icon": (38, 0, 69, 43),
+    "right_name": (112, 5, 150, 32),
+}
 
 
 @dataclass
@@ -53,6 +65,17 @@ def save_json(path: Path, data: object) -> None:
         json.dump(data, f, indent=2)
 
 
+def uri_to_local_path(path_or_uri: str) -> Path:
+    parsed = urlparse(path_or_uri)
+    if parsed.scheme != "file":
+        return Path(path_or_uri)
+
+    local_path = unquote(parsed.path)
+    if local_path.startswith("/") and len(local_path) >= 3 and local_path[2] == ":":
+        local_path = local_path[1:]
+    return Path(local_path)
+
+
 def load_deduped_detections(path: Path) -> list[DedupedDetection]:
     raw_items = load_json(path)
     detections: list[DedupedDetection] = []
@@ -90,6 +113,46 @@ def extract_killfeed_regions(
     center_region = crop_bgr[:, left_end:center_end]
     right_region = crop_bgr[:, center_end:]
     return left_region, center_region, right_region
+
+
+def clip_box_to_image(
+    box: tuple[int, int, int, int], image_shape: tuple[int, ...]
+) -> tuple[int, int, int, int] | None:
+    x, y, w, h = box
+    img_h, img_w = image_shape[:2]
+    x1 = max(0, x)
+    y1 = max(0, y)
+    x2 = min(img_w, x + w)
+    y2 = min(img_h, y + h)
+    if x2 <= x1 or y2 <= y1:
+        return None
+    return (x1, y1, x2 - x1, y2 - y1)
+
+
+def crop_box(
+    image_bgr: np.ndarray, box: tuple[int, int, int, int] | None
+) -> np.ndarray | None:
+    if box is None:
+        return None
+    x, y, w, h = box
+    region = image_bgr[y : y + h, x : x + w]
+    return region if region.size > 0 else None
+
+
+def compute_arrow_anchored_subregions(
+    crop_bgr: np.ndarray, arrow_center: tuple[int, int], arrow_detector: ArrowDetector
+) -> dict[str, tuple[int, int, int, int]]:
+    arrow_x1 = int(round(arrow_center[0] - (arrow_detector.w / 2)))
+    arrow_y1 = int(round(arrow_center[1] - (arrow_detector.h / 2)))
+    regions: dict[str, tuple[int, int, int, int]] = {}
+
+    for name, (dx, dy, w, h) in ARROW_ANCHORED_SUBREGIONS.items():
+        box = (arrow_x1 + dx, arrow_y1 + dy, w, h)
+        clipped = clip_box_to_image(box, crop_bgr.shape)
+        if clipped is not None:
+            regions[name] = clipped
+
+    return regions
 
 
 def _score_icon_bbox(
@@ -203,7 +266,9 @@ def right_side_edge_signal(crop_bgr: np.ndarray) -> float:
 def parse_event(
     detection: DedupedDetection, workspace_dir: Path, templates_dir: str | None
 ) -> tuple[ParsedKillfeedEvent, str | None]:
-    crop_path = workspace_dir / detection.crop_path
+    crop_path = uri_to_local_path(detection.crop_path)
+    if not crop_path.is_absolute():
+        crop_path = workspace_dir / crop_path
     crop_bgr = cv2.imread(str(crop_path), cv2.IMREAD_COLOR)
     if crop_bgr is None or crop_bgr.size == 0:
         return (
@@ -217,10 +282,31 @@ def parse_event(
             "missing_left_or_right_icon",
         )
 
-    left_region, _center_region, right_region = extract_killfeed_regions(crop_bgr)
+    arrow_detector = ArrowDetector()
+    arrow_band = compute_arrow_search_band(crop_bgr.shape[1], crop_bgr.shape[0])
+    arrow_center = arrow_detector.find_arrow(crop_bgr, arrow_band)
 
-    left_boxes = find_icon_anchors(left_region)
-    right_boxes = find_icon_anchors(right_region)
+    left_region = None
+    right_region = None
+    left_boxes: list[tuple[int, int, int, int]] = []
+    right_boxes: list[tuple[int, int, int, int]] = []
+
+    if arrow_center is not None:
+        regions = compute_arrow_anchored_subregions(
+            crop_bgr, arrow_center, arrow_detector
+        )
+        left_region = crop_box(crop_bgr, regions.get("left_icon"))
+        right_region = crop_box(crop_bgr, regions.get("right_icon"))
+        if left_region is not None:
+            left_boxes = [(0, 0, left_region.shape[1], left_region.shape[0])]
+        if right_region is not None:
+            right_boxes = [(0, 0, right_region.shape[1], right_region.shape[0])]
+
+    if left_region is None or right_region is None:
+        left_region, _center_region, right_region = extract_killfeed_regions(crop_bgr)
+        left_boxes = find_icon_anchors(left_region)
+        right_boxes = find_icon_anchors(right_region)
+
     valid = has_two_icons(left_boxes, right_boxes)
 
     if not valid:
@@ -263,7 +349,10 @@ def merge_valid_events(
     sorted_events = sorted(events, key=lambda event: event.ts_sec)
     merged: list[ParsedKillfeedEvent] = [sorted_events[0]]
 
-    prev_crop = cv2.imread(str(workspace_dir / merged[0].crop_path), cv2.IMREAD_COLOR)
+    prev_crop_path = uri_to_local_path(merged[0].crop_path)
+    if not prev_crop_path.is_absolute():
+        prev_crop_path = workspace_dir / prev_crop_path
+    prev_crop = cv2.imread(str(prev_crop_path), cv2.IMREAD_COLOR)
     prev_fp = (
         fingerprint_victim_side(prev_crop)
         if prev_crop is not None and prev_crop.size > 0
@@ -271,7 +360,10 @@ def merge_valid_events(
     )
 
     for event in sorted_events[1:]:
-        curr_crop = cv2.imread(str(workspace_dir / event.crop_path), cv2.IMREAD_COLOR)
+        curr_crop_path = uri_to_local_path(event.crop_path)
+        if not curr_crop_path.is_absolute():
+            curr_crop_path = workspace_dir / curr_crop_path
+        curr_crop = cv2.imread(str(curr_crop_path), cv2.IMREAD_COLOR)
         curr_fp = (
             fingerprint_victim_side(curr_crop)
             if curr_crop is not None and curr_crop.size > 0

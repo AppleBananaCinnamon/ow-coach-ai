@@ -1,0 +1,948 @@
+{"frame_idx": 0, "ts_sec": 7.003545761108398e-07, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 1, "ts_sec": 0.18814710015431046, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 2, "ts_sec": 0.31354149989783764, "arrow_center": [260, 939], "arrow_detected": true}
+{"frame_idx": 3, "ts_sec": 0.4389428999274969, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 4, "ts_sec": 0.5642580003477633, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 5, "ts_sec": 0.6894319001585245, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 6, "ts_sec": 0.8146671000868082, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 7, "ts_sec": 0.9398500001989305, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 8, "ts_sec": 1.065181900281459, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 9, "ts_sec": 1.190548799932003, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 10, "ts_sec": 1.3159111998975277, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 11, "ts_sec": 1.441399300005287, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 12, "ts_sec": 1.5665486003272235, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 13, "ts_sec": 1.6917392001487315, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 14, "ts_sec": 1.8169271000660956, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 15, "ts_sec": 1.9422523002140224, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 16, "ts_sec": 2.067370700184256, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 17, "ts_sec": 2.19277699990198, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 18, "ts_sec": 2.318010200280696, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 19, "ts_sec": 2.4431226002052426, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 20, "ts_sec": 2.568275300320238, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 21, "ts_sec": 2.693798900116235, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 22, "ts_sec": 2.8193324003368616, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 23, "ts_sec": 2.9444556003436446, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 24, "ts_sec": 3.0698530999943614, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 25, "ts_sec": 3.1952981003560126, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 26, "ts_sec": 3.320445400197059, "arrow_center": [1534, 860], "arrow_detected": true}
+{"frame_idx": 27, "ts_sec": 3.445633300114423, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 28, "ts_sec": 3.5709939002990723, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 29, "ts_sec": 3.6960420003160834, "arrow_center": [2004, 754], "arrow_detected": true}
+{"frame_idx": 30, "ts_sec": 3.8215161999687552, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 31, "ts_sec": 3.9466693000867963, "arrow_center": [1026, 702], "arrow_detected": true}
+{"frame_idx": 32, "ts_sec": 4.071910799946636, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 33, "ts_sec": 4.196998700033873, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 34, "ts_sec": 4.322345100343227, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 35, "ts_sec": 4.447569000069052, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 36, "ts_sec": 4.57272050017491, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 37, "ts_sec": 4.697831800207496, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 38, "ts_sec": 4.822912300005555, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 39, "ts_sec": 4.9482526001520455, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 40, "ts_sec": 5.073663200251758, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 41, "ts_sec": 5.1989131001755595, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 42, "ts_sec": 5.324233599938452, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 43, "ts_sec": 5.4493762999773026, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 44, "ts_sec": 5.574632599949837, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 45, "ts_sec": 5.699678800068796, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 46, "ts_sec": 5.824898600112647, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 47, "ts_sec": 5.950033800210804, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 48, "ts_sec": 6.0755267003551126, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 49, "ts_sec": 6.200867100153118, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 50, "ts_sec": 6.326346500311047, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 51, "ts_sec": 6.451747000217438, "arrow_center": [2289, 297], "arrow_detected": true}
+{"frame_idx": 52, "ts_sec": 6.576974000316113, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 53, "ts_sec": 6.702419500332326, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 54, "ts_sec": 6.8277624999172986, "arrow_center": [2267, 296], "arrow_detected": true}
+{"frame_idx": 55, "ts_sec": 6.952919800300151, "arrow_center": [2266, 299], "arrow_detected": true}
+{"frame_idx": 56, "ts_sec": 7.078023700043559, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 57, "ts_sec": 7.203455000184476, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 58, "ts_sec": 7.3288422003388405, "arrow_center": [509, 696], "arrow_detected": true}
+{"frame_idx": 59, "ts_sec": 7.454153200145811, "arrow_center": [2235, 241], "arrow_detected": true}
+{"frame_idx": 60, "ts_sec": 7.579259300138801, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 61, "ts_sec": 7.70457709999755, "arrow_center": [2287, 353], "arrow_detected": true}
+{"frame_idx": 62, "ts_sec": 7.829731999896467, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 63, "ts_sec": 7.954878100194037, "arrow_center": [1229, 149], "arrow_detected": true}
+{"frame_idx": 64, "ts_sec": 8.08005420025438, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 65, "ts_sec": 8.205487899947912, "arrow_center": [2266, 299], "arrow_detected": true}
+{"frame_idx": 66, "ts_sec": 8.331072000321, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 67, "ts_sec": 8.45656260009855, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 68, "ts_sec": 8.581818600185215, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 69, "ts_sec": 8.706861200276762, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 70, "ts_sec": 8.832081700209528, "arrow_center": [2235, 243], "arrow_detected": true}
+{"frame_idx": 71, "ts_sec": 8.95713200001046, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 72, "ts_sec": 9.0823910003528, "arrow_center": [1223, 149], "arrow_detected": true}
+{"frame_idx": 73, "ts_sec": 9.207510400097817, "arrow_center": [2267, 296], "arrow_detected": true}
+{"frame_idx": 74, "ts_sec": 9.332644100300968, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 75, "ts_sec": 9.458140800241381, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 76, "ts_sec": 9.583599200006574, "arrow_center": [2236, 241], "arrow_detected": true}
+{"frame_idx": 77, "ts_sec": 9.7088569002226, "arrow_center": [2266, 299], "arrow_detected": true}
+{"frame_idx": 78, "ts_sec": 9.834321199916303, "arrow_center": [2236, 241], "arrow_detected": true}
+{"frame_idx": 79, "ts_sec": 9.959608500357717, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 80, "ts_sec": 10.084745700005442, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 81, "ts_sec": 10.209883899893612, "arrow_center": [2233, 242], "arrow_detected": true}
+{"frame_idx": 82, "ts_sec": 10.335037900134921, "arrow_center": [2234, 296], "arrow_detected": true}
+{"frame_idx": 83, "ts_sec": 10.460247500333935, "arrow_center": [2234, 296], "arrow_detected": true}
+{"frame_idx": 84, "ts_sec": 10.585346899926662, "arrow_center": [1215, 149], "arrow_detected": true}
+{"frame_idx": 85, "ts_sec": 10.710553400218487, "arrow_center": [1214, 149], "arrow_detected": true}
+{"frame_idx": 86, "ts_sec": 10.83575990004465, "arrow_center": [1213, 149], "arrow_detected": true}
+{"frame_idx": 87, "ts_sec": 10.960971400141716, "arrow_center": [1213, 149], "arrow_detected": true}
+{"frame_idx": 88, "ts_sec": 11.086310599930584, "arrow_center": [1212, 149], "arrow_detected": true}
+{"frame_idx": 89, "ts_sec": 11.211690400261432, "arrow_center": [1211, 149], "arrow_detected": true}
+{"frame_idx": 90, "ts_sec": 11.337068300228566, "arrow_center": [1211, 149], "arrow_detected": true}
+{"frame_idx": 91, "ts_sec": 11.462168900296092, "arrow_center": [1210, 149], "arrow_detected": true}
+{"frame_idx": 92, "ts_sec": 11.587656500283629, "arrow_center": [1209, 149], "arrow_detected": true}
+{"frame_idx": 93, "ts_sec": 11.71280450001359, "arrow_center": [1209, 149], "arrow_detected": true}
+{"frame_idx": 94, "ts_sec": 11.83814619993791, "arrow_center": [1208, 149], "arrow_detected": true}
+{"frame_idx": 95, "ts_sec": 11.963427199982107, "arrow_center": [1207, 149], "arrow_detected": true}
+{"frame_idx": 96, "ts_sec": 12.088519200216979, "arrow_center": [1206, 149], "arrow_detected": true}
+{"frame_idx": 97, "ts_sec": 12.213759500067681, "arrow_center": [1206, 149], "arrow_detected": true}
+{"frame_idx": 98, "ts_sec": 12.33922650013119, "arrow_center": [1205, 149], "arrow_detected": true}
+{"frame_idx": 99, "ts_sec": 12.464320099912584, "arrow_center": [1204, 149], "arrow_detected": true}
+{"frame_idx": 100, "ts_sec": 12.58943790011108, "arrow_center": [1204, 149], "arrow_detected": true}
+{"frame_idx": 101, "ts_sec": 12.714491300284863, "arrow_center": [1203, 149], "arrow_detected": true}
+{"frame_idx": 102, "ts_sec": 12.839963200036436, "arrow_center": [1202, 149], "arrow_detected": true}
+{"frame_idx": 103, "ts_sec": 12.96529299998656, "arrow_center": [1202, 149], "arrow_detected": true}
+{"frame_idx": 104, "ts_sec": 13.090330200269818, "arrow_center": [1201, 149], "arrow_detected": true}
+{"frame_idx": 105, "ts_sec": 13.21565610030666, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 106, "ts_sec": 13.341123300138861, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 107, "ts_sec": 13.466368900146335, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 108, "ts_sec": 13.591448599938303, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 109, "ts_sec": 13.716524800285697, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 110, "ts_sec": 13.841963300015777, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 111, "ts_sec": 13.967101000249386, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 112, "ts_sec": 14.09247300028801, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 113, "ts_sec": 14.217642100062221, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 114, "ts_sec": 14.34292870014906, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 115, "ts_sec": 14.468365400098264, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 116, "ts_sec": 14.593735200352967, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 117, "ts_sec": 14.71921390015632, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 118, "ts_sec": 14.844321600161493, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 119, "ts_sec": 14.969363400246948, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 0, "ts_sec": 8.00006091594696e-07, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 1, "ts_sec": 0.19997439999133348, "arrow_center": [296, 913], "arrow_detected": true}
+{"frame_idx": 2, "ts_sec": 0.3254661997780204, "arrow_center": [261, 939], "arrow_detected": true}
+{"frame_idx": 3, "ts_sec": 0.4507933999411762, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 4, "ts_sec": 0.5762294000014663, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 5, "ts_sec": 0.701537599787116, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 6, "ts_sec": 0.8270522998645902, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 7, "ts_sec": 0.9525655996985734, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 8, "ts_sec": 1.0775930997915566, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 9, "ts_sec": 1.2029557996429503, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 10, "ts_sec": 1.3282893998548388, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 11, "ts_sec": 1.4537470997311175, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 12, "ts_sec": 1.5791279999539256, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 13, "ts_sec": 1.704654200002551, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 14, "ts_sec": 1.829850799869746, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 15, "ts_sec": 1.9550485997460783, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 16, "ts_sec": 2.0805327999405563, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 17, "ts_sec": 2.205568299628794, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 18, "ts_sec": 2.3306584996171296, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 19, "ts_sec": 2.4560234998352826, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 20, "ts_sec": 2.5812423997558653, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 21, "ts_sec": 2.7065179999917746, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 22, "ts_sec": 2.831774499733001, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 23, "ts_sec": 2.9570981999859214, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 24, "ts_sec": 3.082206199876964, "arrow_center": [2092, 1084], "arrow_detected": true}
+{"frame_idx": 25, "ts_sec": 3.2072786996141076, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 26, "ts_sec": 3.332451599650085, "arrow_center": [686, 827], "arrow_detected": true}
+{"frame_idx": 27, "ts_sec": 3.4575716997496784, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 28, "ts_sec": 3.583021099679172, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 29, "ts_sec": 3.7084728996269405, "arrow_center": [628, 738], "arrow_detected": true}
+{"frame_idx": 30, "ts_sec": 3.8339819996617734, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 31, "ts_sec": 3.959427199792117, "arrow_center": [461, 397], "arrow_detected": true}
+{"frame_idx": 32, "ts_sec": 4.084769399836659, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 33, "ts_sec": 4.21006069984287, "arrow_center": [2285, 240], "arrow_detected": true}
+{"frame_idx": 34, "ts_sec": 4.335423199925572, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 35, "ts_sec": 4.460885299835354, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 36, "ts_sec": 4.58594169979915, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 37, "ts_sec": 4.711445400025696, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 38, "ts_sec": 4.836793199647218, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 39, "ts_sec": 4.962194999679923, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 40, "ts_sec": 5.087231399957091, "arrow_center": [2289, 243], "arrow_detected": true}
+{"frame_idx": 41, "ts_sec": 5.212629799731076, "arrow_center": [2289, 243], "arrow_detected": true}
+{"frame_idx": 42, "ts_sec": 5.337839199695736, "arrow_center": [1286, 541], "arrow_detected": true}
+{"frame_idx": 43, "ts_sec": 5.4630180997774005, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 44, "ts_sec": 5.588345799595118, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 45, "ts_sec": 5.713722599670291, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 46, "ts_sec": 5.8389751999638975, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 47, "ts_sec": 5.96410629991442, "arrow_center": [1038, 1040], "arrow_detected": true}
+{"frame_idx": 48, "ts_sec": 6.089220599737018, "arrow_center": [2289, 241], "arrow_detected": true}
+{"frame_idx": 49, "ts_sec": 6.214406299870461, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 50, "ts_sec": 6.339739799965173, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 51, "ts_sec": 6.465102699585259, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 52, "ts_sec": 6.590148799587041, "arrow_center": [2266, 242], "arrow_detected": true}
+{"frame_idx": 53, "ts_sec": 6.71531829982996, "arrow_center": [1387, 99], "arrow_detected": true}
+{"frame_idx": 54, "ts_sec": 6.840750599745661, "arrow_center": [2266, 298], "arrow_detected": true}
+{"frame_idx": 55, "ts_sec": 6.965972299687564, "arrow_center": [2265, 297], "arrow_detected": true}
+{"frame_idx": 56, "ts_sec": 7.091519800014794, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 57, "ts_sec": 7.216603999957442, "arrow_center": [2287, 353], "arrow_detected": true}
+{"frame_idx": 58, "ts_sec": 7.341674400027841, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 59, "ts_sec": 7.467171699739993, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 60, "ts_sec": 7.592399299610406, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 61, "ts_sec": 7.7178306998685, "arrow_center": [2265, 297], "arrow_detected": true}
+{"frame_idx": 62, "ts_sec": 7.843022899702191, "arrow_center": [2287, 358], "arrow_detected": true}
+{"frame_idx": 63, "ts_sec": 7.968285799957812, "arrow_center": [2266, 296], "arrow_detected": true}
+{"frame_idx": 64, "ts_sec": 8.093518499750644, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 65, "ts_sec": 8.219032899942249, "arrow_center": [2233, 242], "arrow_detected": true}
+{"frame_idx": 66, "ts_sec": 8.344111899845302, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 67, "ts_sec": 8.469455800019205, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 68, "ts_sec": 8.594827599823475, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 69, "ts_sec": 8.71995859965682, "arrow_center": [1123, 881], "arrow_detected": true}
+{"frame_idx": 70, "ts_sec": 8.84505119966343, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 71, "ts_sec": 8.970526400022209, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 72, "ts_sec": 9.095683999825269, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 73, "ts_sec": 9.220747799612582, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 74, "ts_sec": 9.346235799603164, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 75, "ts_sec": 9.471545899752527, "arrow_center": [2267, 296], "arrow_detected": true}
+{"frame_idx": 76, "ts_sec": 9.59691259963438, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 77, "ts_sec": 9.722330899909139, "arrow_center": [2265, 297], "arrow_detected": true}
+{"frame_idx": 78, "ts_sec": 9.847929900046438, "arrow_center": [2235, 241], "arrow_detected": true}
+{"frame_idx": 79, "ts_sec": 9.97304859990254, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 80, "ts_sec": 10.098437199834734, "arrow_center": [2234, 242], "arrow_detected": true}
+{"frame_idx": 81, "ts_sec": 10.2237191000022, "arrow_center": [2236, 242], "arrow_detected": true}
+{"frame_idx": 82, "ts_sec": 10.349202599842101, "arrow_center": [2234, 298], "arrow_detected": true}
+{"frame_idx": 83, "ts_sec": 10.474366399925202, "arrow_center": [1216, 149], "arrow_detected": true}
+{"frame_idx": 84, "ts_sec": 10.599483999889344, "arrow_center": [1215, 149], "arrow_detected": true}
+{"frame_idx": 85, "ts_sec": 10.725068399682641, "arrow_center": [1214, 149], "arrow_detected": true}
+{"frame_idx": 86, "ts_sec": 10.850190499797463, "arrow_center": [1214, 149], "arrow_detected": true}
+{"frame_idx": 87, "ts_sec": 10.97551119979471, "arrow_center": [1213, 149], "arrow_detected": true}
+{"frame_idx": 88, "ts_sec": 11.101032400038093, "arrow_center": [1212, 149], "arrow_detected": true}
+{"frame_idx": 89, "ts_sec": 11.226114499848336, "arrow_center": [1212, 149], "arrow_detected": true}
+{"frame_idx": 90, "ts_sec": 11.351278999820352, "arrow_center": [1211, 149], "arrow_detected": true}
+{"frame_idx": 91, "ts_sec": 11.476568899583071, "arrow_center": [1210, 149], "arrow_detected": true}
+{"frame_idx": 92, "ts_sec": 11.601685700006783, "arrow_center": [1210, 149], "arrow_detected": true}
+{"frame_idx": 93, "ts_sec": 11.727014399599284, "arrow_center": [1209, 149], "arrow_detected": true}
+{"frame_idx": 94, "ts_sec": 11.852254800032824, "arrow_center": [1208, 149], "arrow_detected": true}
+{"frame_idx": 95, "ts_sec": 11.977616499643773, "arrow_center": [1207, 149], "arrow_detected": true}
+{"frame_idx": 96, "ts_sec": 12.103009099606425, "arrow_center": [1207, 149], "arrow_detected": true}
+{"frame_idx": 97, "ts_sec": 12.228296699933708, "arrow_center": [1206, 149], "arrow_detected": true}
+{"frame_idx": 98, "ts_sec": 12.353621199727058, "arrow_center": [1205, 149], "arrow_detected": true}
+{"frame_idx": 99, "ts_sec": 12.479142099618912, "arrow_center": [1205, 149], "arrow_detected": true}
+{"frame_idx": 100, "ts_sec": 12.604625700041652, "arrow_center": [1204, 149], "arrow_detected": true}
+{"frame_idx": 101, "ts_sec": 12.730064199771732, "arrow_center": [1203, 149], "arrow_detected": true}
+{"frame_idx": 102, "ts_sec": 12.855359599925578, "arrow_center": [1202, 149], "arrow_detected": true}
+{"frame_idx": 103, "ts_sec": 12.980786500032991, "arrow_center": [1202, 149], "arrow_detected": true}
+{"frame_idx": 104, "ts_sec": 13.10592979984358, "arrow_center": [1201, 149], "arrow_detected": true}
+{"frame_idx": 105, "ts_sec": 13.231161899864674, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 106, "ts_sec": 13.356211300007999, "arrow_center": [1200, 149], "arrow_detected": true}
+{"frame_idx": 107, "ts_sec": 13.481417699716985, "arrow_center": [1199, 149], "arrow_detected": true}
+{"frame_idx": 108, "ts_sec": 13.606931599788368, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 109, "ts_sec": 13.73226139973849, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 110, "ts_sec": 13.857419800013304, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 111, "ts_sec": 13.982655699830502, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 112, "ts_sec": 14.107975199818611, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 113, "ts_sec": 14.233175399713218, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 114, "ts_sec": 14.358244400005788, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 115, "ts_sec": 14.483527999836951, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 116, "ts_sec": 14.608717799652368, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 117, "ts_sec": 14.733875199686736, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 118, "ts_sec": 14.859329599887133, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 119, "ts_sec": 14.984785599634051, "arrow_center": [1198, 149], "arrow_detected": true}
+{"frame_idx": 0, "ts_sec": 6.002373993396759e-07, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 1, "ts_sec": 0.19636140018701553, "arrow_center": [294, 914], "arrow_detected": true}
+{"frame_idx": 2, "ts_sec": 0.32143709994852543, "arrow_center": [261, 939], "arrow_detected": true}
+{"frame_idx": 3, "ts_sec": 0.4465518002398312, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 4, "ts_sec": 0.5720118000172079, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 5, "ts_sec": 0.6972656999714673, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 6, "ts_sec": 0.8226234000176191, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 7, "ts_sec": 0.9480913002043962, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 8, "ts_sec": 1.0731409001164138, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 9, "ts_sec": 1.1982459002174437, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 10, "ts_sec": 1.3235539002344012, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 11, "ts_sec": 1.4488166999071836, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 12, "ts_sec": 1.5742780999280512, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 13, "ts_sec": 1.69940340006724, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 14, "ts_sec": 1.8245725999586284, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 15, "ts_sec": 1.9499221998266876, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 16, "ts_sec": 2.075104699935764, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 17, "ts_sec": 2.200180800165981, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 18, "ts_sec": 2.3254507002420723, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 19, "ts_sec": 2.450561699923128, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 20, "ts_sec": 2.575928600039333, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 21, "ts_sec": 2.7012685001827776, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 22, "ts_sec": 2.8263224000111222, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 23, "ts_sec": 2.9514206000603735, "arrow_center": [2266, 240], "arrow_detected": true}
+{"frame_idx": 24, "ts_sec": 3.0769532001577318, "arrow_center": [2266, 240], "arrow_detected": true}
+{"frame_idx": 25, "ts_sec": 3.2022247998975217, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 26, "ts_sec": 3.3273907001130283, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 27, "ts_sec": 3.4525374001823366, "arrow_center": [2267, 241], "arrow_detected": true}
+{"frame_idx": 28, "ts_sec": 3.5776428999379277, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 29, "ts_sec": 3.7029547998681664, "arrow_center": [2265, 242], "arrow_detected": true}
+{"frame_idx": 30, "ts_sec": 3.828069900162518, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 31, "ts_sec": 3.953592900186777, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 32, "ts_sec": 4.078691199887544, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 33, "ts_sec": 4.20413860026747, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 34, "ts_sec": 4.329640000127256, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 35, "ts_sec": 4.454737199936062, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 36, "ts_sec": 4.580248400103301, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 37, "ts_sec": 4.705739799886942, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 38, "ts_sec": 4.831013699993491, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 39, "ts_sec": 4.956250099930912, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 40, "ts_sec": 5.08159299986437, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 41, "ts_sec": 5.206806200090796, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 42, "ts_sec": 5.332165900152177, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 43, "ts_sec": 5.457418499980122, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 44, "ts_sec": 5.582462000194937, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 45, "ts_sec": 5.707996100187302, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 46, "ts_sec": 5.833044200204313, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 47, "ts_sec": 5.9584511001594365, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 48, "ts_sec": 6.083888399880379, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 49, "ts_sec": 6.209288900252432, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 50, "ts_sec": 6.334369000047445, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 51, "ts_sec": 6.459844899829477, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 52, "ts_sec": 6.585278999991715, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 53, "ts_sec": 6.710506800096482, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 54, "ts_sec": 6.8357974998652935, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 55, "ts_sec": 6.961029199883342, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 56, "ts_sec": 7.0864053000696, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 57, "ts_sec": 7.21189620019868, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 58, "ts_sec": 7.337133100256324, "arrow_center": [1641, 795], "arrow_detected": true}
+{"frame_idx": 59, "ts_sec": 7.462224000133574, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 60, "ts_sec": 7.587577099911869, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 61, "ts_sec": 7.712680900003761, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 62, "ts_sec": 7.855618699919432, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 63, "ts_sec": 7.9811414000578225, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 64, "ts_sec": 8.106227000243962, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 65, "ts_sec": 8.231325500179082, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 66, "ts_sec": 8.356708600185812, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 67, "ts_sec": 8.482006100006402, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 68, "ts_sec": 8.6072685001418, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 69, "ts_sec": 8.732369299978018, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 70, "ts_sec": 8.857426899950951, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 71, "ts_sec": 8.982580400072038, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 72, "ts_sec": 9.107662599999458, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 73, "ts_sec": 9.23306699981913, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 74, "ts_sec": 9.358582800254226, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 75, "ts_sec": 9.483650399837643, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 76, "ts_sec": 9.609157499857247, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 77, "ts_sec": 9.734302900265902, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 78, "ts_sec": 9.859717899933457, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 79, "ts_sec": 9.984932399820536, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 80, "ts_sec": 10.110146999824792, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 81, "ts_sec": 10.235280400142074, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 82, "ts_sec": 10.360671000089496, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 83, "ts_sec": 10.485986600164324, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 84, "ts_sec": 10.611147100105882, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 85, "ts_sec": 10.736260199919343, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 86, "ts_sec": 10.86155050015077, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 87, "ts_sec": 10.986589699983597, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 88, "ts_sec": 11.11201689997688, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 89, "ts_sec": 11.237556499894708, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 90, "ts_sec": 11.363063999917358, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 91, "ts_sec": 11.488522900268435, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 92, "ts_sec": 11.613599699921906, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 93, "ts_sec": 11.738940299954265, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 94, "ts_sec": 11.864033299963921, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 95, "ts_sec": 11.989070900250226, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 96, "ts_sec": 12.11417519999668, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 97, "ts_sec": 12.239343500230461, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 98, "ts_sec": 12.364686999935657, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 99, "ts_sec": 12.489869300276041, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 100, "ts_sec": 12.615106500219554, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 101, "ts_sec": 12.740515499841422, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 102, "ts_sec": 12.865685400087386, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 103, "ts_sec": 12.991159799974412, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 104, "ts_sec": 13.11641879985109, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 105, "ts_sec": 13.241497700102627, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 106, "ts_sec": 13.366975999902934, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 107, "ts_sec": 13.492211400065571, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 108, "ts_sec": 13.617522099986672, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 109, "ts_sec": 13.742999100126326, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 110, "ts_sec": 13.868367000017315, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 111, "ts_sec": 13.993441400118172, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 112, "ts_sec": 14.118883999995887, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 113, "ts_sec": 14.244138000067323, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 114, "ts_sec": 14.369579500053078, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 115, "ts_sec": 14.494620699901134, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 116, "ts_sec": 14.620142499916255, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 117, "ts_sec": 14.745505900122225, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 118, "ts_sec": 14.87100230017677, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 119, "ts_sec": 14.996344500221312, "arrow_center": [1481, 1326], "arrow_detected": true}
+{"frame_idx": 0, "ts_sec": 8.00006091594696e-07, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 1, "ts_sec": 0.18704350013285875, "arrow_center": [295, 913], "arrow_detected": true}
+{"frame_idx": 2, "ts_sec": 0.31244280003011227, "arrow_center": [260, 940], "arrow_detected": true}
+{"frame_idx": 3, "ts_sec": 0.4377457001246512, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 4, "ts_sec": 0.5627816999331117, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 5, "ts_sec": 0.6880474002100527, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 6, "ts_sec": 0.8131849998608232, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 7, "ts_sec": 0.9383090999908745, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 8, "ts_sec": 1.0635525002144277, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 9, "ts_sec": 1.1889519998803735, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 10, "ts_sec": 1.3142364998348057, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 11, "ts_sec": 1.4392900001257658, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 12, "ts_sec": 1.5643465002067387, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 13, "ts_sec": 1.6896782000549138, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 14, "ts_sec": 1.8149541998282075, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 15, "ts_sec": 1.9400909999385476, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 16, "ts_sec": 2.0654462999664247, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 17, "ts_sec": 2.190662699751556, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 18, "ts_sec": 2.3159491000697017, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 19, "ts_sec": 2.4414404998533428, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 20, "ts_sec": 2.566496899817139, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 21, "ts_sec": 2.691791399847716, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 22, "ts_sec": 2.8169597000814974, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 23, "ts_sec": 2.942418400198221, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 24, "ts_sec": 3.0675095999613404, "arrow_center": [2388, 815], "arrow_detected": true}
+{"frame_idx": 25, "ts_sec": 3.1927702999673784, "arrow_center": [2265, 240], "arrow_detected": true}
+{"frame_idx": 26, "ts_sec": 3.318287500180304, "arrow_center": [2266, 240], "arrow_detected": true}
+{"frame_idx": 27, "ts_sec": 3.443370900116861, "arrow_center": [2265, 241], "arrow_detected": true}
+{"frame_idx": 28, "ts_sec": 3.5689238999038935, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 29, "ts_sec": 3.6941939000971615, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 30, "ts_sec": 3.819581199903041, "arrow_center": [2267, 241], "arrow_detected": true}
+{"frame_idx": 31, "ts_sec": 3.9446482001803815, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 32, "ts_sec": 4.070140600204468, "arrow_center": [2267, 240], "arrow_detected": true}
+{"frame_idx": 33, "ts_sec": 4.195589699782431, "arrow_center": [2265, 242], "arrow_detected": true}
+{"frame_idx": 34, "ts_sec": 4.320751899853349, "arrow_center": [663, 562], "arrow_detected": true}
+{"frame_idx": 35, "ts_sec": 4.445849000010639, "arrow_center": [2266, 243], "arrow_detected": true}
+{"frame_idx": 36, "ts_sec": 4.5711381998844445, "arrow_center": [2266, 242], "arrow_detected": true}
+{"frame_idx": 37, "ts_sec": 4.6962938997894526, "arrow_center": [2267, 242], "arrow_detected": true}
+{"frame_idx": 38, "ts_sec": 4.821550900116563, "arrow_center": [754, 528], "arrow_detected": true}
+{"frame_idx": 39, "ts_sec": 4.9468836998566985, "arrow_center": [2265, 354], "arrow_detected": true}
+{"frame_idx": 40, "ts_sec": 5.072180999908596, "arrow_center": [2267, 352], "arrow_detected": true}
+{"frame_idx": 41, "ts_sec": 5.197351799812168, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 42, "ts_sec": 5.322753400076181, "arrow_center": [2268, 353], "arrow_detected": true}
+{"frame_idx": 43, "ts_sec": 5.44816830009222, "arrow_center": [2286, 297], "arrow_detected": true}
+{"frame_idx": 44, "ts_sec": 5.5735603999346495, "arrow_center": [2265, 353], "arrow_detected": true}
+{"frame_idx": 45, "ts_sec": 5.698678600136191, "arrow_center": [2286, 297], "arrow_detected": true}
+{"frame_idx": 46, "ts_sec": 5.824080899823457, "arrow_center": [2268, 353], "arrow_detected": true}
+{"frame_idx": 47, "ts_sec": 5.949277199804783, "arrow_center": [2235, 241], "arrow_detected": true}
+{"frame_idx": 48, "ts_sec": 6.074604900088161, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 49, "ts_sec": 6.199648899957538, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 50, "ts_sec": 6.324895299971104, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 51, "ts_sec": 6.450023400131613, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 52, "ts_sec": 6.575539899989963, "arrow_center": [2289, 297], "arrow_detected": true}
+{"frame_idx": 53, "ts_sec": 6.700714999809861, "arrow_center": [2289, 299], "arrow_detected": true}
+{"frame_idx": 54, "ts_sec": 6.826033500023186, "arrow_center": [2288, 296], "arrow_detected": true}
+{"frame_idx": 55, "ts_sec": 6.95133229997009, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 56, "ts_sec": 7.076835200190544, "arrow_center": [1988, 598], "arrow_detected": true}
+{"frame_idx": 57, "ts_sec": 7.201916799880564, "arrow_center": [1657, 461], "arrow_detected": true}
+{"frame_idx": 58, "ts_sec": 7.327493600081652, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 59, "ts_sec": 7.4526533000171185, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 60, "ts_sec": 7.577850199770182, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 61, "ts_sec": 7.703123599756509, "arrow_center": [2235, 241], "arrow_detected": true}
+{"frame_idx": 62, "ts_sec": 7.828264699783176, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 63, "ts_sec": 7.953764299862087, "arrow_center": [2235, 241], "arrow_detected": true}
+{"frame_idx": 64, "ts_sec": 8.079152099788189, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 65, "ts_sec": 8.204548900015652, "arrow_center": [2287, 354], "arrow_detected": true}
+{"frame_idx": 66, "ts_sec": 8.329922799952328, "arrow_center": [2288, 354], "arrow_detected": true}
+{"frame_idx": 67, "ts_sec": 8.455170500092208, "arrow_center": [2233, 297], "arrow_detected": true}
+{"frame_idx": 68, "ts_sec": 8.580220699775964, "arrow_center": [2233, 242], "arrow_detected": true}
+{"frame_idx": 69, "ts_sec": 8.705302500165999, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 70, "ts_sec": 8.830736999865621, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 71, "ts_sec": 8.956036599818617, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 72, "ts_sec": 9.081379999872297, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 73, "ts_sec": 9.206528999842703, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 74, "ts_sec": 9.331917999777943, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 75, "ts_sec": 9.457225599791855, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 76, "ts_sec": 9.58227950008586, "arrow_center": [1238, 1055], "arrow_detected": true}
+{"frame_idx": 77, "ts_sec": 9.707317600026727, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 78, "ts_sec": 9.83251029998064, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 79, "ts_sec": 9.957870800048113, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 80, "ts_sec": 10.083246999885887, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 81, "ts_sec": 10.208426699973643, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 82, "ts_sec": 10.333688599988818, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 83, "ts_sec": 10.45915829995647, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 84, "ts_sec": 10.584454500116408, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 85, "ts_sec": 10.709644400049001, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 86, "ts_sec": 10.83496190002188, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 87, "ts_sec": 10.960328599903733, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 88, "ts_sec": 11.08540099998936, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 89, "ts_sec": 11.210636700037867, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 90, "ts_sec": 11.336117300204933, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 91, "ts_sec": 11.461538599804044, "arrow_center": [2236, 241], "arrow_detected": true}
+{"frame_idx": 92, "ts_sec": 11.586871999781579, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 93, "ts_sec": 11.71210870007053, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 94, "ts_sec": 11.837348400149494, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 95, "ts_sec": 11.96250980021432, "arrow_center": [2234, 247], "arrow_detected": true}
+{"frame_idx": 96, "ts_sec": 12.08773750020191, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 97, "ts_sec": 12.213152399752289, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 98, "ts_sec": 12.338341900147498, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 99, "ts_sec": 12.463864500168711, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 100, "ts_sec": 12.588904399890453, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 101, "ts_sec": 12.714407399762422, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 102, "ts_sec": 12.839761800132692, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 103, "ts_sec": 12.964897199999541, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 104, "ts_sec": 13.090202399995178, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 105, "ts_sec": 13.215521399863064, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 106, "ts_sec": 13.340687800198793, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 107, "ts_sec": 13.465975999832153, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 108, "ts_sec": 13.591499200090766, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 109, "ts_sec": 13.716996599920094, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 110, "ts_sec": 13.842049499973655, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 111, "ts_sec": 13.967407399788499, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 112, "ts_sec": 14.092610400170088, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 113, "ts_sec": 14.217687000054866, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 114, "ts_sec": 14.342937100213021, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 115, "ts_sec": 14.46837479993701, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 116, "ts_sec": 14.593498600181192, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 117, "ts_sec": 14.718789599835873, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 118, "ts_sec": 14.843900000210851, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 119, "ts_sec": 14.969111599959433, "arrow_center": [1078, 149], "arrow_detected": true}
+{"frame_idx": 0, "ts_sec": 8.996576070785522e-07, "arrow_center": [2188, 251], "arrow_detected": true}
+{"frame_idx": 1, "ts_sec": 0.21022599982097745, "arrow_center": [327, 884], "arrow_detected": true}
+{"frame_idx": 2, "ts_sec": 0.33574429992586374, "arrow_center": [291, 912], "arrow_detected": true}
+{"frame_idx": 3, "ts_sec": 0.4609475997276604, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 4, "ts_sec": 0.5864184997044504, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 5, "ts_sec": 0.7116645998321474, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 6, "ts_sec": 0.8370254999026656, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 7, "ts_sec": 0.9623418999835849, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 8, "ts_sec": 1.0875315996818244, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 9, "ts_sec": 1.2125736996531487, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 10, "ts_sec": 1.3378805997781456, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 11, "ts_sec": 1.4630778999999166, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 12, "ts_sec": 1.5883748000487685, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 13, "ts_sec": 1.7134744999930263, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 14, "ts_sec": 1.8386851996183395, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 15, "ts_sec": 1.9639973999001086, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 16, "ts_sec": 2.0892475000582635, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 17, "ts_sec": 2.214413299690932, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 18, "ts_sec": 2.3396133999340236, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 19, "ts_sec": 2.4648591997101903, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 20, "ts_sec": 2.590240200050175, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 21, "ts_sec": 2.715376299805939, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 22, "ts_sec": 2.840841199737042, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 23, "ts_sec": 2.9659726000390947, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 24, "ts_sec": 3.09131189994514, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 25, "ts_sec": 3.216340699698776, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 26, "ts_sec": 3.3415786996483803, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 27, "ts_sec": 3.4670355999842286, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 28, "ts_sec": 3.5925293997861445, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 29, "ts_sec": 3.717963600065559, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 30, "ts_sec": 3.8433874999172986, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 31, "ts_sec": 3.9688201998360455, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 32, "ts_sec": 4.09393659979105, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 33, "ts_sec": 4.219068399630487, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 34, "ts_sec": 4.344277599826455, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 35, "ts_sec": 4.469470999669284, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 36, "ts_sec": 4.594506399706006, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 37, "ts_sec": 4.719978899694979, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 38, "ts_sec": 4.845433000009507, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 39, "ts_sec": 4.970616799779236, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 40, "ts_sec": 5.095730300061405, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 41, "ts_sec": 5.220878599677235, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 42, "ts_sec": 5.345934399869293, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 43, "ts_sec": 5.4709945996291935, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 44, "ts_sec": 5.596384899690747, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 45, "ts_sec": 5.721617799717933, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 46, "ts_sec": 5.846870000008494, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 47, "ts_sec": 5.972211400046945, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 48, "ts_sec": 6.097289700061083, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 49, "ts_sec": 6.222783099859953, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 50, "ts_sec": 6.348067599814385, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 51, "ts_sec": 6.4732544999569654, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 52, "ts_sec": 6.598696900065988, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 53, "ts_sec": 6.724002500064671, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 54, "ts_sec": 6.849356499966234, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 55, "ts_sec": 6.97467859974131, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 56, "ts_sec": 7.099936199840158, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 57, "ts_sec": 7.225373999681324, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 58, "ts_sec": 7.350896299816668, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 59, "ts_sec": 7.476094000041485, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 60, "ts_sec": 7.601144900079817, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 61, "ts_sec": 7.726467399857938, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 62, "ts_sec": 7.851784599944949, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 63, "ts_sec": 7.977290200069547, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 64, "ts_sec": 8.102361099794507, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 65, "ts_sec": 8.227642899844795, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 66, "ts_sec": 8.352801399771124, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 67, "ts_sec": 8.478176199831069, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 68, "ts_sec": 8.60344269964844, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 69, "ts_sec": 8.728627999778837, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 70, "ts_sec": 8.854076999705285, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 71, "ts_sec": 8.979522099718451, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 72, "ts_sec": 9.104784299619496, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 73, "ts_sec": 9.229821299668401, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 74, "ts_sec": 9.354875300079584, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 75, "ts_sec": 9.480107699986547, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 76, "ts_sec": 9.605336899869144, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 77, "ts_sec": 9.730695799924433, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 78, "ts_sec": 9.856179699767381, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 79, "ts_sec": 9.981237299740314, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 80, "ts_sec": 10.106764199677855, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 81, "ts_sec": 10.232116099912673, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 82, "ts_sec": 10.35746799968183, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 83, "ts_sec": 10.48257669992745, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 84, "ts_sec": 10.608021900057793, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 85, "ts_sec": 10.733292799908668, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 86, "ts_sec": 10.858449599705637, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 87, "ts_sec": 10.98357619997114, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 88, "ts_sec": 11.108856099657714, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 89, "ts_sec": 11.234343299642205, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 90, "ts_sec": 11.359716999810189, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 91, "ts_sec": 11.48523460002616, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 92, "ts_sec": 11.610724799800664, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 93, "ts_sec": 11.735935399774462, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 94, "ts_sec": 11.861256999894977, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 95, "ts_sec": 11.986724799964577, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 96, "ts_sec": 12.130498399958014, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 97, "ts_sec": 12.255697299726307, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 98, "ts_sec": 12.381213800050318, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 99, "ts_sec": 12.506717499811202, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 100, "ts_sec": 12.63219239981845, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 0, "ts_sec": 8.996576070785522e-07, "arrow_center": [2188, 251], "arrow_detected": true}
+{"frame_idx": 1, "ts_sec": 0.25052989972755313, "arrow_center": [309, 900], "arrow_detected": true}
+{"frame_idx": 2, "ts_sec": 0.5009088995866477, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 3, "ts_sec": 0.750961699988693, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 4, "ts_sec": 1.0013908999972045, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 5, "ts_sec": 1.2515493999235332, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 6, "ts_sec": 1.5020582997240126, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 7, "ts_sec": 1.7520917998626828, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 8, "ts_sec": 2.0021593999117613, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 9, "ts_sec": 2.2523371996358037, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 10, "ts_sec": 2.502689199987799, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 11, "ts_sec": 2.7529020998626947, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 12, "ts_sec": 3.0031431997194886, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 13, "ts_sec": 3.2533699995838106, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 14, "ts_sec": 3.503614299930632, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 15, "ts_sec": 3.753888299688697, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 16, "ts_sec": 4.004164099693298, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 17, "ts_sec": 4.254283899907023, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 18, "ts_sec": 4.504787199664861, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 19, "ts_sec": 4.755171199794859, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 20, "ts_sec": 5.005274499766529, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 21, "ts_sec": 5.255430999677628, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 22, "ts_sec": 5.505458999890834, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 23, "ts_sec": 5.7554901000112295, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 24, "ts_sec": 6.005654799751937, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 25, "ts_sec": 6.2557941996492445, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 26, "ts_sec": 6.506139999721199, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 27, "ts_sec": 6.756567699834704, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 28, "ts_sec": 7.006602699868381, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 29, "ts_sec": 7.256811099592596, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 30, "ts_sec": 7.506840999703854, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 31, "ts_sec": 7.757127699907869, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 32, "ts_sec": 8.007224399596453, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 33, "ts_sec": 8.257298599928617, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 34, "ts_sec": 8.507358099799603, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 35, "ts_sec": 8.757583600003272, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 36, "ts_sec": 9.0077251996845, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 37, "ts_sec": 9.258230899926275, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 38, "ts_sec": 9.508455900009722, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 39, "ts_sec": 9.758954599965364, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 40, "ts_sec": 10.009491699747741, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 41, "ts_sec": 10.259899199940264, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 42, "ts_sec": 10.510207399725914, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 43, "ts_sec": 10.760707200039178, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 44, "ts_sec": 11.011058500036597, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 45, "ts_sec": 11.26152789965272, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 46, "ts_sec": 11.511789499782026, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 47, "ts_sec": 11.761817899998277, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 48, "ts_sec": 12.011969099752605, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 49, "ts_sec": 12.262358699925244, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 50, "ts_sec": 12.512394599616528, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 51, "ts_sec": 12.762732499744743, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 52, "ts_sec": 13.01326319994405, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 53, "ts_sec": 13.263549199793488, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 54, "ts_sec": 13.514060699846596, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 55, "ts_sec": 13.764462399762124, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 56, "ts_sec": 14.014616999775171, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 57, "ts_sec": 14.264980599749833, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 58, "ts_sec": 14.515094299800694, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 59, "ts_sec": 14.765402199700475, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 60, "ts_sec": 15.01588789978996, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 61, "ts_sec": 15.266335999593139, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 62, "ts_sec": 15.516664799768478, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 63, "ts_sec": 15.766745099797845, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 64, "ts_sec": 16.01717959996313, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 65, "ts_sec": 16.267483699601144, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 66, "ts_sec": 16.517813599668443, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 67, "ts_sec": 16.76800109958276, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 68, "ts_sec": 17.018518299795687, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 69, "ts_sec": 17.268798099830747, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 70, "ts_sec": 17.519318299833685, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 71, "ts_sec": 17.769583199638873, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 72, "ts_sec": 18.020088699646294, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 73, "ts_sec": 18.27038629958406, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 74, "ts_sec": 18.520446999929845, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 75, "ts_sec": 18.7708276999183, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 76, "ts_sec": 19.020981499925256, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 77, "ts_sec": 19.271296299993992, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 78, "ts_sec": 19.521568699739873, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 79, "ts_sec": 19.771657099947333, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 80, "ts_sec": 20.02176079992205, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 81, "ts_sec": 20.272258899640292, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 82, "ts_sec": 20.522672099992633, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 83, "ts_sec": 20.773145499639213, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 84, "ts_sec": 21.023206899873912, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 85, "ts_sec": 21.273597999941558, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 86, "ts_sec": 21.523737999610603, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 87, "ts_sec": 21.773833599872887, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 88, "ts_sec": 22.023866799660027, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 89, "ts_sec": 22.27412989968434, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 90, "ts_sec": 22.524621999822557, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 91, "ts_sec": 22.774843299761415, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 92, "ts_sec": 23.02487919991836, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 93, "ts_sec": 23.27508069993928, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 94, "ts_sec": 23.52552209980786, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 95, "ts_sec": 23.77583079971373, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 96, "ts_sec": 24.0260370997712, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 97, "ts_sec": 24.276310899760574, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 98, "ts_sec": 24.526486499700695, "arrow_center": [288, 915], "arrow_detected": true}
+{"frame_idx": 0, "ts_sec": 6.002373993396759e-07, "arrow_center": [2267, 296], "arrow_detected": true}
+{"frame_idx": 1, "ts_sec": 0.250118900090456, "arrow_center": [278, 926], "arrow_detected": true}
+{"frame_idx": 2, "ts_sec": 0.5003110999241471, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 3, "ts_sec": 0.7506221998482943, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 4, "ts_sec": 1.0010508000850677, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 5, "ts_sec": 1.2515066000632942, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 6, "ts_sec": 1.5019109998829663, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 7, "ts_sec": 1.7523386999964714, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 8, "ts_sec": 2.002680799923837, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 9, "ts_sec": 2.2530963998287916, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 10, "ts_sec": 2.5032834000885487, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 11, "ts_sec": 2.753466499969363, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 12, "ts_sec": 3.0036700000055134, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 13, "ts_sec": 3.2541745002381504, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 14, "ts_sec": 3.5042810002341866, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 15, "ts_sec": 3.754674999974668, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 16, "ts_sec": 4.004873199854046, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 17, "ts_sec": 4.2551070000045, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 18, "ts_sec": 4.505535800009966, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 19, "ts_sec": 4.755841200239956, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 20, "ts_sec": 5.005915699992329, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 21, "ts_sec": 5.256291800178587, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 22, "ts_sec": 5.506444400176406, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 23, "ts_sec": 5.756504099816084, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 24, "ts_sec": 6.00681129982695, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 25, "ts_sec": 6.25710459984839, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 26, "ts_sec": 6.507380700204521, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 27, "ts_sec": 6.757408999837935, "arrow_center": [257, 942], "arrow_detected": true}
+{"frame_idx": 0, "ts_sec": 3.003515303134918e-07, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 1, "ts_sec": 0.18753250036388636, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 2, "ts_sec": 0.31284369993954897, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 3, "ts_sec": 0.43837180035188794, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 4, "ts_sec": 0.5638461001217365, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 5, "ts_sec": 0.6891876002773643, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 6, "ts_sec": 0.8142204000614583, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 7, "ts_sec": 0.9396024001762271, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 8, "ts_sec": 1.0650838003493845, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 9, "ts_sec": 1.1904958002269268, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 10, "ts_sec": 1.3158583999611437, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 11, "ts_sec": 1.4409679002128541, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 12, "ts_sec": 1.5660019000060856, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 13, "ts_sec": 1.691370100248605, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 14, "ts_sec": 1.8164659002795815, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 15, "ts_sec": 1.9416549000889063, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 16, "ts_sec": 2.066874800249934, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 17, "ts_sec": 2.1923890002071857, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 18, "ts_sec": 2.317422400228679, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 19, "ts_sec": 2.4424646999686956, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 20, "ts_sec": 2.5677165002562106, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 21, "ts_sec": 2.6930506001226604, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 22, "ts_sec": 2.8181662000715733, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 23, "ts_sec": 2.9434945001266897, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 24, "ts_sec": 3.0688483002595603, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 25, "ts_sec": 3.1940780002623796, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 26, "ts_sec": 3.3196061002090573, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 27, "ts_sec": 3.4448598003946245, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 28, "ts_sec": 3.570317500270903, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 29, "ts_sec": 3.695841300301254, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 30, "ts_sec": 3.82130439998582, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 31, "ts_sec": 3.9465840002521873, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 32, "ts_sec": 4.071949300356209, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 33, "ts_sec": 4.197425100021064, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 34, "ts_sec": 4.322487500030547, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 35, "ts_sec": 4.447811800055206, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 36, "ts_sec": 4.573173700366169, "arrow_center": [2288, 243], "arrow_detected": true}
+{"frame_idx": 37, "ts_sec": 4.698311800137162, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 38, "ts_sec": 4.823430300224572, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 39, "ts_sec": 4.948932799976319, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 40, "ts_sec": 5.073967300355434, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 41, "ts_sec": 5.199067099951208, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 42, "ts_sec": 5.324299700092524, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 43, "ts_sec": 5.449938300065696, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 44, "ts_sec": 5.57512619998306, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 45, "ts_sec": 5.700396600179374, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 46, "ts_sec": 5.825546800158918, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 47, "ts_sec": 5.951015600003302, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 48, "ts_sec": 6.076522100251168, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 49, "ts_sec": 6.201658500358462, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 50, "ts_sec": 6.327123400289565, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 51, "ts_sec": 6.45235070027411, "arrow_center": [2287, 242], "arrow_detected": true}
+{"frame_idx": 52, "ts_sec": 6.577647500205785, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 53, "ts_sec": 6.702682700008154, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 54, "ts_sec": 6.828106400091201, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 55, "ts_sec": 6.953477900009602, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 56, "ts_sec": 7.078738100361079, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 57, "ts_sec": 7.203789500053972, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 58, "ts_sec": 7.328843200113624, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 59, "ts_sec": 7.45389370014891, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 60, "ts_sec": 7.579245100263506, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 61, "ts_sec": 7.704414200037718, "arrow_center": [2287, 241], "arrow_detected": true}
+{"frame_idx": 62, "ts_sec": 7.829531100112945, "arrow_center": [2287, 242], "arrow_detected": true}
+{"frame_idx": 63, "ts_sec": 7.9549630000256, "arrow_center": [2287, 242], "arrow_detected": true}
+{"frame_idx": 64, "ts_sec": 8.080102000385523, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 65, "ts_sec": 8.205294700339437, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 66, "ts_sec": 8.33046260010451, "arrow_center": [2253, 241], "arrow_detected": true}
+{"frame_idx": 67, "ts_sec": 8.45598840015009, "arrow_center": [2267, 241], "arrow_detected": true}
+{"frame_idx": 68, "ts_sec": 8.581374099943787, "arrow_center": [2266, 242], "arrow_detected": true}
+{"frame_idx": 69, "ts_sec": 8.706579100340605, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 70, "ts_sec": 8.83197920024395, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 71, "ts_sec": 8.957290000282228, "arrow_center": [2267, 243], "arrow_detected": true}
+{"frame_idx": 72, "ts_sec": 9.082543100230396, "arrow_center": [2266, 242], "arrow_detected": true}
+{"frame_idx": 73, "ts_sec": 9.207696400117129, "arrow_center": [2266, 242], "arrow_detected": true}
+{"frame_idx": 74, "ts_sec": 9.33317770017311, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 75, "ts_sec": 9.458707800135016, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 76, "ts_sec": 9.584140200167894, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 77, "ts_sec": 9.709314600098878, "arrow_center": [2230, 240], "arrow_detected": true}
+{"frame_idx": 78, "ts_sec": 9.83479670016095, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 79, "ts_sec": 9.95991550013423, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 80, "ts_sec": 10.085226600058377, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 81, "ts_sec": 10.210557000245899, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 82, "ts_sec": 10.335881000384688, "arrow_center": [2236, 242], "arrow_detected": true}
+{"frame_idx": 83, "ts_sec": 10.461374999955297, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 84, "ts_sec": 10.586822700221092, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 85, "ts_sec": 10.712211800273508, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 86, "ts_sec": 10.837250400334597, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 87, "ts_sec": 10.962634100113064, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 88, "ts_sec": 11.087718900293112, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 89, "ts_sec": 11.213126300368458, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 90, "ts_sec": 11.338502299971879, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 91, "ts_sec": 11.463999700266868, "arrow_center": [2236, 241], "arrow_detected": true}
+{"frame_idx": 92, "ts_sec": 11.589227500371635, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 93, "ts_sec": 11.714400799944997, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 94, "ts_sec": 11.839610000140965, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 95, "ts_sec": 11.964670500252396, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 96, "ts_sec": 12.090130100026727, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 97, "ts_sec": 12.215459200087935, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 98, "ts_sec": 12.340862200129777, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 99, "ts_sec": 12.4660265003331, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 100, "ts_sec": 12.591221400070935, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 101, "ts_sec": 12.71668180031702, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 102, "ts_sec": 12.841847800184041, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 103, "ts_sec": 12.967187700327486, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 104, "ts_sec": 13.092476600315422, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 105, "ts_sec": 13.217752899974585, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 106, "ts_sec": 13.34289010008797, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 107, "ts_sec": 13.46794980019331, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 108, "ts_sec": 13.593080000020564, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 109, "ts_sec": 13.718572200275958, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 110, "ts_sec": 13.843958800192922, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 111, "ts_sec": 13.96918320003897, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 112, "ts_sec": 14.094636000227183, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 113, "ts_sec": 14.219686000142246, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 114, "ts_sec": 14.345005000010133, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 115, "ts_sec": 14.470122700091451, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 116, "ts_sec": 14.595476100221276, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 117, "ts_sec": 14.720812099985778, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 118, "ts_sec": 14.846100599970669, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 119, "ts_sec": 14.971328500192612, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 0, "ts_sec": 6.002373993396759e-07, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 1, "ts_sec": 0.18751530023291707, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 2, "ts_sec": 0.312618600204587, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 3, "ts_sec": 0.43766679987311363, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 4, "ts_sec": 0.5627534999512136, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 5, "ts_sec": 0.6880824002437294, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 6, "ts_sec": 0.8135071001015604, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 7, "ts_sec": 0.9385897000320256, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 8, "ts_sec": 1.06364700011909, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 9, "ts_sec": 1.1887142998166382, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 10, "ts_sec": 1.314141099806875, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 11, "ts_sec": 1.439643600024283, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 12, "ts_sec": 1.5651083998382092, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 13, "ts_sec": 1.6901521999388933, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 14, "ts_sec": 1.8156721000559628, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 15, "ts_sec": 1.9409086001105607, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 16, "ts_sec": 2.065996100194752, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 17, "ts_sec": 2.191437100060284, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 18, "ts_sec": 2.3169173998758197, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 19, "ts_sec": 2.4421390001662076, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 20, "ts_sec": 2.567336699925363, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 21, "ts_sec": 2.6925400998443365, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 22, "ts_sec": 2.817726199980825, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 23, "ts_sec": 2.942971399985254, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 24, "ts_sec": 3.0683924998156726, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 25, "ts_sec": 3.1938804001547396, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 26, "ts_sec": 3.3191653001122177, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 27, "ts_sec": 3.44421310024336, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 28, "ts_sec": 3.5696581001393497, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 29, "ts_sec": 3.6950111999176443, "arrow_center": [2280, 241], "arrow_detected": true}
+{"frame_idx": 30, "ts_sec": 3.820374300237745, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 31, "ts_sec": 3.9456019001081586, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 32, "ts_sec": 4.0708774998784065, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 33, "ts_sec": 4.196387100033462, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 34, "ts_sec": 4.321465699933469, "arrow_center": [2288, 240], "arrow_detected": true}
+{"frame_idx": 35, "ts_sec": 4.446886099874973, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 36, "ts_sec": 4.572354900185019, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 37, "ts_sec": 4.697861699853092, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 38, "ts_sec": 4.823207899928093, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 39, "ts_sec": 4.948581799864769, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 40, "ts_sec": 5.073731400072575, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 41, "ts_sec": 5.198924399912357, "arrow_center": [2288, 241], "arrow_detected": true}
+{"frame_idx": 42, "ts_sec": 5.324104799889028, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 43, "ts_sec": 5.44950190000236, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 44, "ts_sec": 5.574534299783409, "arrow_center": [2287, 242], "arrow_detected": true}
+{"frame_idx": 45, "ts_sec": 5.699891000054777, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 46, "ts_sec": 5.825056300032884, "arrow_center": [2263, 241], "arrow_detected": true}
+{"frame_idx": 47, "ts_sec": 5.950401700101793, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 48, "ts_sec": 6.075608400162309, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 49, "ts_sec": 6.201191400177777, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 50, "ts_sec": 6.326624100096524, "arrow_center": [2267, 243], "arrow_detected": true}
+{"frame_idx": 51, "ts_sec": 6.452062800060958, "arrow_center": [2213, 240], "arrow_detected": true}
+{"frame_idx": 52, "ts_sec": 6.577489099930972, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 53, "ts_sec": 6.702739700209349, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 54, "ts_sec": 6.828280599787831, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 55, "ts_sec": 6.953800099901855, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 56, "ts_sec": 7.078949099872261, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 57, "ts_sec": 7.204637300223112, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 58, "ts_sec": 7.330098900012672, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 59, "ts_sec": 7.455431700218469, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 60, "ts_sec": 7.580826399847865, "arrow_center": [2233, 241], "arrow_detected": true}
+{"frame_idx": 61, "ts_sec": 7.706210699863732, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 62, "ts_sec": 7.8316107001155615, "arrow_center": [2236, 242], "arrow_detected": true}
+{"frame_idx": 63, "ts_sec": 7.956724899820983, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 64, "ts_sec": 8.082076100166887, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 65, "ts_sec": 8.207365800160915, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 66, "ts_sec": 8.332687600050122, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 67, "ts_sec": 8.457756400108337, "arrow_center": [2234, 240], "arrow_detected": true}
+{"frame_idx": 68, "ts_sec": 8.583462399896234, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 69, "ts_sec": 8.708741500042379, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 70, "ts_sec": 8.834260399919003, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 71, "ts_sec": 8.95953099988401, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 72, "ts_sec": 9.084707600064576, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 73, "ts_sec": 9.210022800136358, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 74, "ts_sec": 9.33553809998557, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 75, "ts_sec": 9.461018099915236, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 76, "ts_sec": 9.586521300021559, "arrow_center": [2235, 240], "arrow_detected": true}
+{"frame_idx": 77, "ts_sec": 9.711677600163966, "arrow_center": [2234, 241], "arrow_detected": true}
+{"frame_idx": 78, "ts_sec": 9.83719479991123, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 79, "ts_sec": 9.9624900999479, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 80, "ts_sec": 10.08792999992147, "arrow_center": [2280, 241], "arrow_detected": true}
+{"frame_idx": 81, "ts_sec": 10.213278600014746, "arrow_center": [2280, 240], "arrow_detected": true}
+{"frame_idx": 82, "ts_sec": 10.338624900206923, "arrow_center": [2280, 240], "arrow_detected": true}
+{"frame_idx": 83, "ts_sec": 10.463671599980444, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 84, "ts_sec": 10.589008700102568, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 85, "ts_sec": 10.714161300100386, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 86, "ts_sec": 10.839348699897528, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 87, "ts_sec": 10.964839399792254, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 88, "ts_sec": 11.090301500167698, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 89, "ts_sec": 11.215482499916106, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 90, "ts_sec": 11.340816000010818, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 91, "ts_sec": 11.46619480010122, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 92, "ts_sec": 11.591716700233519, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 93, "ts_sec": 11.717219199985266, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 94, "ts_sec": 11.842578100040555, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 95, "ts_sec": 11.967885099817067, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 96, "ts_sec": 12.093207200057805, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 97, "ts_sec": 12.218342099804431, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 98, "ts_sec": 12.34348879987374, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 99, "ts_sec": 12.468971599824727, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 100, "ts_sec": 12.594177099876106, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 101, "ts_sec": 12.719600699841976, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 102, "ts_sec": 12.844892399851233, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 103, "ts_sec": 12.970253000035882, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 104, "ts_sec": 13.09550890000537, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 105, "ts_sec": 13.220809000078589, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 106, "ts_sec": 13.346101299859583, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 107, "ts_sec": 13.471198999788612, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 108, "ts_sec": 13.596663900185376, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 109, "ts_sec": 13.722101599909365, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 110, "ts_sec": 13.847527400124818, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 111, "ts_sec": 13.973007400054485, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 112, "ts_sec": 14.098441699985415, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 113, "ts_sec": 14.22351469984278, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 114, "ts_sec": 14.348835399840027, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 115, "ts_sec": 14.473968999926, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 116, "ts_sec": 14.599334199912846, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 117, "ts_sec": 14.724781999830157, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 118, "ts_sec": 14.850011200178415, "arrow_center": null, "arrow_detected": false}
+{"frame_idx": 119, "ts_sec": 14.975097800139338, "arrow_center": null, "arrow_detected": false}

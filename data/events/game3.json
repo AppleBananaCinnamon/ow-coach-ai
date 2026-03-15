@@ -23,78 +23,50 @@
     { "player_id": "P10", "team": "ALLY", "role": "TANK", "hero": "ORISA", "handle": "ally_tank" }
   ],
   "fights": [
-    { "fight_id": "F01", "start_ts": 120.0, "end_ts": 148.0, "note": "clustered killfeed deaths" }
+    { "fight_id": "F01", "start_ts": 00:00:48, "end_ts": 148.0, "note": "poke begins from focus Zenyatta" }
   ],
   "events": [
     {
       "event_id": "E001",
-      "ts": 121.5,
+      "ts": 00:00:56,
       "type": "FIGHT_STATE",
-      "actors": { "team": "ALLY" },
+      "actors": { "team": "ALLY" }, # what do actors mean here? I see both sides engaging, so I'm going to mark it as Engage.
       "payload": { "fight_id": "F01", "state": "ENGAGE" },
       "tags": ["fight:F01"],
-      "sources": [{ "kind": "manual", "confidence": 0.9 }]
-    },
-
-    {
-      "event_id": "E002",
-      "ts": 123.0,
-      "type": "ULT_PCT",
-      "actors": { "subject_player_id": "P1" },
-      "payload": { "fight_id": "F01", "pct": 42 },
-      "tags": ["fight:F01", "zen"],
-      "sources": [{ "kind": "manual", "confidence": 0.95, "note": "POV ult meter" }]
-    },
-
-    {
-      "event_id": "E003",
-      "ts": 128.2,
-      "type": "DEATH",
-      "actors": { "subject_player_id": "P3", "by_player_id": "P8" },
-      "payload": { "fight_id": "F01" },
-      "tags": ["fight:F01"],
-      "sources": [{ "kind": "manual", "confidence": 0.9, "note": "killfeed" }]
-    },
-
-    {
-      "event_id": "E004",
-      "ts": 132.0,
-      "type": "ULT_PCT",
-      "actors": { "subject_player_id": "P1" },
-      "payload": { "fight_id": "F01", "pct": 71 },
-      "tags": ["fight:F01", "zen"],
-      "sources": [{ "kind": "manual", "confidence": 0.95 }]
-    },
-
-    {
-      "event_id": "E005",
-      "ts": 135.4,
-      "type": "POSITION_TAG",
-      "actors": { "subject_player_id": "P1" },
-      "payload": { "fight_id": "F01", "tag": "FRONTLINE" },
-      "tags": ["fight:F01", "zen"],
-      "sources": [{ "kind": "manual", "confidence": 0.8 }]
-    },
-
-    {
-      "event_id": "E006",
-      "ts": 136.1,
-      "type": "DEATH",
-      "actors": { "subject_player_id": "P1", "by_player_id": "P7" },
-      "payload": { "fight_id": "F01", "ult_pct_at_death": 74, "is_stagger": false },
-      "tags": ["fight:F01", "zen"],
       "sources": [{ "kind": "manual", "confidence": 1.0 }]
     },
 
     {
-      "event_id": "E007",
-      "ts": 147.5,
-      "type": "FIGHT_STATE",
-      "actors": { "team": "ALLY" },
-      "payload": { "fight_id": "F01", "state": "REGROUP" },
+      "event_id": "E002",
+      "ts": 00:00:58,
+      "type": "DEATH",
+      "actors": { "subject_player_id": "P2", "by_player_id": "P6"},
+      "payload": { "fight_id": "F01", "pct": 16 },
+      "tags": ["fight:F01", "zen"], # What should I put here for tag?
+      "sources": [{ "kind": "manual", "confidence": 1.00, "note": "zen in offangle; tracked via killfeed" }]
+    },
+
+    {
+      "event_id": "E003",
+      "ts": 00:01:06,
+      "type": "DEATH",
+      "actors": { "subject_player_id": "P4", "by_player_id": "P10", "assist_by_id": "P7" },
+      "payload": { "fight_id": "F01", "pct": 21 },
       "tags": ["fight:F01"],
-      "sources": [{ "kind": "manual", "confidence": 0.85 }]
-    }
+      "sources": [{ "kind": "manual", "confidence": 1.0, "note": "killfeed" }]
+    },
+
+    {
+      "event_id": "E004",
+      "ts": 00:01:08,
+      "type": "DEATH",
+      "actors": { "subject_player_id": "P7", "by_player_id": "P1" },
+      "payload": { "fight_id": "F01", "pct": 22 },
+      "tags": ["fight:F01", "zen"], [backline]
+      "sources": [{ "kind": "manual", "confidence": 1.0 }]
+    },
+
+ 
   ],
   "observations": []
 }

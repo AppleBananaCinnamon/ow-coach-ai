@@ -406,6 +406,7 @@ def run_parser(input_dir: Path, templates_dir: str | None) -> list[ParsedKillfee
 
     workspace_dir = Path.cwd()
     events: list[ParsedKillfeedEvent] = []
+    event_records: list[dict[str, object]] = []
     valid_events: list[ParsedKillfeedEvent] = []
 
     for detection in detections:
@@ -421,13 +422,19 @@ def run_parser(input_dir: Path, templates_dir: str | None) -> list[ParsedKillfee
         )
         event.ts_sec = earliest_ts
         events.append(event)
+        event_records.append(
+            {
+                **asdict(event),
+                "reject_reason": reject_reason,
+            }
+        )
         if reject_reason is None:
             valid_events.append(event)
 
     merged_events = merge_valid_events(valid_events, workspace_dir=workspace_dir)
     merged_events.sort(key=lambda event: event.ts_sec)
 
-    save_json(input_dir / "parsed_events.json", [asdict(event) for event in events])
+    save_json(input_dir / "parsed_events.json", event_records)
     save_json(
         input_dir / "parsed_events_valid.json",
         [asdict(event) for event in valid_events],

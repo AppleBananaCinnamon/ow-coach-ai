@@ -1,31 +1,13 @@
 [
   {
-    "frame_idx": 19,
-    "ts_sec": 2.442,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00001_best_f0000019_t00002.44.jpg",
-    "motion_score": 0.189,
-    "signal": 0.228,
-    "red_ratio": 0.003,
-    "cyan_ratio": 0.225,
-    "white_ratio": 0.0,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "row_idx": 0,
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 24,
-    "ts_sec": 3.068,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00002_best_f0000024_t00003.07.jpg",
-    "motion_score": 0.298,
-    "signal": 0.308,
-    "red_ratio": 0.001,
-    "cyan_ratio": 0.306,
-    "white_ratio": 0.0,
+    "frame_idx": 10,
+    "ts_sec": 1.074,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00001_best_f0000010_t00001.07.jpg",
+    "motion_score": 0.571,
+    "signal": 0.457,
+    "red_ratio": 0.151,
+    "cyan_ratio": 0.217,
+    "white_ratio": 0.088,
     "bbox_xyxy": [
       1920,
       216,
@@ -33,34 +15,22 @@
       266
     ],
     "row_idx": 1,
-    "monitor_idx": 1
+    "monitor_idx": 1,
+    "right_icon_box": [
+      371,
+      2,
+      69,
+      43
+    ]
   },
   {
-    "frame_idx": 29,
-    "ts_sec": 3.695,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00003_best_f0000029_t00003.69.jpg",
-    "motion_score": 0.614,
-    "signal": 0.559,
-    "red_ratio": 0.26,
-    "cyan_ratio": 0.227,
-    "white_ratio": 0.072,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "row_idx": 1,
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 35,
-    "ts_sec": 4.447,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00004_best_f0000035_t00004.45.jpg",
-    "motion_score": 0.088,
-    "signal": 0.804,
-    "red_ratio": 0.381,
-    "cyan_ratio": 0.302,
+    "frame_idx": 17,
+    "ts_sec": 1.776,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00002_best_f0000017_t00001.78.jpg",
+    "motion_score": 0.103,
+    "signal": 0.809,
+    "red_ratio": 0.379,
+    "cyan_ratio": 0.31,
     "white_ratio": 0.12,
     "bbox_xyxy": [
       1920,
@@ -69,88 +39,70 @@
       266
     ],
     "row_idx": 1,
-    "monitor_idx": 1
+    "monitor_idx": 1,
+    "right_icon_box": [
+      391,
+      2,
+      69,
+      43
+    ]
+  },
+  {
+    "frame_idx": 28,
+    "ts_sec": 2.88,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00004_best_f0000028_t00002.88.jpg",
+    "motion_score": 0.027,
+    "signal": 0.888,
+    "red_ratio": 0.53,
+    "cyan_ratio": 0.238,
+    "white_ratio": 0.12,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "row_idx": 2,
+    "monitor_idx": 1,
+    "right_icon_box": [
+      390,
+      4,
+      69,
+      43
+    ]
   },
   {
     "frame_idx": 39,
-    "ts_sec": 4.949,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00005_best_f0000039_t00004.95.jpg",
-    "motion_score": 0.066,
-    "signal": 0.776,
-    "red_ratio": 0.334,
-    "cyan_ratio": 0.322,
-    "white_ratio": 0.12,
+    "ts_sec": 3.983,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00006_best_f0000039_t00003.98.jpg",
+    "motion_score": 0.317,
+    "signal": 0.799,
+    "red_ratio": 0.34,
+    "cyan_ratio": 0.305,
+    "white_ratio": 0.154,
     "bbox_xyxy": [
       1920,
       216,
       2521,
       266
     ],
-    "row_idx": 1,
-    "monitor_idx": 1
+    "row_idx": 2,
+    "monitor_idx": 1,
+    "right_icon_box": [
+      337,
+      5,
+      69,
+      43
+    ]
   },
   {
     "frame_idx": 46,
-    "ts_sec": 5.825,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00006_best_f0000046_t00005.83.jpg",
-    "motion_score": 0.254,
-    "signal": 0.667,
-    "red_ratio": 0.339,
-    "cyan_ratio": 0.282,
-    "white_ratio": 0.046,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "row_idx": 1,
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 52,
-    "ts_sec": 6.577,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00007_best_f0000052_t00006.58.jpg",
-    "motion_score": 0.419,
-    "signal": 0.798,
-    "red_ratio": 0.339,
-    "cyan_ratio": 0.306,
-    "white_ratio": 0.153,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "row_idx": 1,
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 60,
-    "ts_sec": 7.581,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00009_best_f0000060_t00007.58.jpg",
-    "motion_score": 0.284,
-    "signal": 0.652,
-    "red_ratio": 0.211,
-    "cyan_ratio": 0.013,
-    "white_ratio": 0.427,
-    "bbox_xyxy": [
-      1920,
-      216,
-      2521,
-      266
-    ],
-    "row_idx": 1,
-    "monitor_idx": 1
-  },
-  {
-    "frame_idx": 70,
-    "ts_sec": 8.834,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00011_best_f0000070_t00008.83.jpg",
-    "motion_score": 0.233,
-    "signal": 0.901,
-    "red_ratio": 0.442,
-    "cyan_ratio": 0.306,
+    "ts_sec": 4.685,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00007_best_f0000046_t00004.68.jpg",
+    "motion_score": 0.16,
+    "signal": 0.714,
+    "red_ratio": 0.249,
+    "cyan_ratio": 0.313,
     "white_ratio": 0.152,
     "bbox_xyxy": [
       1920,
@@ -159,15 +111,93 @@
       266
     ],
     "row_idx": 1,
-    "monitor_idx": 1
+    "monitor_idx": 1,
+    "right_icon_box": [
+      339,
+      3,
+      69,
+      43
+    ]
   },
   {
-    "frame_idx": 80,
-    "ts_sec": 10.088,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00013_best_f0000080_t00010.09.jpg",
-    "motion_score": 0.659,
-    "signal": 0.569,
-    "red_ratio": 0.208,
+    "frame_idx": 52,
+    "ts_sec": 5.287,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00008_best_f0000052_t00005.29.jpg",
+    "motion_score": 0.107,
+    "signal": 0.771,
+    "red_ratio": 0.318,
+    "cyan_ratio": 0.301,
+    "white_ratio": 0.153,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "row_idx": 1,
+    "monitor_idx": 1,
+    "right_icon_box": [
+      337,
+      3,
+      69,
+      43
+    ]
+  },
+  {
+    "frame_idx": 57,
+    "ts_sec": 5.788,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00009_best_f0000057_t00005.79.jpg",
+    "motion_score": 0.041,
+    "signal": 0.748,
+    "red_ratio": 0.297,
+    "cyan_ratio": 0.297,
+    "white_ratio": 0.154,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "row_idx": 1,
+    "monitor_idx": 1,
+    "right_icon_box": [
+      336,
+      3,
+      69,
+      43
+    ]
+  },
+  {
+    "frame_idx": 65,
+    "ts_sec": 6.59,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00010_best_f0000065_t00006.59.jpg",
+    "motion_score": 0.127,
+    "signal": 0.859,
+    "red_ratio": 0.405,
+    "cyan_ratio": 0.298,
+    "white_ratio": 0.157,
+    "bbox_xyxy": [
+      1920,
+      216,
+      2521,
+      266
+    ],
+    "row_idx": 1,
+    "monitor_idx": 1,
+    "right_icon_box": [
+      337,
+      3,
+      69,
+      43
+    ]
+  },
+  {
+    "frame_idx": 75,
+    "ts_sec": 7.591,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00012_best_f0000075_t00007.59.jpg",
+    "motion_score": 0.116,
+    "signal": 0.702,
+    "red_ratio": 0.341,
     "cyan_ratio": 0.013,
     "white_ratio": 0.348,
     "bbox_xyxy": [
@@ -177,6 +207,12 @@
       266
     ],
     "row_idx": 1,
-    "monitor_idx": 1
+    "monitor_idx": 1,
+    "right_icon_box": [
+      383,
+      2,
+      69,
+      43
+    ]
   }
 ]

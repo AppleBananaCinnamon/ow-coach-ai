@@ -1,0 +1,119 @@
+[
+    {
+        "prev_crop_path":  null,
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00001_best_f0000010_t00001.31.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  null,
+        "similarity":  0.0,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00001_best_f0000010_t00001.31.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00002_best_f0000017_t00002.19.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  0.877,
+        "similarity":  0.8719,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00002_best_f0000017_t00002.19.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00003_best_f0000021_t00002.69.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  0.501,
+        "similarity":  0.9938,
+        "threshold":  0.98,
+        "merged":  true
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00002_best_f0000017_t00002.19.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00004_best_f0000027_t00003.44.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  1.253,
+        "similarity":  0.8722,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  null,
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00005_best_f0000032_t00004.07.jpg",
+        "row_idx":  2,
+        "time_gap_sec":  null,
+        "similarity":  0.0,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00004_best_f0000027_t00003.44.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00006_best_f0000037_t00004.70.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  1.254,
+        "similarity":  0.0,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00006_best_f0000037_t00004.70.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00007_best_f0000042_t00005.33.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  0.626,
+        "similarity":  0.0,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00007_best_f0000042_t00005.33.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00008_best_f0000048_t00006.08.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  0.752,
+        "similarity":  0.9331,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00008_best_f0000048_t00006.08.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00009_best_f0000053_t00006.70.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  0.627,
+        "similarity":  0.9983,
+        "threshold":  0.98,
+        "merged":  true
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00005_best_f0000032_t00004.07.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00010_best_f0000057_t00007.21.jpg",
+        "row_idx":  2,
+        "time_gap_sec":  3.134,
+        "similarity":  0.6784,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00010_best_f0000057_t00007.21.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00011_best_f0000062_t00007.83.jpg",
+        "row_idx":  2,
+        "time_gap_sec":  0.626,
+        "similarity":  0.7281,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00009_best_f0000053_t00006.70.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00012_best_f0000068_t00008.58.jpg",
+        "row_idx":  1,
+        "time_gap_sec":  1.879,
+        "similarity":  0.7298,
+        "threshold":  0.98,
+        "merged":  false
+    },
+    {
+        "prev_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00011_best_f0000062_t00007.83.jpg",
+        "curr_crop_path":  "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00013_best_f0000074_t00009.33.jpg",
+        "row_idx":  2,
+        "time_gap_sec":  1.503,
+        "similarity":  0.7933,
+        "threshold":  0.98,
+        "merged":  false
+    }
+]

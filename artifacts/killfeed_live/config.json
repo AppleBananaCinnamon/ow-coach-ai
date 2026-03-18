@@ -1,6 +1,6 @@
 {
   "output_dir": "artifacts/killfeed_live",
-  "sample_fps": 8.0,
+  "sample_fps": 10.0,
   "monitor_idx": 1,
   "killfeed_roi": [
     0.75,
@@ -13,7 +13,7 @@
   "resize_width": 700,
   "blur_kernel": 3,
   "debug": false,
-  "duration_sec": 15.0,
+  "duration_sec": 10.0,
   "show_preview": true,
   "burst_count": 3,
   "save_format": "jpg",

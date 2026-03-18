@@ -44,5 +44,9 @@ Learnings
     4.  Everytime another kill event trips, the window resets and the subregions get elevated attention.
     5.  We're now seeing some regression (we dropped true kills from parse_validated) but we can implement:
         1. Bias best selection to images from raw where the kill has arrow && BOTH icons && BOTH nameplates (or some combination). 
-        2. Introduce a higher image comparison threshold once a kill event starts. This means subsequent frames for a brief period must be VERY different to be counted as a new kill. This helps prune duplication. 
+        2. Introduce a higher image comparison threshold once a kill event starts. This means subsequent frames for a brief period must be VERY different to be counted as a new kill. This helps prune duplication.
+ 11. 3.15 -- Arrow detection is 100%, which allowed us to proxy detect the icons and nameplates. I realized that the better anchor is not left && right icons && nameplates, but ONLY right icon for the purposes of detecting "is this a new kill". Reason: once someone dies, they must wait at least 10s before respawning, effectively removing them from the killfeed for at least 40 seconds. So while the attacker can appear repeatedly, the victim cannot, so the victim is a better proxy for 'unique kill event'. 
+     1.  We also implemented a better 'best-frame' solution: we biased it to pick candidates that had:
+         1.  arrow present > both icons fully rendered > both icons mostly visible > both nameplates visible > combined icon coverage 
+ 12. 3.17 -- Still seeing duplications in parsed_valid. Started emitting metrics to determine where a candidate image lost in our pipeline (crops? > best selection? > burst selection? > id'd as event? > deduped? > processed by parser? invalidated by parser? > merged away as parsed event?)
 

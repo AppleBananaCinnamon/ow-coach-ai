@@ -29,6 +29,7 @@ class FeedDetection:
     bbox_xyxy: tuple[int, int, int, int]
     row_idx: int
     monitor_idx: int
+    right_icon_box: Optional[tuple[int, int, int, int]]
 
 
 @dataclass
@@ -42,6 +43,19 @@ class BurstCandidate:
     cyan_ratio: float
     white_ratio: float
     arrow_center: Optional[tuple[int, int]]
+    crop_arrow_center: Optional[tuple[int, int]]
+    right_icon_box: Optional[tuple[int, int, int, int]]
+
+
+ARROW_ANCHORED_SUBREGIONS = {
+    "left_name": (-180, 5, 91, 32),
+    "left_icon": (-78, 0, 62, 43),
+    "arrow": (0, 0, 30, 43),
+    "right_icon": (38, 0, 69, 43),
+    "right_name": (112, 5, 150, 32),
+}
+
+EXPORT_RIGHT_ICON_DEBUG = True
 
 
 @dataclass
@@ -255,6 +269,124 @@ def detection_rank(detection: FeedDetection) -> float:
     return detection.motion_score * detection.signal
 
 
+def clip_box_to_image(
+    box: tuple[int, int, int, int], image_shape: tuple[int, ...]
+) -> tuple[int, int, int, int] | None:
+    x, y, w, h = box
+    img_h, img_w = image_shape[:2]
+    x1 = max(0, x)
+    y1 = max(0, y)
+    x2 = min(img_w, x + w)
+    y2 = min(img_h, y + h)
+    if x2 <= x1 or y2 <= y1:
+        return None
+    return (x1, y1, x2 - x1, y2 - y1)
+
+
+def subregion_coverage(
+    crop_shape: tuple[int, ...], box: tuple[int, int, int, int]
+) -> float:
+    clipped = clip_box_to_image(box, crop_shape)
+    if clipped is None:
+        return 0.0
+    _, _, w, h = clipped
+    expected_area = max(box[2] * box[3], 1)
+    return float((w * h) / expected_area)
+
+
+def candidate_structure_rank(
+    candidate: BurstCandidate, arrow_detector: ArrowDetector
+) -> tuple[int, int, int, int, int, float]:
+    if candidate.crop_arrow_center is None:
+        return (0, 0, 0, 0, 0, candidate.signal)
+
+    arrow_x1 = int(round(candidate.crop_arrow_center[0] - (arrow_detector.w / 2)))
+    arrow_y1 = int(round(candidate.crop_arrow_center[1] - (arrow_detector.h / 2)))
+
+    visible_regions = 0
+    icon_regions = 0
+    name_regions = 0
+    left_icon_coverage = 0.0
+    right_icon_coverage = 0.0
+
+    for name, (dx, dy, w, h) in ARROW_ANCHORED_SUBREGIONS.items():
+        coverage = subregion_coverage(
+            candidate.crop.shape, (arrow_x1 + dx, arrow_y1 + dy, w, h)
+        )
+        if name == "left_icon":
+            left_icon_coverage = coverage
+        elif name == "right_icon":
+            right_icon_coverage = coverage
+        if coverage >= 0.85:
+            visible_regions += 1
+            if "icon" in name:
+                icon_regions += 1
+            elif "name" in name:
+                name_regions += 1
+
+    both_icons_present = left_icon_coverage >= 0.85 and right_icon_coverage >= 0.85
+    both_icons_full = left_icon_coverage >= 0.98 and right_icon_coverage >= 0.98
+    both_names_present = name_regions == 2
+
+    return (
+        1,
+        1 if both_icons_full else 0,
+        1 if both_icons_present else 0,
+        1 if both_names_present else 0,
+        int(round((left_icon_coverage + right_icon_coverage) * 1000)),
+        visible_regions + candidate.signal,
+    )
+
+
+def candidate_structure_debug(
+    candidate: BurstCandidate, arrow_detector: ArrowDetector
+) -> dict[str, object]:
+    if candidate.crop_arrow_center is None:
+        return {
+            "arrow_present": False,
+            "left_icon_coverage": 0.0,
+            "right_icon_coverage": 0.0,
+            "both_icons_full": False,
+            "both_icons_present": False,
+            "both_names_present": False,
+            "visible_regions": 0,
+            "signal": candidate.signal,
+            "rank": list(candidate_structure_rank(candidate, arrow_detector)),
+        }
+
+    arrow_x1 = int(round(candidate.crop_arrow_center[0] - (arrow_detector.w / 2)))
+    arrow_y1 = int(round(candidate.crop_arrow_center[1] - (arrow_detector.h / 2)))
+    visible_regions = 0
+    name_regions = 0
+    left_icon_coverage = 0.0
+    right_icon_coverage = 0.0
+
+    for name, (dx, dy, w, h) in ARROW_ANCHORED_SUBREGIONS.items():
+        coverage = subregion_coverage(
+            candidate.crop.shape, (arrow_x1 + dx, arrow_y1 + dy, w, h)
+        )
+        if name == "left_icon":
+            left_icon_coverage = coverage
+        elif name == "right_icon":
+            right_icon_coverage = coverage
+        if coverage >= 0.85:
+            visible_regions += 1
+            if "name" in name:
+                name_regions += 1
+
+    return {
+        "arrow_present": True,
+        "left_icon_coverage": round(left_icon_coverage, 3),
+        "right_icon_coverage": round(right_icon_coverage, 3),
+        "both_icons_full": left_icon_coverage >= 0.98 and right_icon_coverage >= 0.98,
+        "both_icons_present": left_icon_coverage >= 0.85 and right_icon_coverage >= 0.85,
+        "both_names_present": name_regions == 2,
+        "visible_regions": visible_regions,
+        "signal": candidate.signal,
+        "rank": list(candidate_structure_rank(candidate, arrow_detector)),
+    }
+
+
 def draw_arrow_overlay(
     image: np.ndarray,
     arrow_center: Optional[tuple[int, int]],
@@ -306,6 +438,93 @@ def compute_row_signature(crop_path: str) -> tuple[np.ndarray, np.ndarray, np.nd
     )
 
 
+def crop_box(
+    image_bgr: np.ndarray, box: tuple[int, int, int, int] | None
+) -> np.ndarray | None:
+    if box is None:
+        return None
+    x, y, w, h = box
+    region = image_bgr[y : y + h, x : x + w]
+    return region if region.size > 0 else None
+
+
+def export_right_icon_debug(
+    crop_path: str,
+    right_icon: np.ndarray | None,
+    accepted: bool,
+    coverage: float,
+) -> None:
+    if not EXPORT_RIGHT_ICON_DEBUG:
+        return
+
+    local_crop_path = uri_to_local_path(crop_path)
+    debug_dir = local_crop_path.parent.parent / "right_icon_debug"
+    ensure_dir(debug_dir)
+
+    status = "accepted" if accepted else "rejected"
+    out_path = debug_dir / (
+        f"{local_crop_path.stem}_righticon_{status}_cov{int(round(coverage * 1000)):04d}.png"
+    )
+
+    if right_icon is None or right_icon.size == 0:
+        placeholder = np.zeros((43, 69, 3), dtype=np.uint8)
+        cv2.imwrite(str(out_path), placeholder)
+        return
+
+    cv2.imwrite(str(out_path), right_icon)
+
+
+def compute_arrow_anchored_subregions(
+    crop_bgr: np.ndarray, arrow_center: tuple[int, int], arrow_detector: ArrowDetector
+) -> dict[str, tuple[int, int, int, int]]:
+    arrow_x1 = int(round(arrow_center[0] - (arrow_detector.w / 2)))
+    arrow_y1 = int(round(arrow_center[1] - (arrow_detector.h / 2)))
+    regions: dict[str, tuple[int, int, int, int]] = {}
+
+    for name, (dx, dy, w, h) in ARROW_ANCHORED_SUBREGIONS.items():
+        clipped = clip_box_to_image((arrow_x1 + dx, arrow_y1 + dy, w, h), crop_bgr.shape)
+        if clipped is not None:
+            regions[name] = clipped
+
+    return regions
+
+
+def subregion_fingerprint(region_bgr: np.ndarray, size: tuple[int, int]) -> np.ndarray:
+    gray = cv2.cvtColor(region_bgr, cv2.COLOR_BGR2GRAY)
+    return cv2.resize(gray, size, interpolation=cv2.INTER_AREA)
+
+
+def compute_right_icon_signature(
+    crop_path: str, right_icon_box: Optional[tuple[int, int, int, int]]
+) -> np.ndarray | None:
+    crop = cv2.imread(str(uri_to_local_path(crop_path)), cv2.IMREAD_COLOR)
+    if crop is None or crop.size == 0:
+        return None
+    if right_icon_box is None:
+        export_right_icon_debug(crop_path, None, accepted=False, coverage=0.0)
+        return None
+    right_icon_coverage = subregion_coverage(crop.shape, right_icon_box)
+    right_icon = crop_box(crop, right_icon_box)
+    if right_icon is None:
+        export_right_icon_debug(crop_path, None, accepted=False, coverage=0.0)
+        return None
+
+    export_right_icon_debug(
+        crop_path, right_icon, accepted=True, coverage=right_icon_coverage
+    )
+    return subregion_fingerprint(right_icon, (32, 32))
+
+
+def structural_similarity(a: FeedDetection, b: FeedDetection) -> float:
+    sig_a = compute_right_icon_signature(a.crop_path, a.right_icon_box)
+    sig_b = compute_right_icon_signature(b.crop_path, b.right_icon_box)
+    if sig_a is None or sig_b is None:
+        return 0.0
+
+    diff = cv2.absdiff(sig_a, sig_b)
+    return 1.0 - (float(np.mean(diff)) / 255.0)
+
+
 def crop_similarity(crop_path_a: str, crop_path_b: str) -> float:
     sig_a = compute_row_signature(crop_path_a)
     sig_b = compute_row_signature(crop_path_b)
@@ -320,34 +539,49 @@ def crop_similarity(crop_path_a: str, crop_path_b: str) -> float:
 
 def dedupe_detections_visual(
     detections: List[FeedDetection],
-    max_gap_sec: float = 4.0,
-    similarity_threshold: float = 0.65,
+    max_gap_sec: float = 5.0,
+    similarity_threshold: float = 0.98,
 ) -> List[FeedDetection]:
     if not detections:
         return []
 
     deduped: List[FeedDetection] = []
-    last_by_row: dict[int, FeedDetection] = {}
-    last_idx_by_row: dict[int, int] = {}
+    debug_path = Path("artifacts/killfeed_live/dedupe_debug.jsonl")
 
     for detection in detections:
-        row_idx = detection.row_idx
-        prev = last_by_row.get(row_idx)
-        prev_idx = last_idx_by_row.get(row_idx)
+        best_match_idx: int | None = None
+        best_match_similarity = 0.0
 
-        if prev is not None and (detection.ts_sec - prev.ts_sec) <= max_gap_sec:
-            similarity = crop_similarity(prev.crop_path, detection.crop_path)
-        else:
-            similarity = 0.0
+        for idx, prev in enumerate(deduped):
+            time_gap_sec = detection.ts_sec - prev.ts_sec
+            if time_gap_sec < 0 or time_gap_sec > max_gap_sec:
+                continue
 
-        if prev is not None and prev_idx is not None and similarity >= similarity_threshold:
-            best = max(prev, detection, key=detection_rank)
-            last_by_row[row_idx] = best
-            deduped[prev_idx] = best
+            similarity = structural_similarity(prev, detection)
+            merged = similarity >= similarity_threshold
+            append_jsonl(
+                debug_path,
+                {
+                    "prev_crop_path": prev.crop_path,
+                    "curr_crop_path": detection.crop_path,
+                    "prev_row_idx": prev.row_idx,
+                    "curr_row_idx": detection.row_idx,
+                    "time_gap_sec": round(time_gap_sec, 3),
+                    "similarity": round(similarity, 4),
+                    "threshold": similarity_threshold,
+                    "merged": merged,
+                },
+            )
+
+            if merged and similarity > best_match_similarity:
+                best_match_idx = idx
+                best_match_similarity = similarity
+
+        if best_match_idx is not None:
+            prev = deduped[best_match_idx]
+            deduped[best_match_idx] = max(prev, detection, key=detection_rank)
         else:
             deduped.append(detection)
-            last_by_row[row_idx] = detection
-            last_idx_by_row[row_idx] = len(deduped) - 1
 
     return deduped
 
@@ -383,6 +617,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
     crops_dir = out_dir / "crops"
     debug_dir = out_dir / "debug_frames"
     arrow_debug_path = out_dir / "arrow_debug.jsonl"
+    best_selection_debug_path = out_dir / "best_selection_debug.jsonl"
     ensure_dir(out_dir)
     ensure_dir(crops_dir)
     if cfg.debug:
@@ -496,6 +731,14 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         cyan_ratio=round(cyan_ratio, 3),
                         white_ratio=round(white_ratio, 3),
                         arrow_center=arrow_center,
+                        crop_arrow_center=crop_arrow_center,
+                        right_icon_box=(
+                            compute_arrow_anchored_subregions(
+                                crop, crop_arrow_center, arrow_detector
+                            ).get("right_icon")
+                            if crop_arrow_center is not None
+                            else None
+                        ),
                     )
                     burst_candidates.append(candidate)
 
@@ -524,10 +767,28 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                 burst_remaining -= 1
 
                 if burst_remaining == 0 and burst_candidates:
+                    candidate_debug_rows = []
+                    for burst_idx, candidate in enumerate(burst_candidates):
+                        candidate_debug_rows.append(
+                            {
+                                "event_idx": burst_event_idx,
+                                "candidate_idx": burst_idx,
+                                "frame_idx": candidate.frame_idx,
+                                "ts_sec": candidate.ts_sec,
+                                "motion_score": candidate.motion_score,
+                                "signal": candidate.signal,
+                                **candidate_structure_debug(candidate, arrow_detector),
+                            }
+                        )
                     best_candidate = max(
                         burst_candidates,
-                        key=lambda candidate: candidate.motion_score * candidate.signal,
+                        key=lambda candidate: candidate_structure_rank(
+                            candidate, arrow_detector
+                        ),
                     )
+                    for row in candidate_debug_rows:
+                        row["selected"] = row["frame_idx"] == best_candidate.frame_idx
+                        append_jsonl(best_selection_debug_path, row)
 
                     ext = cfg.save_format
                     crop_name = (
@@ -575,6 +836,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                                 ),
                             ),
                             monitor_idx=cfg.monitor_idx,
+                            right_icon_box=best_candidate.right_icon_box,
                         )
                     )
 

@@ -30,6 +30,9 @@ class FeedDetection:
     row_idx: int
     monitor_idx: int
     right_icon_box: Optional[tuple[int, int, int, int]]
+    right_icon_fingerprint: Optional[list[int]]
+    right_name_fingerprint: Optional[list[int]]
+    anchored_regions: dict[str, tuple[int, int, int, int]]
 
 
 @dataclass
@@ -45,6 +48,9 @@ class BurstCandidate:
     arrow_center: Optional[tuple[int, int]]
     crop_arrow_center: Optional[tuple[int, int]]
     right_icon_box: Optional[tuple[int, int, int, int]]
+    right_icon_fingerprint: Optional[list[int]]
+    right_name_fingerprint: Optional[list[int]]
+    anchored_regions: dict[str, tuple[int, int, int, int]]
 
 
 ARROW_ANCHORED_SUBREGIONS = {
@@ -56,6 +62,9 @@ ARROW_ANCHORED_SUBREGIONS = {
 }
 
 EXPORT_RIGHT_ICON_DEBUG = True
+EXPORT_RIGHT_NAME_DEBUG = True
+RIGHT_ICON_FINGERPRINT_SIZE = (16, 16)
+RIGHT_NAME_FINGERPRINT_SIZE = (32, 12)
 
 
 @dataclass
@@ -474,6 +483,32 @@ def export_right_icon_debug(
     cv2.imwrite(str(out_path), right_icon)
 
 
+def export_right_name_debug(
+    crop_path: str,
+    right_name: np.ndarray | None,
+    accepted: bool,
+    coverage: float,
+) -> None:
+    if not EXPORT_RIGHT_NAME_DEBUG:
+        return
+
+    local_crop_path = uri_to_local_path(crop_path)
+    debug_dir = local_crop_path.parent.parent / "right_name_debug"
+    ensure_dir(debug_dir)
+
+    status = "accepted" if accepted else "rejected"
+    out_path = debug_dir / (
+        f"{local_crop_path.stem}_rightname_{status}_cov{int(round(coverage * 1000)):04d}.png"
+    )
+
+    if right_name is None or right_name.size == 0:
+        placeholder = np.zeros((32, 150, 3), dtype=np.uint8)
+        cv2.imwrite(str(out_path), placeholder)
+        return
+
+    cv2.imwrite(str(out_path), right_name)
+
+
 def compute_arrow_anchored_subregions(
     crop_bgr: np.ndarray, arrow_center: tuple[int, int], arrow_detector: ArrowDetector
 ) -> dict[str, tuple[int, int, int, int]]:
@@ -494,35 +529,153 @@ def subregion_fingerprint(region_bgr: np.ndarray, size: tuple[int, int]) -> np.n
     return cv2.resize(gray, size, interpolation=cv2.INTER_AREA)
 
 
+def normalize_right_icon_fingerprint(right_icon_bgr: np.ndarray) -> np.ndarray:
+    gray = cv2.cvtColor(right_icon_bgr, cv2.COLOR_BGR2GRAY)
+    resized = cv2.resize(gray, (32, 32), interpolation=cv2.INTER_AREA)
+    normalized = cv2.normalize(resized, None, 0, 255, cv2.NORM_MINMAX)
+    blurred = cv2.GaussianBlur(normalized, (3, 3), 0)
+    _threshold, binary = cv2.threshold(
+        blurred, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
+    )
+    kernel = np.ones((3, 3), np.uint8)
+    binary = cv2.morphologyEx(binary, cv2.MORPH_OPEN, kernel)
+    binary = cv2.morphologyEx(binary, cv2.MORPH_CLOSE, kernel)
+    compact = cv2.resize(
+        binary, RIGHT_ICON_FINGERPRINT_SIZE, interpolation=cv2.INTER_AREA
+    )
+    return (compact >= 127).astype(np.uint8) * 255
+
+
+def normalize_right_name_fingerprint(right_name_bgr: np.ndarray) -> np.ndarray:
+    gray = cv2.cvtColor(right_name_bgr, cv2.COLOR_BGR2GRAY)
+    normalized = cv2.normalize(gray, None, 0, 255, cv2.NORM_MINMAX)
+    blurred = cv2.GaussianBlur(normalized, (3, 3), 0)
+    _threshold, binary = cv2.threshold(
+        blurred, 0, 255, cv2.THRESH_BINARY + cv2.THRESH_OTSU
+    )
+    compact = cv2.resize(
+        binary, RIGHT_NAME_FINGERPRINT_SIZE, interpolation=cv2.INTER_AREA
+    )
+    return (compact >= 127).astype(np.uint8) * 255
+
+
+def fingerprint_to_list(fingerprint: np.ndarray | None) -> Optional[list[int]]:
+    if fingerprint is None:
+        return None
+    return [int(v) for v in fingerprint.flatten()]
+
+
+def fingerprint_from_list(values: Optional[list[int]]) -> np.ndarray | None:
+    if values is None:
+        return None
+    expected = RIGHT_ICON_FINGERPRINT_SIZE[0] * RIGHT_ICON_FINGERPRINT_SIZE[1]
+    if len(values) != expected:
+        return None
+    return np.array(values, dtype=np.uint8).reshape(
+        RIGHT_ICON_FINGERPRINT_SIZE[1], RIGHT_ICON_FINGERPRINT_SIZE[0]
+    )
+
+
+def fingerprint_from_list_with_size(
+    values: Optional[list[int]], size: tuple[int, int]
+) -> np.ndarray | None:
+    if values is None:
+        return None
+    expected = size[0] * size[1]
+    if len(values) != expected:
+        return None
+    return np.array(values, dtype=np.uint8).reshape(size[1], size[0])
+
+
+def compute_right_icon_fingerprint_from_crop(
+    crop: np.ndarray,
+    right_icon_box: Optional[tuple[int, int, int, int]],
+    crop_path: str | None = None,
+) -> np.ndarray | None:
+    if crop is None or crop.size == 0:
+        return None
+    if right_icon_box is None:
+        if crop_path is not None:
+            export_right_icon_debug(crop_path, None, accepted=False, coverage=0.0)
+        return None
+
+    right_icon_coverage = subregion_coverage(crop.shape, right_icon_box)
+    right_icon = crop_box(crop, right_icon_box)
+    if right_icon is None:
+        if crop_path is not None:
+            export_right_icon_debug(crop_path, None, accepted=False, coverage=0.0)
+        return None
+
+    if crop_path is not None:
+        export_right_icon_debug(
+            crop_path, right_icon, accepted=True, coverage=right_icon_coverage
+        )
+    return normalize_right_icon_fingerprint(right_icon)
+
+
+def compute_right_name_fingerprint_from_crop(
+    crop: np.ndarray,
+    right_name_box: Optional[tuple[int, int, int, int]],
+    crop_path: str | None = None,
+) -> np.ndarray | None:
+    if crop is None or crop.size == 0 or right_name_box is None:
+        if crop_path is not None:
+            export_right_name_debug(crop_path, None, accepted=False, coverage=0.0)
+        return None
+    right_name_coverage = subregion_coverage(crop.shape, right_name_box)
+    right_name = crop_box(crop, right_name_box)
+    if right_name is None:
+        if crop_path is not None:
+            export_right_name_debug(crop_path, None, accepted=False, coverage=0.0)
+        return None
+    if crop_path is not None:
+        export_right_name_debug(
+            crop_path, right_name, accepted=True, coverage=right_name_coverage
+        )
+    return normalize_right_name_fingerprint(right_name)
+
+
 def compute_right_icon_signature(
     crop_path: str, right_icon_box: Optional[tuple[int, int, int, int]]
 ) -> np.ndarray | None:
     crop = cv2.imread(str(uri_to_local_path(crop_path)), cv2.IMREAD_COLOR)
-    if crop is None or crop.size == 0:
-        return None
-    if right_icon_box is None:
-        export_right_icon_debug(crop_path, None, accepted=False, coverage=0.0)
-        return None
-    right_icon_coverage = subregion_coverage(crop.shape, right_icon_box)
-    right_icon = crop_box(crop, right_icon_box)
-    if right_icon is None:
-        export_right_icon_debug(crop_path, None, accepted=False, coverage=0.0)
-        return None
-
-    export_right_icon_debug(
-        crop_path, right_icon, accepted=True, coverage=right_icon_coverage
-    )
-    return subregion_fingerprint(right_icon, (32, 32))
+    return compute_right_icon_fingerprint_from_crop(crop, right_icon_box, crop_path)
 
 
-def structural_similarity(a: FeedDetection, b: FeedDetection) -> float:
-    sig_a = compute_right_icon_signature(a.crop_path, a.right_icon_box)
-    sig_b = compute_right_icon_signature(b.crop_path, b.right_icon_box)
+def right_icon_similarity(a: FeedDetection, b: FeedDetection) -> float:
+    sig_a = fingerprint_from_list(a.right_icon_fingerprint)
+    sig_b = fingerprint_from_list(b.right_icon_fingerprint)
+    if sig_a is None:
+        sig_a = compute_right_icon_signature(a.crop_path, a.right_icon_box)
+    if sig_b is None:
+        sig_b = compute_right_icon_signature(b.crop_path, b.right_icon_box)
     if sig_a is None or sig_b is None:
         return 0.0
 
     diff = cv2.absdiff(sig_a, sig_b)
     return 1.0 - (float(np.mean(diff)) / 255.0)
+
+
+def right_name_similarity(a: FeedDetection, b: FeedDetection) -> float:
+    sig_a = fingerprint_from_list_with_size(
+        a.right_name_fingerprint, RIGHT_NAME_FINGERPRINT_SIZE
+    )
+    sig_b = fingerprint_from_list_with_size(
+        b.right_name_fingerprint, RIGHT_NAME_FINGERPRINT_SIZE
+    )
+    if sig_a is None or sig_b is None:
+        return 0.0
+
+    diff = cv2.absdiff(sig_a, sig_b)
+    return 1.0 - (float(np.mean(diff)) / 255.0)
+
+
+def victim_identity_similarity(a: FeedDetection, b: FeedDetection) -> float:
+    icon_similarity = right_icon_similarity(a, b)
+    name_similarity = right_name_similarity(a, b)
+    if a.right_name_fingerprint is None or b.right_name_fingerprint is None:
+        return icon_similarity
+    return (0.55 * icon_similarity) + (0.45 * name_similarity)
 
 
 def crop_similarity(crop_path_a: str, crop_path_b: str) -> float:
@@ -540,7 +693,7 @@ def crop_similarity(crop_path_a: str, crop_path_b: str) -> float:
 def dedupe_detections_visual(
     detections: List[FeedDetection],
     max_gap_sec: float = 5.0,
-    similarity_threshold: float = 0.98,
+    similarity_threshold: float = 0.95,
 ) -> List[FeedDetection]:
     if not detections:
         return []
@@ -557,7 +710,9 @@ def dedupe_detections_visual(
             if time_gap_sec < 0 or time_gap_sec > max_gap_sec:
                 continue
 
-            similarity = structural_similarity(prev, detection)
+            icon_similarity = right_icon_similarity(prev, detection)
+            name_similarity = right_name_similarity(prev, detection)
+            similarity = victim_identity_similarity(prev, detection)
             merged = similarity >= similarity_threshold
             append_jsonl(
                 debug_path,
@@ -567,6 +722,8 @@ def dedupe_detections_visual(
                     "prev_row_idx": prev.row_idx,
                     "curr_row_idx": detection.row_idx,
                     "time_gap_sec": round(time_gap_sec, 3),
+                    "icon_similarity": round(icon_similarity, 4),
+                    "name_similarity": round(name_similarity, 4),
                     "similarity": round(similarity, 4),
                     "threshold": similarity_threshold,
                     "merged": merged,
@@ -720,6 +877,14 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                 if should_keep_burst_candidate:
                     if crop_arrow_center is None:
                         candidates_skipped_no_arrow += 1
+                    anchored_regions = (
+                        compute_arrow_anchored_subregions(
+                            crop, crop_arrow_center, arrow_detector
+                        )
+                        if crop_arrow_center is not None
+                        else {}
+                    )
+                    right_icon_box = anchored_regions.get("right_icon")
 
                     candidate = BurstCandidate(
                         frame_idx=frame_idx,
@@ -732,13 +897,16 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         white_ratio=round(white_ratio, 3),
                         arrow_center=arrow_center,
                         crop_arrow_center=crop_arrow_center,
-                        right_icon_box=(
-                            compute_arrow_anchored_subregions(
-                                crop, crop_arrow_center, arrow_detector
-                            ).get("right_icon")
-                            if crop_arrow_center is not None
-                            else None
+                        right_icon_box=right_icon_box,
+                        right_icon_fingerprint=fingerprint_to_list(
+                            compute_right_icon_fingerprint_from_crop(crop, right_icon_box)
                         ),
+                        right_name_fingerprint=fingerprint_to_list(
+                            compute_right_name_fingerprint_from_crop(
+                                crop, anchored_regions.get("right_name")
+                            )
+                        ),
+                        anchored_regions=anchored_regions,
                     )
                     burst_candidates.append(candidate)
 
@@ -806,6 +974,17 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         origin_y=y1_rel,
                     )
                     save_crop_image(crop_path, best_candidate_img, cfg.save_format)
+                    crop_uri = path_to_uri(crop_path)
+                    _ = compute_right_icon_fingerprint_from_crop(
+                        best_candidate.crop,
+                        best_candidate.right_icon_box,
+                        crop_uri,
+                    )
+                    _ = compute_right_name_fingerprint_from_crop(
+                        best_candidate.crop,
+                        best_candidate.anchored_regions.get("right_name"),
+                        crop_uri,
+                    )
 
                     bbox_abs = (
                         mon_left + x1_rel,
@@ -818,7 +997,7 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         FeedDetection(
                             frame_idx=best_candidate.frame_idx,
                             ts_sec=best_candidate.ts_sec,
-                            crop_path=path_to_uri(crop_path),
+                            crop_path=crop_uri,
                             motion_score=best_candidate.motion_score,
                             signal=best_candidate.signal,
                             red_ratio=best_candidate.red_ratio,
@@ -837,6 +1016,9 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                             ),
                             monitor_idx=cfg.monitor_idx,
                             right_icon_box=best_candidate.right_icon_box,
+                            right_icon_fingerprint=best_candidate.right_icon_fingerprint,
+                            right_name_fingerprint=best_candidate.right_name_fingerprint,
+                            anchored_regions=best_candidate.anchored_regions,
                         )
                     )
 
@@ -904,33 +1086,35 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
 
 
 def cluster_detections(
-    detections: List[FeedDetection], gap_sec: float = 0.6
+    detections: List[FeedDetection],
+    gap_sec: float = 0.6,
+    similarity_threshold: float = 0.96,
 ) -> List[FeedDetection]:
     if not detections:
         return []
 
     detections = sorted(detections, key=lambda d: d.ts_sec)
+    representatives: List[FeedDetection] = []
 
-    clusters = []
-    current_cluster = [detections[0]]
+    for detection in detections:
+        best_match_idx: int | None = None
+        best_match_similarity = 0.0
 
-    for d in detections[1:]:
-        if d.ts_sec - current_cluster[-1].ts_sec <= gap_sec:
-            current_cluster.append(d)
+        for idx, prev in enumerate(representatives):
+            time_gap_sec = detection.ts_sec - prev.ts_sec
+            if time_gap_sec < 0 or time_gap_sec > gap_sec:
+                continue
+
+            similarity = victim_identity_similarity(prev, detection)
+            if similarity >= similarity_threshold and similarity > best_match_similarity:
+                best_match_idx = idx
+                best_match_similarity = similarity
+
+        if best_match_idx is not None:
+            prev = representatives[best_match_idx]
+            representatives[best_match_idx] = max(prev, detection, key=detection_rank)
         else:
-            clusters.append(current_cluster)
-            current_cluster = [d]
-
-    clusters.append(current_cluster)
-
-    representatives = []
-
-    for cluster in clusters:
-        def cluster_rank(detection: FeedDetection) -> float:
-            return detection_rank(detection)
-
-        best = max(cluster, key=cluster_rank)
-        representatives.append(best)
+            representatives.append(detection)
 
     return representatives
 

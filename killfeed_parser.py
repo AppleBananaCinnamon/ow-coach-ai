@@ -27,6 +27,8 @@ class DedupedDetection:
     ts_sec: float
     frame_idx: int
     crop_path: str
+    right_icon_box: tuple[int, int, int, int] | None
+    anchored_regions: dict[str, tuple[int, int, int, int]]
 
 
 @dataclass
@@ -81,11 +83,25 @@ def load_deduped_detections(path: Path) -> list[DedupedDetection]:
     detections: list[DedupedDetection] = []
 
     for item in raw_items:
+        anchored_regions_raw = item.get("anchored_regions") or {}
+        anchored_regions = {
+            str(name): tuple(int(v) for v in box)
+            for name, box in anchored_regions_raw.items()
+            if isinstance(box, (list, tuple)) and len(box) == 4
+        }
+        right_icon_box_raw = item.get("right_icon_box")
         detections.append(
             DedupedDetection(
                 ts_sec=float(item["ts_sec"]),
                 frame_idx=int(item["frame_idx"]),
                 crop_path=str(item["crop_path"]),
+                right_icon_box=(
+                    tuple(int(v) for v in right_icon_box_raw)
+                    if isinstance(right_icon_box_raw, (list, tuple))
+                    and len(right_icon_box_raw) == 4
+                    else None
+                ),
+                anchored_regions=anchored_regions,
             )
         )
 
@@ -244,6 +260,15 @@ def has_two_icons(
     return len(left_boxes) >= 1 and len(right_boxes) >= 1
 
 
+def region_from_box(
+    crop_bgr: np.ndarray, box: tuple[int, int, int, int] | None
+) -> np.ndarray | None:
+    clipped = clip_box_to_image(box, crop_bgr.shape) if box is not None else None
+    if clipped is None:
+        return None
+    return crop_box(crop_bgr, clipped)
+
+
 def fingerprint_victim_side(crop_bgr: np.ndarray) -> np.ndarray:
     _, _, right = extract_killfeed_regions(crop_bgr)
     gray = cv2.cvtColor(right, cv2.COLOR_BGR2GRAY)
@@ -290,8 +315,20 @@ def parse_event(
     right_region = None
     left_boxes: list[tuple[int, int, int, int]] = []
     right_boxes: list[tuple[int, int, int, int]] = []
+    persisted_regions = detection.anchored_regions or {}
 
-    if arrow_center is not None:
+    persisted_left_icon_box = persisted_regions.get("left_icon")
+    persisted_right_icon_box = persisted_regions.get("right_icon") or detection.right_icon_box
+
+    if persisted_left_icon_box is not None and persisted_right_icon_box is not None:
+        left_region = region_from_box(crop_bgr, persisted_left_icon_box)
+        right_region = region_from_box(crop_bgr, persisted_right_icon_box)
+        if left_region is not None:
+            left_boxes = [(0, 0, left_region.shape[1], left_region.shape[0])]
+        if right_region is not None:
+            right_boxes = [(0, 0, right_region.shape[1], right_region.shape[0])]
+
+    if (left_region is None or right_region is None) and arrow_center is not None:
         regions = compute_arrow_anchored_subregions(
             crop_bgr, arrow_center, arrow_detector
         )

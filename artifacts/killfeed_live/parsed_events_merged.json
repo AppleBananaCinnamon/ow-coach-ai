@@ -1,28 +1,35 @@
 [
   {
-    "ts_sec": 1.58,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00002_best_f0000017_t00001.78.jpg",
+    "ts_sec": 1.39,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00005_best_f0000031_t00003.20.jpg",
     "killer_hero": null,
     "victim_hero": null,
     "confidence": 0.0
   },
   {
-    "ts_sec": 3.98,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00009_best_f0000057_t00005.79.jpg",
+    "ts_sec": 3.8,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00006_best_f0000039_t00004.00.jpg",
     "killer_hero": null,
     "victim_hero": null,
     "confidence": 0.0
   },
   {
-    "ts_sec": 6.39,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00010_best_f0000065_t00006.59.jpg",
+    "ts_sec": 4.4,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00010_best_f0000063_t00006.41.jpg",
     "killer_hero": null,
     "victim_hero": null,
     "confidence": 0.0
   },
   {
-    "ts_sec": 7.59,
-    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00012_best_f0000075_t00007.59.jpg",
+    "ts_sec": 6.81,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00011_best_f0000068_t00006.91.jpg",
+    "killer_hero": null,
+    "victim_hero": null,
+    "confidence": 0.0
+  },
+  {
+    "ts_sec": 8.01,
+    "crop_path": "file:///C:/Users/jmfra/OneDrive/Desktop/Coding/ow_coach/artifacts/killfeed_live/crops/killfeed_evt00014_best_f0000085_t00008.62.jpg",
     "killer_hero": null,
     "victim_hero": null,
     "confidence": 0.0

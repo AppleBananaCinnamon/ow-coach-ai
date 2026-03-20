@@ -35,7 +35,6 @@ class FeedDetection:
     victim_profile_icon_fingerprint: Optional[list[int]]
     victim_profile_name_fingerprint: Optional[list[int]]
     identity_samples: list[dict[str, object]]
-    identity_stable_start_frame_idx: Optional[int]
     anchored_regions: dict[str, tuple[int, int, int, int]]
 
 
@@ -500,121 +499,9 @@ def weighted_average_fingerprint(
     return np.clip(np.round(averaged), 0, 255).astype(np.uint8)
 
 
-def candidate_victim_identity_similarity(
-    a: BurstCandidate, b: BurstCandidate
-) -> float:
-    icon_a = fingerprint_from_list(a.right_icon_fingerprint)
-    icon_b = fingerprint_from_list(b.right_icon_fingerprint)
-    name_a = fingerprint_from_list_with_size(
-        a.right_name_fingerprint, RIGHT_NAME_FINGERPRINT_SIZE
-    )
-    name_b = fingerprint_from_list_with_size(
-        b.right_name_fingerprint, RIGHT_NAME_FINGERPRINT_SIZE
-    )
-    icon_similarity = icon_similarity_from_fingerprints(icon_a, icon_b)
-    name_similarity = name_similarity_from_fingerprints(name_a, name_b)
-    if name_a is None or name_b is None:
-        return icon_similarity
-    return (0.55 * icon_similarity) + (0.45 * name_similarity)
-
-
-def find_identity_stable_start_frame(
-    burst_candidates: list[BurstCandidate], transition_threshold: float = 0.82
-) -> int | None:
-    qualified = [
-        candidate
-        for candidate in sorted(burst_candidates, key=lambda c: c.frame_idx)
-        if candidate.right_icon_fingerprint is not None
-        and candidate.right_name_fingerprint is not None
-    ]
-    if not qualified:
-        return None
-    if len(qualified) < 3:
-        return qualified[0].frame_idx
-
-    consecutive_scores: list[float] = []
-    for prev_candidate, curr_candidate in zip(qualified, qualified[1:]):
-        consecutive_scores.append(
-            candidate_victim_identity_similarity(prev_candidate, curr_candidate)
-        )
-
-    if not consecutive_scores:
-        return qualified[0].frame_idx
-
-    min_idx = int(np.argmin(consecutive_scores))
-    min_score = consecutive_scores[min_idx]
-    if min_score < transition_threshold and min_idx + 1 < len(qualified):
-        return qualified[min_idx + 1].frame_idx
-    return qualified[0].frame_idx
-
-
-def split_burst_candidates_on_victim_transition(
-    burst_candidates: list[BurstCandidate],
-    transition_threshold: float = 0.78,
-    min_quality: float = 2.4,
-) -> tuple[list[list[BurstCandidate]], list[dict[str, object]]]:
-    ordered = sorted(burst_candidates, key=lambda candidate: candidate.frame_idx)
-    if len(ordered) < 2:
-        return [ordered], []
-
-    segments: list[list[BurstCandidate]] = []
-    split_debug: list[dict[str, object]] = []
-    current_segment: list[BurstCandidate] = [ordered[0]]
-    prev_qualified = (
-        ordered[0].right_icon_fingerprint is not None
-        and ordered[0].right_name_fingerprint is not None
-        and ordered[0].sample_quality >= min_quality
-    )
-
-    for candidate in ordered[1:]:
-        curr_qualified = (
-            candidate.right_icon_fingerprint is not None
-            and candidate.right_name_fingerprint is not None
-            and candidate.sample_quality >= min_quality
-        )
-        should_split = False
-        transition_similarity = None
-        if prev_qualified and curr_qualified:
-            transition_similarity = candidate_victim_identity_similarity(
-                current_segment[-1], candidate
-            )
-            should_split = transition_similarity < transition_threshold
-
-        split_debug.append(
-            {
-                "prev_frame_idx": current_segment[-1].frame_idx,
-                "curr_frame_idx": candidate.frame_idx,
-                "prev_ts_sec": current_segment[-1].ts_sec,
-                "curr_ts_sec": candidate.ts_sec,
-                "prev_sample_quality": round(current_segment[-1].sample_quality, 4),
-                "curr_sample_quality": round(candidate.sample_quality, 4),
-                "transition_similarity": (
-                    round(transition_similarity, 4)
-                    if transition_similarity is not None
-                    else None
-                ),
-                "threshold": transition_threshold,
-                "split": should_split,
-            }
-        )
-
-        if should_split:
-            segments.append(current_segment)
-            current_segment = [candidate]
-        else:
-            current_segment.append(candidate)
-
-        prev_qualified = curr_qualified
-
-    if current_segment:
-        segments.append(current_segment)
-    return segments, split_debug
-
-
 def build_identity_samples(
     burst_candidates: list[BurstCandidate], max_samples: int = 3
-) -> tuple[list[dict[str, object]], np.ndarray | None, np.ndarray | None, int | None]:
-    stable_start_frame_idx = find_identity_stable_start_frame(burst_candidates)
+) -> tuple[list[dict[str, object]], np.ndarray | None, np.ndarray | None]:
     qualified: list[tuple[float, BurstCandidate]] = []
     for candidate in burst_candidates:
         if (
@@ -622,21 +509,7 @@ def build_identity_samples(
             or candidate.right_name_fingerprint is None
         ):
             continue
-        if (
-            stable_start_frame_idx is not None
-            and candidate.frame_idx < stable_start_frame_idx
-        ):
-            continue
         qualified.append((candidate.sample_quality, candidate))
-
-    if not qualified:
-        for candidate in burst_candidates:
-            if (
-                candidate.right_icon_fingerprint is None
-                or candidate.right_name_fingerprint is None
-            ):
-                continue
-            qualified.append((candidate.sample_quality, candidate))
 
     qualified.sort(key=lambda item: (item[0], item[1].signal), reverse=True)
     selected = [candidate for _quality, candidate in qualified[:max_samples]]
@@ -662,7 +535,6 @@ def build_identity_samples(
                 "frame_idx": candidate.frame_idx,
                 "ts_sec": candidate.ts_sec,
                 "sample_quality": round(candidate.sample_quality, 4),
-                "used_for_identity_profile": True,
                 "right_icon_fingerprint": candidate.right_icon_fingerprint,
                 "right_name_fingerprint": candidate.right_name_fingerprint,
             }
@@ -670,7 +542,7 @@ def build_identity_samples(
 
     profile_icon = weighted_average_fingerprint(icon_fingerprints, weights, binary=True)
     profile_name = weighted_average_fingerprint(name_fingerprints, weights, binary=False)
-    return identity_samples, profile_icon, profile_name, stable_start_frame_idx
+    return identity_samples, profile_icon, profile_name
 
 
 def draw_arrow_overlay(
@@ -1153,17 +1025,11 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
     arrow_debug_path = out_dir / "arrow_debug.jsonl"
     best_selection_debug_path = out_dir / "best_selection_debug.jsonl"
     dedupe_debug_path = out_dir / "dedupe_debug.jsonl"
-    burst_split_debug_path = out_dir / "burst_split_debug.jsonl"
     ensure_dir(out_dir)
     ensure_dir(crops_dir)
     if cfg.debug:
         ensure_dir(debug_dir)
-    for debug_path in (
-        arrow_debug_path,
-        best_selection_debug_path,
-        dedupe_debug_path,
-        burst_split_debug_path,
-    ):
+    for debug_path in (arrow_debug_path, best_selection_debug_path, dedupe_debug_path):
         if debug_path.exists():
             debug_path.unlink()
 
@@ -1172,7 +1038,6 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
     frame_idx = 0
     burst_remaining = 0
     burst_event_idx = 0
-    emitted_event_idx = 0
     last_event_ts = -999.0
     burst_candidates: List[BurstCandidate] = []
     arrow_detector = ArrowDetector()
@@ -1326,14 +1191,71 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                 burst_remaining -= 1
 
                 if burst_remaining == 0 and burst_candidates:
-                    burst_segments, split_debug_rows = (
-                        split_burst_candidates_on_victim_transition(burst_candidates)
-                    )
-                    for split_row in split_debug_rows:
-                        append_jsonl(
-                            burst_split_debug_path,
-                            {"trigger_event_idx": burst_event_idx, **split_row},
+                    candidate_debug_rows = []
+                    for burst_idx, candidate in enumerate(burst_candidates):
+                        candidate_debug_rows.append(
+                            {
+                                "event_idx": burst_event_idx,
+                                "candidate_idx": burst_idx,
+                                "frame_idx": candidate.frame_idx,
+                                "ts_sec": candidate.ts_sec,
+                                "motion_score": candidate.motion_score,
+                                "signal": candidate.signal,
+                                "sample_quality": round(candidate.sample_quality, 4),
+                                **candidate_structure_debug(candidate, arrow_detector),
+                            }
                         )
+                    best_candidate = max(
+                        burst_candidates,
+                        key=lambda candidate: candidate_structure_rank(
+                            candidate, arrow_detector
+                        ),
+                    )
+                    best_summary = candidate_structure_summary(
+                        best_candidate, arrow_detector
+                    )
+                    identity_samples, profile_icon, profile_name = build_identity_samples(
+                        burst_candidates
+                    )
+                    for row in candidate_debug_rows:
+                        row["selected"] = row["frame_idx"] == best_candidate.frame_idx
+                        if row["selected"]:
+                            row["qualified_as_best"] = candidate_qualifies_as_best(
+                                best_summary
+                            )
+                        append_jsonl(best_selection_debug_path, row)
+
+                    if not candidate_qualifies_as_best(best_summary):
+                        burst_candidates = []
+                        continue
+
+                    ext = cfg.save_format
+                    crop_name = (
+                        f"killfeed_evt{burst_event_idx:05d}_"
+                        f"best_"
+                        f"f{best_candidate.frame_idx:07d}_"
+                        f"t{best_candidate.ts_sec:08.2f}."
+                        f"{ext}"
+                    )
+                    crop_path = crops_dir / crop_name
+                    best_candidate_img = draw_arrow_overlay(
+                        best_candidate.crop,
+                        best_candidate.arrow_center,
+                        origin_x=x1_rel,
+                        origin_y=y1_rel,
+                    )
+                    save_crop_image(crop_path, best_candidate_img, cfg.save_format)
+                    crop_uri = path_to_uri(crop_path)
+                    _ = compute_right_icon_fingerprint_from_crop(
+                        best_candidate.crop,
+                        best_candidate.right_icon_box,
+                        crop_uri,
+                    )
+                    _ = compute_right_name_fingerprint_from_crop(
+                        best_candidate.crop,
+                        best_candidate.anchored_regions.get("right_name"),
+                        crop_uri,
+                    )
 
                     bbox_abs = (
                         mon_left + x1_rel,
@@ -1342,134 +1264,50 @@ def detect_feed_changes_live(cfg: Config) -> List[FeedDetection]:
                         mon_top + y2_rel,
                     )
 
-                    for segment_idx, segment_candidates in enumerate(burst_segments):
-                        if not segment_candidates:
-                            continue
-
-                        candidate_debug_rows = []
-                        for burst_idx, candidate in enumerate(segment_candidates):
-                            candidate_debug_rows.append(
-                                {
-                                    "event_idx": burst_event_idx,
-                                    "segment_idx": segment_idx,
-                                    "candidate_idx": burst_idx,
-                                    "frame_idx": candidate.frame_idx,
-                                    "ts_sec": candidate.ts_sec,
-                                    "motion_score": candidate.motion_score,
-                                    "signal": candidate.signal,
-                                    "sample_quality": round(candidate.sample_quality, 4),
-                                    **candidate_structure_debug(
-                                        candidate, arrow_detector
-                                    ),
-                                }
-                            )
-                        best_candidate = max(
-                            segment_candidates,
-                            key=lambda candidate: candidate_structure_rank(
-                                candidate, arrow_detector
+                    detections.append(
+                        FeedDetection(
+                            frame_idx=best_candidate.frame_idx,
+                            ts_sec=best_candidate.ts_sec,
+                            crop_path=crop_uri,
+                            motion_score=best_candidate.motion_score,
+                            signal=best_candidate.signal,
+                            red_ratio=best_candidate.red_ratio,
+                            cyan_ratio=best_candidate.cyan_ratio,
+                            white_ratio=best_candidate.white_ratio,
+                            bbox_xyxy=bbox_abs,
+                            row_idx=estimate_row_idx_from_crop(
+                                path_to_uri(crop_path),
+                                top_y=y1_rel,
+                                row_height=row_height,
+                                arrow_y=(
+                                    best_candidate.arrow_center[1]
+                                    if best_candidate.arrow_center is not None
+                                    else None
+                                ),
                             ),
+                            monitor_idx=cfg.monitor_idx,
+                            right_icon_box=best_candidate.right_icon_box,
+                            right_icon_fingerprint=best_candidate.right_icon_fingerprint,
+                            right_name_fingerprint=best_candidate.right_name_fingerprint,
+                            victim_profile_icon_fingerprint=fingerprint_to_list(
+                                profile_icon
+                            ),
+                            victim_profile_name_fingerprint=fingerprint_to_list(
+                                profile_name
+                            ),
+                            identity_samples=identity_samples,
+                            anchored_regions=best_candidate.anchored_regions,
                         )
-                        best_summary = candidate_structure_summary(
-                            best_candidate, arrow_detector
-                        )
-                        (
-                            identity_samples,
-                            profile_icon,
-                            profile_name,
-                            stable_start_frame_idx,
-                        ) = build_identity_samples(segment_candidates)
-                        emitted_event_idx += 1
+                    )
 
-                        for row in candidate_debug_rows:
-                            row["selected"] = row["frame_idx"] == best_candidate.frame_idx
-                            row["emitted_event_idx"] = emitted_event_idx
-                            if row["selected"]:
-                                row["qualified_as_best"] = candidate_qualifies_as_best(
-                                    best_summary
-                                )
-                                row["identity_stable_start_frame_idx"] = (
-                                    stable_start_frame_idx
-                                )
-                            append_jsonl(best_selection_debug_path, row)
-
-                        if not candidate_qualifies_as_best(best_summary):
-                            continue
-
-                        ext = cfg.save_format
-                        crop_name = (
-                            f"killfeed_evt{emitted_event_idx:05d}_"
-                            f"best_"
-                            f"f{best_candidate.frame_idx:07d}_"
-                            f"t{best_candidate.ts_sec:08.2f}."
-                            f"{ext}"
-                        )
-                        crop_path = crops_dir / crop_name
-                        best_candidate_img = draw_arrow_overlay(
-                            best_candidate.crop,
-                            best_candidate.arrow_center,
-                            origin_x=x1_rel,
-                            origin_y=y1_rel,
-                        )
-                        save_crop_image(crop_path, best_candidate_img, cfg.save_format)
-                        crop_uri = path_to_uri(crop_path)
-                        _ = compute_right_icon_fingerprint_from_crop(
-                            best_candidate.crop,
-                            best_candidate.right_icon_box,
-                            crop_uri,
-                        )
-                        _ = compute_right_name_fingerprint_from_crop(
-                            best_candidate.crop,
-                            best_candidate.anchored_regions.get("right_name"),
-                            crop_uri,
-                        )
-
-                        detections.append(
-                            FeedDetection(
-                                frame_idx=best_candidate.frame_idx,
-                                ts_sec=best_candidate.ts_sec,
-                                crop_path=crop_uri,
-                                motion_score=best_candidate.motion_score,
-                                signal=best_candidate.signal,
-                                red_ratio=best_candidate.red_ratio,
-                                cyan_ratio=best_candidate.cyan_ratio,
-                                white_ratio=best_candidate.white_ratio,
-                                bbox_xyxy=bbox_abs,
-                                row_idx=estimate_row_idx_from_crop(
-                                    path_to_uri(crop_path),
-                                    top_y=y1_rel,
-                                    row_height=row_height,
-                                    arrow_y=(
-                                        best_candidate.arrow_center[1]
-                                        if best_candidate.arrow_center is not None
-                                        else None
-                                    ),
-                                ),
-                                monitor_idx=cfg.monitor_idx,
-                                right_icon_box=best_candidate.right_icon_box,
-                                right_icon_fingerprint=best_candidate.right_icon_fingerprint,
-                                right_name_fingerprint=best_candidate.right_name_fingerprint,
-                                victim_profile_icon_fingerprint=fingerprint_to_list(
-                                    profile_icon
-                                ),
-                                victim_profile_name_fingerprint=fingerprint_to_list(
-                                    profile_name
-                                ),
-                                identity_samples=identity_samples,
-                                identity_stable_start_frame_idx=stable_start_frame_idx,
-                                anchored_regions=best_candidate.anchored_regions,
-                            )
-                        )
-
-                        h, w = best_candidate.crop.shape[:2]
-                        print(
-                            f"[save] evt={emitted_event_idx:05d} "
-                            f"trigger={burst_event_idx:05d} "
-                            f"segment={segment_idx} "
-                            f"t={best_candidate.ts_sec:7.2f}s "
-                            f"score={best_candidate.motion_score:6.2f} "
-                            f"sig={best_candidate.signal:0.3f} "
-                            f"size={w}x{h} saved={crop_path.name}"
-                        )
+                    h, w = best_candidate.crop.shape[:2]
+                    print(
+                        f"[save] evt={burst_event_idx:05d} "
+                        f"t={best_candidate.ts_sec:7.2f}s "
+                        f"score={best_candidate.motion_score:6.2f} "
+                        f"sig={best_candidate.signal:0.3f} "
+                        f"size={w}x{h} saved={crop_path.name}"
+                    )
 
             if cfg.debug or cfg.show_preview:
                 frame_dbg = frame_bgr.copy()

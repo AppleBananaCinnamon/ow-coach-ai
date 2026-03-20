@@ -1,0 +1,72 @@
+{
+  "schema_version": "0.1.0",
+  "match": {
+    "match_id": "M001",
+    "map": "SHAMBALI MONASTERY",
+    "mode": "PAYLOAD",
+    "player": "THEFRANCO",
+    "hero": "ZENYATTA",
+    "rank": "UNKNOWN",
+    "video": { "source": "Replay VOD", "vod_id": "-", "start_offset_sec": 45 }
+  },
+  "players": [
+    { "player_id": "P1", "team": "ENEMY", "role": "DPS", "hero": "SYMMETRA", "handle": "enemy_dps1" },
+    { "player_id": "P2", "team": "ENEMY", "role": "DPS", "hero": "GENJI", "handle": "enemy_dps2" },
+    { "player_id": "P3", "team": "ENEMY", "role": "SUPPORT", "hero": "MERCY", "handle": "enemy_sup1" },
+    { "player_id": "P4", "team": "ENEMY", "role": "TANK", "hero": "ORISA", "handle": "enemy_tank" },
+    { "player_id": "P5", "team": "ENEMY", "role": "SUPPORT", "hero": "MOIRA", "handle": "enemy_sup2" },
+
+    { "player_id": "P6", "team": "ALLY", "role": "DPS", "hero": "VENTURE", "handle": "ally_dps1" },
+    { "player_id": "P7", "team": "ALLY", "role": "SUPPORT", "hero": "ZENYATTA", "handle": "focus" },
+    { "player_id": "P8", "team": "ALLY", "role": "DPS", "hero": "ANRAN", "handle": "ally_dps2" },
+    { "player_id": "P9", "team": "ALLY", "role": "SUPPORT", "hero": "MIZUKI", "handle": "ally_sup2" },
+    { "player_id": "P10", "team": "ALLY", "role": "TANK", "hero": "ORISA", "handle": "ally_tank" }
+  ],
+  "fights": [
+    { "fight_id": "F01", "start_ts": 00:00:48, "end_ts": 148.0, "note": "poke begins from focus Zenyatta" }
+  ],
+  "events": [
+    {
+      "event_id": "E001",
+      "ts": 00:00:56,
+      "type": "FIGHT_STATE",
+      "actors": { "team": "ALLY" }, # what do actors mean here? I see both sides engaging, so I'm going to mark it as Engage.
+      "payload": { "fight_id": "F01", "state": "ENGAGE" },
+      "tags": ["fight:F01"],
+      "sources": [{ "kind": "manual", "confidence": 1.0 }]
+    },
+
+    {
+      "event_id": "E002",
+      "ts": 00:00:58,
+      "type": "DEATH",
+      "actors": { "subject_player_id": "P2", "by_player_id": "P6"},
+      "payload": { "fight_id": "F01", "pct": 16 },
+      "tags": ["fight:F01", "zen"], # What should I put here for tag?
+      "sources": [{ "kind": "manual", "confidence": 1.00, "note": "zen in offangle; tracked via killfeed" }]
+    },
+
+    {
+      "event_id": "E003",
+      "ts": 00:01:06,
+      "type": "DEATH",
+      "actors": { "subject_player_id": "P4", "by_player_id": "P10", "assist_by_id": "P7" },
+      "payload": { "fight_id": "F01", "pct": 21 },
+      "tags": ["fight:F01"],
+      "sources": [{ "kind": "manual", "confidence": 1.0, "note": "killfeed" }]
+    },
+
+    {
+      "event_id": "E004",
+      "ts": 00:01:08,
+      "type": "DEATH",
+      "actors": { "subject_player_id": "P7", "by_player_id": "P1" },
+      "payload": { "fight_id": "F01", "pct": 22 },
+      "tags": ["fight:F01", "zen"], [backline]
+      "sources": [{ "kind": "manual", "confidence": 1.0 }]
+    },
+
+ 
+  ],
+  "observations": []
+}

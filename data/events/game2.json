@@ -2,10 +2,10 @@
   "schema_version": "0.1.0",
   "match": {
     "match_id": "M001",
-    "map": "KING'S ROW",
-    "mode": "HYBRID",
+    "map": "LIJIANG TOWER",
+    "mode": "CONTROL",
     "player": "AWKWARD",
-    "video": { "source": "file", "vod_id": "local_2026-03-04_zen", "start_offset_sec": 0 }
+    "video": { "source": "Twitch", "vod_id": "https://www.twitch.tv/awkward/video/2709121817", "start_offset_sec": 0 }
   },
   "players": [
     { "player_id": "P1", "team": "ALLY", "role": "SUPPORT", "hero": "ZENYATTA", "handle": "focus" },

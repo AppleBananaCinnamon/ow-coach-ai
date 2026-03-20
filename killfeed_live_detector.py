@@ -911,7 +911,7 @@ def crop_similarity(crop_path_a: str, crop_path_b: str) -> float:
 
 def dedupe_detections_visual(
     detections: List[FeedDetection],
-    max_gap_sec: float = 5.0,
+    max_gap_sec: float = 7.0,
     similarity_threshold: float = 0.95,
 ) -> List[FeedDetection]:
     if not detections:
@@ -942,9 +942,15 @@ def dedupe_detections_visual(
             elif time_gap_sec <= 1.35 and row_idx_delta == 0:
                 adaptive_threshold = 0.93
                 threshold_reason = "same_row_medium_gap"
+            elif time_gap_sec <= 7.0 and row_idx_delta == 0:
+                adaptive_threshold = 0.94
+                threshold_reason = "same_row_persistence"
             elif time_gap_sec <= 1.2 and row_idx_delta == 1:
                 adaptive_threshold = 0.92
                 threshold_reason = "adjacent_row_short_gap"
+            elif time_gap_sec <= 5.0 and row_idx_delta == 1:
+                adaptive_threshold = 0.94
+                threshold_reason = "adjacent_row_persistence"
 
             agreement_bonus = 0.0
             if threshold_reason != "default":

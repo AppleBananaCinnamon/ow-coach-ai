@@ -449,7 +449,10 @@ def run_parser(input_dir: Path, templates_dir: str | None) -> list[ParsedKillfee
     for detection in detections:
         event_id = extract_event_id(detection.crop_path)
         candidate_paths = sorted(
-            (input_dir / "crops").glob(f"killfeed_evt{event_id:05d}_cand*_t*.jpg")
+            [
+                * (input_dir / "crops").glob(f"killfeed_evt{event_id:05d}_cand*_t*.jpg"),
+                * (input_dir / "crops").glob(f"killfeed_evt{event_id:05d}_cand*_t*.png"),
+            ]
         )
         ts_candidates = [extract_ts_from_path(str(path)) for path in candidate_paths]
         earliest_ts = min(ts_candidates) if ts_candidates else detection.ts_sec

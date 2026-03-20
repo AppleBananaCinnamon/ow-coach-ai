@@ -56,4 +56,30 @@ Learnings
      4.  Added capture-time victim-side fingerprinting and debug exports for the exact right icon and right nameplate crops used by dedupe.
      5.  Current state: recall is much better, but dedupe still underperforms. Same-kill frames often score around 0.87-0.95 similarity, so near-duplicates remain in parsed_events_valid.json.
      6.  Next likely move: either soften/replace the current heuristic comparison on the right nameplate with a stronger victim-identity method (better similarity metric, OCR, or ML), because binary/thresholded fingerprints appear close to their limit.
+ 14. 3.19 -- Uncovered that 'image structure score' used in our 'best' selection stage is only answering "are the sub-region shots in this crop fully encapsulated within the ROI shot?". Instead, by coverage, we want to know "are the images contained within the subregions ACTUALLY visually showing?" So we want to use both left and right sides of the extraction for 'best' selection, but ONLY for best selection. Why? Because using both can confuse de-dedupe, so de-dupe has a different JTBD -> discrimination, whereas best -> coverage of event.
+     1.  I'm finding the agent is subpar at remembering past fixes; it requires me to have very specific instructions and understanding to know what to tell it to do. E.g., we're still seeing duplicates in the KF, it's suggesting 3 separate fixes without offering tradeoffs; I need to understand those tradeoffs before I tell it to go any further.
+     2.  The agent is proposing using multiple detections as a more reliable signal than using a single 'best' detection. The logic is: each snapshot is imperfect because our sampling is imperfect. But if two detections, each measuring something different, move together, that should improve our confidence in the assertion. E.g., if  icon coverage and nameplate coverage indepenently = 0.93, we're more confident to dedupe than if 'w1*ic + w2*nc' = 0.93.
+         1.  Similarly, the agent is proposing the same thing for intra and inter-event comparisons. 
+     3.  We are conflating too many jobs into 'best' frame. We are trying to use one perfect frame to 1) be the best frame for parsing (what is parsing doing), 2) construct event identity (i.e., this is kill row A, B, C), 3) the frame we expose as the canonical visual representation of the event. Instead, we can use one group of images for JTBD 2, and 'best' frame for JTBD 1 and 3.
+         1.  The fix: 1) widen the burst sampling, 2) create a new function dedicated to establishing event identity, reduce the scope of the 'best' function so it only cares about finding the best visual representation of the event 3) event construction comprises using the best 2-3 frames from the sample that are focused ONLY on the victim side, and weight the sample by a sample quality metric that looks at both asset quality (e.g., does this icon have good coverage) and asset consistency (how does this icon slice compare to other icon slices in the sample set).   4) tie both the aggregate profile and the 'best' image back to the same event cluster so once identity has been constructed, we can refer back to the 'best' image representative of that event.     
 
+
+
+
+
+
+Increase burst coverage upstream
+start with a global increase first
+that’s simpler and gives us a cleaner read before adding adaptive behavior
+Add victim-side sample quality inside each event
+score the burst samples based on right-side usability and consistency
+use that to choose the best 2-3 samples for identity work
+Build an event-level victim profile
+aggregate those selected victim-side samples into one event representation
+this becomes the primary identity signal for dedupe
+Use event-profile comparison for inter-event dedupe
+compare event-level victim profiles first
+this becomes the default dedupe decision path
+Keep pairwise sample-to-sample comparison as a fallback
+only use it when event-profile comparison is borderline
+treat it as tie-breaker evidence, not the main representation
